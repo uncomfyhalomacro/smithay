@@ -227,9 +227,6 @@
 <span id="226">226</span>
 <span id="227">227</span>
 <span id="228">228</span>
-<span id="229">229</span>
-<span id="230">230</span>
-<span id="231">231</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Utilities for importing buffers into X11.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! Buffers imported into X11 are represented as X pixmaps which are then presented to the window.</span>
@@ -341,10 +338,8 @@
         <span class="ident">window</span>: <span class="kw-2">&amp;</span><span class="ident">Window</span>,
         <span class="ident">dmabuf</span>: <span class="kw-2">&amp;</span><span class="ident">Dmabuf</span>,
     ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">PixmapWrapper</span><span class="op">&lt;</span><span class="lifetime">&#39;c</span>, <span class="ident">C</span><span class="op">&gt;</span>, <span class="ident">CreatePixmapError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">window_inner</span> <span class="op">=</span> <span class="ident">window</span>.<span class="number">0</span>.<span class="ident">upgrade</span>().<span class="ident">unwrap</span>();
-
-        <span class="kw">if</span> <span class="ident">dmabuf</span>.<span class="ident">format</span>().<span class="ident">code</span> <span class="op">!</span><span class="op">=</span> <span class="ident">window_inner</span>.<span class="ident">format</span> {
-            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">CreatePixmapError::IncorrectFormat</span>(<span class="ident">window_inner</span>.<span class="ident">format</span>));
+        <span class="kw">if</span> <span class="ident">dmabuf</span>.<span class="ident">format</span>().<span class="ident">code</span> <span class="op">!</span><span class="op">=</span> <span class="ident">window</span>.<span class="ident">format</span>() {
+            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">CreatePixmapError::IncorrectFormat</span>(<span class="ident">window</span>.<span class="ident">format</span>()));
         }
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fds</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
@@ -361,7 +356,7 @@
         }
 
         <span class="comment">// We need dri3 &gt;= 1.2 in order to use the enhanced dri3_pixmap_from_buffers function.</span>
-        <span class="kw">let</span> <span class="ident">xid</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">window_inner</span>.<span class="ident">extensions</span>.<span class="ident">dri3</span> <span class="op">&gt;</span><span class="op">=</span> <span class="prelude-val">Some</span>((<span class="number">1</span>, <span class="number">2</span>)) {
+        <span class="kw">let</span> <span class="ident">xid</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">window</span>.<span class="number">0</span>.<span class="ident">extensions</span>.<span class="ident">dri3</span> <span class="op">&gt;</span><span class="op">=</span> <span class="prelude-val">Some</span>((<span class="number">1</span>, <span class="number">2</span>)) {
             <span class="kw">if</span> <span class="ident">dmabuf</span>.<span class="ident">num_planes</span>() <span class="op">&gt;</span> <span class="number">4</span> {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">CreatePixmapError::TooManyPlanes</span>);
             }
@@ -386,7 +381,7 @@
                 <span class="ident">offsets</span>.<span class="ident">next</span>().<span class="ident">unwrap_or</span>(<span class="ident">x11rb::NONE</span>),
                 <span class="ident">window</span>.<span class="ident">depth</span>(),
                 <span class="comment">// In the future this could be made nicer.</span>
-                <span class="kw">match</span> <span class="ident">window</span>.<span class="ident">format</span>().<span class="ident">unwrap</span>() {
+                <span class="kw">match</span> <span class="ident">window</span>.<span class="ident">format</span>() {
                     <span class="ident">DrmFourcc::Argb8888</span> =&gt; <span class="number">32</span>,
                     <span class="ident">DrmFourcc::Xrgb8888</span> =&gt; <span class="number">24</span>,
                     <span class="kw">_</span> =&gt; <span class="macro">unreachable!</span>(),
@@ -415,7 +410,7 @@
                 <span class="ident">stride</span> <span class="kw">as</span> <span class="ident">u16</span>,
                 <span class="ident">window</span>.<span class="ident">depth</span>(),
                 <span class="comment">// In the future this could be made nicer.</span>
-                <span class="kw">match</span> <span class="ident">window</span>.<span class="ident">format</span>().<span class="ident">unwrap</span>() {
+                <span class="kw">match</span> <span class="ident">window</span>.<span class="ident">format</span>() {
                     <span class="ident">DrmFourcc::Argb8888</span> =&gt; <span class="number">32</span>,
                     <span class="ident">DrmFourcc::Xrgb8888</span> =&gt; <span class="number">24</span>,
                     <span class="kw">_</span> =&gt; <span class="macro">unreachable!</span>(),
@@ -430,10 +425,9 @@
     }
 
     <span class="kw">fn</span> <span class="ident">present</span>(<span class="self">self</span>, <span class="ident">connection</span>: <span class="kw-2">&amp;</span><span class="ident">C</span>, <span class="ident">window</span>: <span class="kw-2">&amp;</span><span class="ident">Window</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span>, <span class="ident">X11Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">window_inner</span> <span class="op">=</span> <span class="ident">window</span>.<span class="number">0</span>.<span class="ident">upgrade</span>().<span class="ident">unwrap</span>(); <span class="comment">// We have the connection and window alive.</span>
-        <span class="kw">let</span> <span class="ident">next_serial</span> <span class="op">=</span> <span class="ident">window_inner</span>.<span class="ident">next_serial</span>.<span class="ident">fetch_add</span>(<span class="number">1</span>, <span class="ident">Ordering::SeqCst</span>);
+        <span class="kw">let</span> <span class="ident">next_serial</span> <span class="op">=</span> <span class="ident">window</span>.<span class="number">0</span>.<span class="ident">next_serial</span>.<span class="ident">fetch_add</span>(<span class="number">1</span>, <span class="ident">Ordering::SeqCst</span>);
         <span class="comment">// We want to present as soon as possible, so wait 1ms so the X server will present when next convenient.</span>
-        <span class="kw">let</span> <span class="ident">msc</span> <span class="op">=</span> <span class="ident">window_inner</span>.<span class="ident">last_msc</span>.<span class="ident">load</span>(<span class="ident">Ordering::SeqCst</span>) <span class="op">+</span> <span class="number">1</span>;
+        <span class="kw">let</span> <span class="ident">msc</span> <span class="op">=</span> <span class="ident">window</span>.<span class="number">0</span>.<span class="ident">last_msc</span>.<span class="ident">load</span>(<span class="ident">Ordering::SeqCst</span>) <span class="op">+</span> <span class="number">1</span>;
 
         <span class="comment">// options parameter does not take the enum but a u32.</span>
         <span class="kw">const</span> <span class="ident">OPTIONS</span>: <span class="ident">present::Option</span> <span class="op">=</span> <span class="ident">present::Option::NONE</span>;
@@ -462,5 +456,5 @@
     }
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (0b42deacc 2021-12-09)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (c5ecc1570 2021-12-15)" ></div>
 </body></html>

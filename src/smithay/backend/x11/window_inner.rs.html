@@ -299,6 +299,11 @@
 <span id="298">298</span>
 <span id="299">299</span>
 <span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
 </pre><pre class="rust"><code><span class="doccomment">/**
 A note for future contributors and maintainers:
 
@@ -335,7 +340,7 @@ A link to the ICCCM Section 4: https://tronche.com/gui/x/icccm/sec-4.html
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">WindowInner</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Window</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">inner</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">WindowInner</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">Window</span>(<span class="ident">Arc::downgrade</span>(<span class="kw-2">&amp;</span><span class="ident">inner</span>))
+        <span class="ident">Window</span>(<span class="ident">inner</span>)
     }
 }
 
@@ -588,7 +593,12 @@ A link to the ICCCM Section 4: https://tronche.com/gui/x/icccm/sec-4.html
 
 <span class="kw">impl</span> <span class="ident">PartialEq</span> <span class="kw">for</span> <span class="ident">WindowInner</span> {
     <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">id</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">id</span>
+        <span class="kw">match</span> (<span class="self">self</span>.<span class="ident">connection</span>.<span class="ident">upgrade</span>(), <span class="ident">other</span>.<span class="ident">connection</span>.<span class="ident">upgrade</span>()) {
+            (<span class="prelude-val">Some</span>(<span class="ident">conn1</span>), <span class="prelude-val">Some</span>(<span class="ident">conn2</span>)) =&gt; <span class="ident">Arc::ptr_eq</span>(<span class="kw-2">&amp;</span><span class="ident">conn1</span>, <span class="kw-2">&amp;</span><span class="ident">conn2</span>) <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">id</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">id</span>,
+
+            <span class="comment">// A window with no connection to the X server cannot be validated.</span>
+            <span class="kw">_</span> =&gt; <span class="bool-val">false</span>,
+        }
     }
 }
 
@@ -600,5 +610,5 @@ A link to the ICCCM Section 4: https://tronche.com/gui/x/icccm/sec-4.html
     }
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (0b42deacc 2021-12-09)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (c5ecc1570 2021-12-15)" ></div>
 </body></html>
