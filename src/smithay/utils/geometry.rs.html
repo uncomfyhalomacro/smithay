@@ -1037,6 +1037,11 @@
 <span id="1035">1035</span>
 <span id="1036">1036</span>
 <span id="1037">1037</span>
+<span id="1038">1038</span>
+<span id="1039">1039</span>
+<span id="1040">1040</span>
+<span id="1041">1041</span>
+<span id="1042">1042</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::fmt</span>;
 <span class="kw">use</span> <span class="ident">std::ops</span>::{<span class="ident">Add</span>, <span class="ident">AddAssign</span>, <span class="ident">Sub</span>, <span class="ident">SubAssign</span>};
 
@@ -1925,16 +1930,21 @@
     }
 
     <span class="doccomment">/// Clamp rectangle to min and max corners resulting in the overlapping area of two rectangles</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Returns `None` if the two rectangles don&#39;t overlap</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">intersection</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Rectangle</span><span class="op">&lt;</span><span class="ident">N</span>, <span class="ident">Kind</span><span class="op">&gt;</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">intersection</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Rectangle</span><span class="op">&lt;</span><span class="ident">N</span>, <span class="ident">Kind</span><span class="op">&gt;</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">other</span> <span class="op">=</span> <span class="ident">other</span>.<span class="ident">into</span>();
-        <span class="ident">Rectangle::from_extemities</span>(
+        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">overlaps</span>(<span class="ident">other</span>) {
+            <span class="kw">return</span> <span class="prelude-val">None</span>;
+        }
+        <span class="prelude-val">Some</span>(<span class="ident">Rectangle::from_extemities</span>(
             (<span class="self">self</span>.<span class="ident">loc</span>.<span class="ident">x</span>.<span class="ident">max</span>(<span class="ident">other</span>.<span class="ident">loc</span>.<span class="ident">x</span>), <span class="self">self</span>.<span class="ident">loc</span>.<span class="ident">y</span>.<span class="ident">max</span>(<span class="ident">other</span>.<span class="ident">loc</span>.<span class="ident">y</span>)),
             (
                 (<span class="self">self</span>.<span class="ident">loc</span>.<span class="ident">x</span>.<span class="ident">saturating_add</span>(<span class="self">self</span>.<span class="ident">size</span>.<span class="ident">w</span>)).<span class="ident">min</span>(<span class="ident">other</span>.<span class="ident">loc</span>.<span class="ident">x</span>.<span class="ident">saturating_add</span>(<span class="ident">other</span>.<span class="ident">size</span>.<span class="ident">w</span>)),
                 (<span class="self">self</span>.<span class="ident">loc</span>.<span class="ident">y</span>.<span class="ident">saturating_add</span>(<span class="self">self</span>.<span class="ident">size</span>.<span class="ident">h</span>)).<span class="ident">min</span>(<span class="ident">other</span>.<span class="ident">loc</span>.<span class="ident">y</span>.<span class="ident">saturating_add</span>(<span class="ident">other</span>.<span class="ident">size</span>.<span class="ident">h</span>)),
             ),
-        )
+        ))
     }
 
     <span class="doccomment">/// Compute the bounding box of a given set of points</span>
@@ -2075,5 +2085,5 @@
     }
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (5531927e8 2021-12-16)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (e95e084a1 2021-12-19)" ></div>
 </body></html>
