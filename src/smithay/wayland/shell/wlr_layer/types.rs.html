@@ -283,7 +283,7 @@
 <span class="doccomment">/// - some applications are not interested in keyboard events</span>
 <span class="doccomment">///   and not allowing them to be focused can improve the desktop experience</span>
 <span class="doccomment">/// - some applications will want to take exclusive keyboard focus.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">KeyboardInteractivity</span> {
     <span class="doccomment">/// This value indicates that this surface is not interested in keyboard events</span>
     <span class="doccomment">/// and the compositor should never assign it the keyboard focus.</span>
@@ -463,5 +463,5 @@
     <span class="kw">pub</span> <span class="ident">left</span>: <span class="ident">i32</span>,
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (34926f0a1 2021-12-22)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (cfa4ac66c 2022-01-06)" ></div>
 </body></html>

@@ -247,7 +247,7 @@
     <span class="doccomment">/// Operations will have no effect. Functions that read textures, buffers, etc.</span>
     <span class="doccomment">/// will return uninitialized data instead.</span>
     <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;The context has been lost, it needs to be recreated: {0}&quot;</span>)]</span>
-    <span class="ident">ContextLost</span>(<span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">std::error::Error</span><span class="op">&gt;</span>),
+    <span class="ident">ContextLost</span>(<span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">std::error::Error</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span><span class="op">&gt;</span>),
     <span class="doccomment">/// A temporary condition caused to rendering to fail.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Depending on the underlying error this *might* require fixing internal state of the rendering backend,</span>
@@ -258,8 +258,8 @@
     <span class="doccomment">/// If the root cause cannot be discovered and subsequent renderings also fail, it is advised to fallback to</span>
     <span class="doccomment">/// recreation.</span>
     <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;A temporary condition caused the page flip to fail: {0}&quot;</span>)]</span>
-    <span class="ident">TemporaryFailure</span>(<span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">std::error::Error</span><span class="op">&gt;</span>),
+    <span class="ident">TemporaryFailure</span>(<span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">std::error::Error</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span><span class="op">&gt;</span>),
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (34926f0a1 2021-12-22)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (cfa4ac66c 2022-01-06)" ></div>
 </body></html>

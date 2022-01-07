@@ -221,7 +221,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// You may bind this buffer to a renderer to render.</span>
     <span class="doccomment">/// This function will return the same buffer until [`submit`](Self::submit) is called</span>
-    <span class="doccomment">/// or [`reset_buffers`](Self::reset_buffer) is used to reset the buffers.</span>
+    <span class="doccomment">/// or [`reset_buffers`](Self::reset_buffers) is used to reset the buffers.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">buffer</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">Dmabuf</span>, <span class="ident">u8</span>), <span class="ident">AllocateBuffersError</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">new_size</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">resize</span>.<span class="ident">try_iter</span>().<span class="ident">last</span>() {
             <span class="self">self</span>.<span class="ident">resize</span>(<span class="ident">new_size</span>);
@@ -295,5 +295,5 @@
     }
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (34926f0a1 2021-12-22)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (cfa4ac66c 2022-01-06)" ></div>
 </body></html>

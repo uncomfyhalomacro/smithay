@@ -201,6 +201,15 @@
 <span id="199">199</span>
 <span id="200">200</span>
 <span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::ops::Deref</span>;
 <span class="kw">use</span> <span class="ident">std::sync</span>::{
     <span class="ident">atomic</span>::{<span class="ident">AtomicBool</span>, <span class="ident">AtomicU8</span>, <span class="ident">Ordering</span>},
@@ -399,9 +408,18 @@
 
     <span class="doccomment">/// Remove all internally cached buffers to e.g. reset age values</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reset_buffers</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">slots</span> <span class="op">=</span> <span class="ident">Default::default</span>();
+        <span class="kw">for</span> <span class="ident">slot</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">slots</span> {
+            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">internal_slot</span>) <span class="op">=</span> <span class="ident">Arc::get_mut</span>(<span class="ident">slot</span>) {
+                <span class="kw-2">*</span><span class="ident">internal_slot</span> <span class="op">=</span> <span class="ident">InternalSlot</span> {
+                    <span class="ident">buffer</span>: <span class="ident">internal_slot</span>.<span class="ident">buffer</span>.<span class="ident">take</span>(),
+                    ..<span class="ident">Default::default</span>()
+                };
+            } <span class="kw">else</span> {
+                <span class="kw-2">*</span><span class="ident">slot</span> <span class="op">=</span> <span class="ident">Default::default</span>();
+            }
+        }
     }
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (34926f0a1 2021-12-22)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (cfa4ac66c 2022-01-06)" ></div>
 </body></html>

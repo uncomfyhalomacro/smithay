@@ -423,6 +423,11 @@
 <span id="421">421</span>
 <span id="422">422</span>
 <span id="423">423</span>
+<span id="424">424</span>
+<span id="425">425</span>
+<span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::collections::HashSet</span>;
 <span class="kw">use</span> <span class="ident">std::os::unix::io::AsRawFd</span>;
 <span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
@@ -663,6 +668,11 @@
         <span class="ident">flip</span>.<span class="ident">map_err</span>(<span class="ident">Error::DrmError</span>)
     }
 
+    <span class="doccomment">/// Reset the underlying buffers</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reset_buffers</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
+        <span class="self">self</span>.<span class="ident">swapchain</span>.<span class="ident">reset_buffers</span>()
+    }
+
     <span class="doccomment">/// Returns the underlying [`crtc`](drm::control::crtc) of this surface</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">crtc</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">crtc::Handle</span> {
         <span class="self">self</span>.<span class="ident">drm</span>.<span class="ident">crtc</span>()
@@ -847,5 +857,5 @@
     }
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (34926f0a1 2021-12-22)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (cfa4ac66c 2022-01-06)" ></div>
 </body></html>
