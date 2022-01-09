@@ -540,6 +540,11 @@
 <span id="538">538</span>
 <span id="539">539</span>
 <span id="540">540</span>
+<span id="541">541</span>
+<span id="542">542</span>
+<span id="543">543</span>
+<span id="544">544</span>
+<span id="545">545</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::backend::input::KeyState</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::wayland::Serial</span>;
 <span class="kw">use</span> <span class="ident">slog</span>::{<span class="ident">debug</span>, <span class="ident">info</span>, <span class="ident">o</span>, <span class="ident">trace</span>, <span class="ident">warn</span>};
@@ -1011,6 +1016,11 @@
             .<span class="ident">unwrap_or</span>(<span class="bool-val">false</span>)
     }
 
+    <span class="doccomment">/// Check if keyboard has focus</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_focused</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
+        <span class="self">self</span>.<span class="ident">arc</span>.<span class="ident">internal</span>.<span class="ident">borrow_mut</span>().<span class="ident">focus</span>.<span class="ident">is_some</span>()
+    }
+
     <span class="doccomment">/// Register a new keyboard to this handler</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The keymap will automatically be sent to it</span>
@@ -1081,5 +1091,5 @@
     <span class="ident">keyboard</span>.<span class="ident">deref</span>().<span class="ident">clone</span>()
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (cfa4ac66c 2022-01-06)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (a7e2e3396 2022-01-08)" ></div>
 </body></html>
