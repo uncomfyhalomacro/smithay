@@ -603,6 +603,9 @@ impl Space {
                     clear_color,
                     &damage
                         .iter()
+                        // Map from global space to output space
+                        .map(|geo| Rectangle::from_loc_and_size(geo.loc - output_geo.loc, geo.size))
+                        // Map from logical to phisical
                         .map(|geo| geo.to_f64().to_physical(state.render_scale).to_i32_round())
                         .collect::<Vec<_>>(),
                 )?;
@@ -629,6 +632,8 @@ impl Space {
                             .iter()
                             .flat_map(|d| d.intersection(geo))
                             .map(|geo| Rectangle::from_loc_and_size(geo.loc - loc, geo.size))
+                            // Map from global compositor space to output one
+                            .map(|geo| Rectangle::from_loc_and_size(geo.loc - output_geo.loc, geo.size))
                             .collect::<Vec<_>>();
                         slog::trace!(
                             self.logger,
