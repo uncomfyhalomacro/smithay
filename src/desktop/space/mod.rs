@@ -605,7 +605,7 @@ impl Space {
                         .iter()
                         // Map from global space to output space
                         .map(|geo| Rectangle::from_loc_and_size(geo.loc - output_geo.loc, geo.size))
-                        // Map from logical to phisical
+                        // Map from logical to physical
                         .map(|geo| geo.to_f64().to_physical(state.render_scale).to_i32_round())
                         .collect::<Vec<_>>(),
                 )?;
