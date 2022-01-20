@@ -529,7 +529,7 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">Inner</span> {
     <span class="ident">name</span>: <span class="ident">String</span>,
-    <span class="ident">log</span>: <span class="ident">::slog::Logger</span>,
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">log</span>: <span class="ident">::slog::Logger</span>,
     <span class="ident">instances</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">WlOutput</span><span class="op">&gt;</span>,
     <span class="ident">physical</span>: <span class="ident">PhysicalProperties</span>,
     <span class="ident">location</span>: <span class="ident">Point</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span>,
