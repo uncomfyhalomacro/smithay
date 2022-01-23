@@ -72,10 +72,12 @@ the specific value varies across devices.</p>
 </li>
 <li>
 <p><strong>X11:</strong> Many man-hours have been spent trying to figure out how to handle DPI in X11. Winit
-currently uses a three-pronged approach:
-+ Use the value in the <code>WINIT_X11_SCALE_FACTOR</code> environment variable, if present.
-+ If not present, use the value set in <code>Xft.dpi</code> in Xresources.
-+ Otherwise, calcuate the scale factor based on the millimeter monitor dimensions provided by XRandR.</p>
+currently uses a three-pronged approach:</p>
+<ul>
+<li>Use the value in the <code>WINIT_X11_SCALE_FACTOR</code> environment variable, if present.</li>
+<li>If not present, use the value set in <code>Xft.dpi</code> in Xresources.</li>
+<li>Otherwise, calcuate the scale factor based on the millimeter monitor dimensions provided by XRandR.</li>
+</ul>
 <p>If <code>WINIT_X11_SCALE_FACTOR</code> is set to <code>randr</code>, it’ll ignore the <code>Xft.dpi</code> field and use the
 XRandR scaling method. Generally speaking, you should try to configure the standard system
 variables to do what you want before resorting to <code>WINIT_X11_SCALE_FACTOR</code>.</p>
@@ -110,5 +112,5 @@ both the screen scaling and the browser zoom level and can go below <code>1.0</c
 </div></div></div><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2>
 <div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.Pixel.html" title="winit::dpi::Pixel trait">Pixel</a></div><div class="item-right docblock-short"></div></div></div><h2 id="functions" class="small-section-header"><a href="#functions">Functions</a></h2>
 <div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.validate_scale_factor.html" title="winit::dpi::validate_scale_factor fn">validate_scale_factor</a></div><div class="item-right docblock-short"><p>Checks that the scale factor is a normal positive <code>f64</code>.</p>
-</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="winit" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (17d29dcdc 2022-01-21)" ></div>
+</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="winit" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (bfe156467 2022-01-22)" ></div>
 </body></html>

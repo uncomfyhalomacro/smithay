@@ -213,6 +213,10 @@
 <span id="207">207</span>
 <span id="208">208</span>
 <span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::{
     <span class="ident">backend::renderer</span>::{<span class="ident">Frame</span>, <span class="ident">ImportAll</span>, <span class="ident">Renderer</span>, <span class="ident">Texture</span>},
     <span class="ident">desktop</span>::{<span class="ident">space</span>::<span class="kw-2">*</span>, <span class="ident">utils</span>::<span class="kw-2">*</span>},
@@ -259,6 +263,8 @@
     <span class="doccomment">/// Draws the element using the provided `Frame` and `Renderer`.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// - `scale` provides the current fractional scale value to render as</span>
+    <span class="doccomment">/// - `location` refers to the relative position in the bound buffer the element should be drawn at,</span>
+    <span class="doccomment">///    so that it matches with the space-relative coordinates returned by [`RenderElement::geometry`].</span>
     <span class="doccomment">/// - `damage` provides the regions you need to re-draw and *may* not</span>
     <span class="doccomment">///   be equivalent to the damage returned by `accumulated_damage`.</span>
     <span class="doccomment">///   Redrawing other parts of the element is not valid and may cause rendering artifacts.</span>
@@ -267,6 +273,7 @@
         <span class="ident">renderer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">R</span>,
         <span class="ident">frame</span>: <span class="kw-2">&amp;mut</span> <span class="ident">F</span>,
         <span class="ident">scale</span>: <span class="ident">f64</span>,
+        <span class="ident">location</span>: <span class="ident">Point</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span>,
         <span class="ident">damage</span>: <span class="kw-2">&amp;</span>[<span class="ident">Rectangle</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span>],
         <span class="ident">log</span>: <span class="kw-2">&amp;</span><span class="ident">slog::Logger</span>,
     ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">R::Error</span><span class="op">&gt;</span>;
@@ -324,11 +331,11 @@
         <span class="ident">renderer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">R</span>,
         <span class="ident">frame</span>: <span class="kw-2">&amp;mut</span> <span class="ident">F</span>,
         <span class="ident">scale</span>: <span class="ident">f64</span>,
-        <span class="ident">_location</span>: <span class="ident">Point</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span>,
+        <span class="ident">location</span>: <span class="ident">Point</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span>,
         <span class="ident">damage</span>: <span class="kw-2">&amp;</span>[<span class="ident">Rectangle</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span>],
         <span class="ident">log</span>: <span class="kw-2">&amp;</span><span class="ident">slog::Logger</span>,
     ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">R::Error</span><span class="op">&gt;</span> {
-        (<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span> <span class="kw">as</span> <span class="kw-2">&amp;</span><span class="kw">dyn</span> <span class="ident">RenderElement</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">F</span>, <span class="ident">E</span>, <span class="ident">T</span><span class="op">&gt;</span>).<span class="ident">draw</span>(<span class="ident">renderer</span>, <span class="ident">frame</span>, <span class="ident">scale</span>, <span class="ident">damage</span>, <span class="ident">log</span>)
+        (<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span> <span class="kw">as</span> <span class="kw-2">&amp;</span><span class="kw">dyn</span> <span class="ident">RenderElement</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">F</span>, <span class="ident">E</span>, <span class="ident">T</span><span class="op">&gt;</span>).<span class="ident">draw</span>(<span class="ident">renderer</span>, <span class="ident">frame</span>, <span class="ident">scale</span>, <span class="ident">location</span>, <span class="ident">damage</span>, <span class="ident">log</span>)
     }
 }
 
@@ -377,6 +384,7 @@
         <span class="ident">renderer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">R</span>,
         <span class="ident">frame</span>: <span class="kw-2">&amp;mut</span> <span class="ident">F</span>,
         <span class="ident">scale</span>: <span class="ident">f64</span>,
+        <span class="ident">location</span>: <span class="ident">Point</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span>,
         <span class="ident">damage</span>: <span class="kw-2">&amp;</span>[<span class="ident">Rectangle</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span>],
         <span class="ident">log</span>: <span class="kw-2">&amp;</span><span class="ident">slog::Logger</span>,
     ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">R::Error</span><span class="op">&gt;</span> {
@@ -385,7 +393,7 @@
             <span class="ident">frame</span>,
             <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">surface</span>,
             <span class="ident">scale</span>,
-            <span class="self">self</span>.<span class="ident">position</span>,
+            <span class="ident">location</span>,
             <span class="ident">damage</span>,
             <span class="ident">log</span>,
         )
@@ -423,5 +431,5 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Hash</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SpaceOutputHash</span>(<span class="ident">usize</span>, <span class="ident">usize</span>);
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (17d29dcdc 2022-01-21)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (bfe156467 2022-01-22)" ></div>
 </body></html>
