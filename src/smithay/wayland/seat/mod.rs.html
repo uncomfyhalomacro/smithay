@@ -418,12 +418,12 @@
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::{
     <span class="ident">keyboard</span>::{
-        <span class="ident">keysyms</span>, <span class="ident">Error</span> <span class="kw">as</span> <span class="ident">KeyboardError</span>, <span class="ident">FilterResult</span>, <span class="ident">KeyboardHandle</span>, <span class="ident">Keysym</span>, <span class="ident">KeysymHandle</span>, <span class="ident">ModifiersState</span>,
-        <span class="ident">XkbConfig</span>,
+        <span class="ident">keysyms</span>, <span class="ident">Error</span> <span class="kw">as</span> <span class="ident">KeyboardError</span>, <span class="ident">FilterResult</span>, <span class="ident">GrabStartData</span> <span class="kw">as</span> <span class="ident">KeyboardGrabStartData</span>, <span class="ident">KeyboardGrab</span>,
+        <span class="ident">KeyboardHandle</span>, <span class="ident">KeyboardInnerHandle</span>, <span class="ident">Keysym</span>, <span class="ident">KeysymHandle</span>, <span class="ident">ModifiersState</span>, <span class="ident">XkbConfig</span>,
     },
     <span class="ident">pointer</span>::{
-        <span class="ident">AxisFrame</span>, <span class="ident">CursorImageAttributes</span>, <span class="ident">CursorImageStatus</span>, <span class="ident">GrabStartData</span>, <span class="ident">PointerGrab</span>, <span class="ident">PointerHandle</span>,
-        <span class="ident">PointerInnerHandle</span>,
+        <span class="ident">AxisFrame</span>, <span class="ident">CursorImageAttributes</span>, <span class="ident">CursorImageStatus</span>, <span class="ident">GrabStartData</span> <span class="kw">as</span> <span class="ident">PointerGrabStartData</span>,
+        <span class="ident">PointerGrab</span>, <span class="ident">PointerHandle</span>, <span class="ident">PointerInnerHandle</span>,
     },
 };
 

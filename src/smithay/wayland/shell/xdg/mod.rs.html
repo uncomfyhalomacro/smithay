@@ -1682,6 +1682,15 @@
 <span id="1676">1676</span>
 <span id="1677">1677</span>
 <span id="1678">1678</span>
+<span id="1679">1679</span>
+<span id="1680">1680</span>
+<span id="1681">1681</span>
+<span id="1682">1682</span>
+<span id="1683">1683</span>
+<span id="1684">1684</span>
+<span id="1685">1685</span>
+<span id="1686">1686</span>
+<span id="1687">1687</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Utilities for handling shell surfaces with the `xdg_shell` protocol</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! This module provides automatic handling of shell surfaces objects, by being registered</span>
@@ -2067,6 +2076,14 @@
         <span class="doccomment">/// It is a protocol error to call commit on a wl_surface with</span>
         <span class="doccomment">/// the xdg_popup role when no parent is set.</span>
         <span class="kw">pub</span> <span class="ident">parent</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">wl_surface::WlSurface</span><span class="op">&gt;</span>,
+
+        <span class="doccomment">/// Defines if the surface has received at least one commit</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// This can be used to check for protocol errors, like</span>
+        <span class="doccomment">/// checking if a popup requested a grab after it has been</span>
+        <span class="doccomment">/// mapped.</span>
+        <span class="kw">pub</span> <span class="ident">committed</span>: <span class="ident">bool</span>,
+
         <span class="ident">popup_handle</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">xdg_popup::XdgPopup</span><span class="op">&gt;</span>
     }
 );
@@ -3083,6 +3100,7 @@
                 .<span class="ident">unwrap</span>()
                 .<span class="ident">lock</span>()
                 .<span class="ident">unwrap</span>();
+            <span class="ident">attributes</span>.<span class="ident">committed</span> <span class="op">=</span> <span class="bool-val">true</span>;
             <span class="kw">if</span> <span class="ident">attributes</span>.<span class="ident">initial_configure_sent</span> {
                 <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">state</span>) <span class="op">=</span> <span class="ident">attributes</span>.<span class="ident">last_acked</span> {
                     <span class="kw">if</span> <span class="ident">state</span> <span class="op">!</span><span class="op">=</span> <span class="ident">attributes</span>.<span class="ident">current</span> {
