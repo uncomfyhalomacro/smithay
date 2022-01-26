@@ -451,11 +451,6 @@
 <span id="446">446</span>
 <span id="447">447</span>
 <span id="448">448</span>
-<span id="449">449</span>
-<span id="450">450</span>
-<span id="451">451</span>
-<span id="452">452</span>
-<span id="453">453</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">drm::control</span>::{<span class="ident">connector</span>, <span class="ident">crtc</span>, <span class="ident">encoder</span>, <span class="ident">framebuffer</span>, <span class="ident">Device</span> <span class="kw">as</span> <span class="ident">ControlDevice</span>, <span class="ident">Mode</span>, <span class="ident">PageFlipFlags</span>};
 
 <span class="kw">use</span> <span class="ident">std::collections::HashSet</span>;
@@ -747,18 +742,13 @@
             <span class="comment">// this will result in wasting a frame, because this flip will need to wait</span>
             <span class="comment">// for `set_crtc`, but is necessary to drive the event loop and thus provide</span>
             <span class="comment">// a more consistent api.</span>
-            <span class="ident">ControlDevice::page_flip</span>(
-                <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="ident">fd</span>,
-                <span class="self">self</span>.<span class="ident">crtc</span>,
-                <span class="ident">framebuffer</span>,
-                <span class="kw-2">&amp;</span>[<span class="ident">PageFlipFlags::PageFlipEvent</span>],
-                <span class="prelude-val">None</span>,
-            )
-            .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">source</span><span class="op">|</span> <span class="ident">Error::Access</span> {
-                <span class="ident">errmsg</span>: <span class="string">&quot;Failed to queue page flip&quot;</span>,
-                <span class="ident">dev</span>: <span class="self">self</span>.<span class="ident">fd</span>.<span class="ident">dev_path</span>(),
-                <span class="ident">source</span>,
-            })<span class="question-mark">?</span>;
+            <span class="ident">ControlDevice::page_flip</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="ident">fd</span>, <span class="self">self</span>.<span class="ident">crtc</span>, <span class="ident">framebuffer</span>, <span class="ident">PageFlipFlags::EVENT</span>, <span class="prelude-val">None</span>).<span class="ident">map_err</span>(
+                <span class="op">|</span><span class="ident">source</span><span class="op">|</span> <span class="ident">Error::Access</span> {
+                    <span class="ident">errmsg</span>: <span class="string">&quot;Failed to queue page flip&quot;</span>,
+                    <span class="ident">dev</span>: <span class="self">self</span>.<span class="ident">fd</span>.<span class="ident">dev_path</span>(),
+                    <span class="ident">source</span>,
+                },
+            )<span class="question-mark">?</span>;
         }
 
         <span class="prelude-val">Ok</span>(())
@@ -776,9 +766,9 @@
             <span class="self">self</span>.<span class="ident">crtc</span>,
             <span class="ident">framebuffer</span>,
             <span class="kw">if</span> <span class="ident">event</span> {
-                <span class="kw-2">&amp;</span>[<span class="ident">PageFlipFlags::PageFlipEvent</span>]
+                <span class="ident">PageFlipFlags::EVENT</span>
             } <span class="kw">else</span> {
-                <span class="kw-2">&amp;</span>[]
+                <span class="ident">PageFlipFlags::empty</span>()
             },
             <span class="prelude-val">None</span>,
         )
