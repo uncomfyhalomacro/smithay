@@ -338,6 +338,8 @@
 <span id="333">333</span>
 <span id="334">334</span>
 <span id="335">335</span>
+<span id="336">336</span>
+<span id="337">337</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">cell::RefCell</span>, <span class="ident">ops::Deref</span> <span class="kw">as</span> <span class="kw">_</span>, <span class="ident">rc::Rc</span>};
 
 <span class="kw">use</span> <span class="ident">wayland_server</span>::{
@@ -549,7 +551,9 @@
                     <span class="ident">source</span>.<span class="ident">cancelled</span>();
                 }
             }
-            (<span class="kw-2">&amp;mut</span> <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">callback</span>.<span class="ident">borrow_mut</span>())(<span class="ident"><span class="kw">super</span>::DataDeviceEvent::DnDDropped</span>);
+            (<span class="kw-2">&amp;mut</span> <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">callback</span>.<span class="ident">borrow_mut</span>())(<span class="ident"><span class="kw">super</span>::DataDeviceEvent::DnDDropped</span> {
+                <span class="ident">seat</span>: <span class="self">self</span>.<span class="ident">seat</span>.<span class="ident">clone</span>(),
+            });
             <span class="self">self</span>.<span class="ident">icon</span> <span class="op">=</span> <span class="prelude-val">None</span>;
             <span class="comment">// in all cases abandon the drop</span>
             <span class="comment">// no more buttons are pressed, release the grab</span>
@@ -674,5 +678,5 @@
     <span class="ident">offer</span>.<span class="ident">deref</span>().<span class="ident">clone</span>()
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (08df8b81d 2022-01-30)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (2681f253b 2022-02-01)" ></div>
 </body></html>
