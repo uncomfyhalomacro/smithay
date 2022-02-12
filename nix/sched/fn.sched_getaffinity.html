@@ -10,7 +10,7 @@
 If pid is zero, then the calling thread is checked.</p>
 <p>Returned <code>cpuset</code> is the set of CPUs on which the thread
 is eligible to run.</p>
-<h2 id="example" class="section-header"><a href="#example">Example</a></h2>
+<h2 id="example"><a href="#example">Example</a></h2>
 <p>Checking if the current thread can run on CPU 0 can be done as follows:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">nix::sched::sched_getaffinity</span>;
@@ -20,5 +20,5 @@ is eligible to run.</p>
 <span class="kw">if</span> <span class="ident">cpu_set</span>.<span class="ident">is_set</span>(<span class="number">0</span>).<span class="ident">unwrap</span>() {
     <span class="macro">println!</span>(<span class="string">&quot;Current thread can run on CPU 0&quot;</span>);
 }</code></pre></div>
-</div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="nix" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (f624427f8 2022-02-06)" ></div>
+</div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="nix" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (e789f3a3a 2022-02-11)" ></div>
 </body></html>

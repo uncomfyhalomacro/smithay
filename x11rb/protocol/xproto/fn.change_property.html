@@ -9,7 +9,7 @@
 example the window title (<code>WM_NAME</code>) or its minimum size (<code>WM_NORMAL_HINTS</code>).
 Protocols such as EWMH also use properties - for example EWMH defines the
 window title, encoded as UTF-8 string, in the <code>_NET_WM_NAME</code> property.</p>
-<h2 id="fields-1" class="section-header"><a href="#fields-1">Fields</a></h2>
+<h2 id="fields-1"><a href="#fields-1">Fields</a></h2>
 <ul>
 <li><code>window</code> - The window whose property you want to change.</li>
 <li><code>mode</code> -</li>
@@ -21,7 +21,7 @@ the X server to correctly perform byte-swap operations as necessary.</li>
 <li><code>data_len</code> - Specifies the number of elements (see <code>format</code>).</li>
 <li><code>data</code> - The property data.</li>
 </ul>
-<h2 id="errors" class="section-header"><a href="#errors">Errors</a></h2>
+<h2 id="errors"><a href="#errors">Errors</a></h2>
 <ul>
 <li><code>Match</code> - TODO: reasons?</li>
 <li><code>Value</code> - TODO: reasons?</li>
@@ -29,12 +29,12 @@ the X server to correctly perform byte-swap operations as necessary.</li>
 <li><code>Atom</code> - <code>property</code> or <code>type</code> do not refer to a valid atom.</li>
 <li><code>Alloc</code> - The X server could not store the property (no memory?).</li>
 </ul>
-<h2 id="see" class="section-header"><a href="#see">See</a></h2>
+<h2 id="see"><a href="#see">See</a></h2>
 <ul>
 <li><code>InternAtom</code>: request</li>
 <li><code>xprop</code>: program</li>
 </ul>
-<h2 id="example" class="section-header"><a href="#example">Example</a></h2><div class="example-wrap"><pre class="language-text"><code>/*
+<h2 id="example"><a href="#example">Example</a></h2><div class="example-wrap"><pre class="language-text"><code>/*
  * Sets the WM_NAME property of the window to &quot;XCB Example&quot;.
  *
  */
@@ -48,5 +48,5 @@ void my_example(xcb_connection_t *conn, xcb_window_t window) {
         strlen(&quot;XCB Example&quot;),
         &quot;XCB Example&quot;);
     xcb_flush(conn);
-}</code></pre></div></div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="x11rb" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (f624427f8 2022-02-06)" ></div>
+}</code></pre></div></div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="x11rb" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (e789f3a3a 2022-02-11)" ></div>
 </body></html>

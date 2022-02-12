@@ -10,7 +10,7 @@ server is represented by an implementation of the <code>Connection</code> trait.
 <p>The client can interact with the server by sending requests. The server can answer requests and
 can also generate events.</p>
 <p>The examples that come with this library might be a good starting point for new users.</p>
-<h2 id="getting-started-with-x11" class="section-header"><a href="#getting-started-with-x11">Getting started with X11</a></h2>
+<h2 id="getting-started-with-x11"><a href="#getting-started-with-x11">Getting started with X11</a></h2>
 <p>X11 is a big protocol. I would claim that most of it is not actually that complicated, but it
 is still difficult to get into it. A good starting point might be some <a href="https://www.x.org/releases/X11R7.7/doc/libxcb/tutorial/index.html">libxcb
 tutorial</a>. This tutorial
@@ -28,7 +28,7 @@ about six pages of text.</p>
 <p>The notable exception is the X keyboard extension, which is documented in a <a href="https://www.x.org/releases/current/doc/kbproto/xkbproto.pdf">PDF file with 168
 pages</a> which I am never going to
 read completely.</p>
-<h2 id="getting-started-with-x11rb" class="section-header"><a href="#getting-started-with-x11rb">Getting started with x11rb</a></h2>
+<h2 id="getting-started-with-x11rb"><a href="#getting-started-with-x11rb">Getting started with x11rb</a></h2>
 <p>Most code in this code is automatically generated from an XML description of the protocol. This
 is the same approach as taken by <a href="https://xcb.freedesktop.org/">libxcb</a> (and in fact this uses
 the same XML description). This means that if you know your way around X11, most things should
@@ -65,7 +65,7 @@ be obvious to you.</p>
 }</code></pre></div>
 <p>More examples can be found in the
 <a href="https://github.com/psychon/x11rb/tree/master/examples">examples</a> directory.</p>
-<h3 id="feature-flags" class="section-header"><a href="#feature-flags">Feature flags</a></h3>
+<h3 id="feature-flags"><a href="#feature-flags">Feature flags</a></h3>
 <p>This crate uses <a href="https://doc.rust-lang.org/cargo/reference/manifest.html#the-features-section">feature
 flags</a> to reduce
 the amount of compiled code. There are two kinds of feature flags available:</p>
@@ -73,7 +73,7 @@ the amount of compiled code. There are two kinds of feature flags available:</p>
 <li>Feature flags for specific X11 extensions</li>
 <li>Feature flags for additional functionality</li>
 </ul>
-<h4 id="feature-flags-for-specific-x11-extensions" class="section-header"><a href="#feature-flags-for-specific-x11-extensions">Feature flags for specific X11 extensions</a></h4>
+<h4 id="feature-flags-for-specific-x11-extensions"><a href="#feature-flags-for-specific-x11-extensions">Feature flags for specific X11 extensions</a></h4>
 <p>By default, only the core X11 protocol and X11 extensions that are
 needed internally are enabled. Further extensions need to be explicitly enabled via their
 feature flag:</p>
@@ -82,7 +82,7 @@ feature flag:</p>
 <code>xinerama</code>, <code>xinput</code>, <code>xkb</code>, <code>xprint</code>, <code>xselinux</code>, <code>xtest</code>, <code>xv</code>, <code>xvmc</code>.</p>
 <p>If you want to take the “I do not want to think about this”-approach, you can enable the
 <code>all-extensions</code> feature to just enable, well, all extensions.</p>
-<h4 id="feature-flags-for-additional-functionality" class="section-header"><a href="#feature-flags-for-additional-functionality">Feature flags for additional functionality</a></h4>
+<h4 id="feature-flags-for-additional-functionality"><a href="#feature-flags-for-additional-functionality">Feature flags for additional functionality</a></h4>
 <p>Additionally, the following flags exist:</p>
 <ul>
 <li><code>allow-unsafe-code</code>: Enable features that require <code>unsafe</code>. Without this flag,
@@ -96,7 +96,7 @@ resulting executable. Instead libxcb will be dynamically loaded at runtime.
 This feature adds the [<code>crate::xcb_ffi::load_libxcb</code>] function, that allows to load
 libxcb and check for success or failure.</li>
 </ul>
-<h2 id="integrating-x11rb-with-an-event-loop" class="section-header"><a href="#integrating-x11rb-with-an-event-loop">Integrating x11rb with an Event Loop</a></h2>
+<h2 id="integrating-x11rb-with-an-event-loop"><a href="#integrating-x11rb-with-an-event-loop">Integrating x11rb with an Event Loop</a></h2>
 <p>The <a href="event_loop_integration/index.html">event_loop_integration</a> module contains some hints for
 integrating x11rb with an event loop as doc comments.</p>
 </div></details><h2 id="modules" class="small-section-header"><a href="#modules">Modules</a></h2>
@@ -124,5 +124,5 @@ parent window’s depth.</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="constant" href="constant.NO_SYMBOL.html" title="x11rb::NO_SYMBOL constant">NO_SYMBOL</a></div><div class="item-right docblock-short"><p>This constant can be used to fill unused entries in <code>Keysym</code> tables</p>
 </div></div></div><h2 id="functions" class="small-section-header"><a href="#functions">Functions</a></h2>
 <div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.connect.html" title="x11rb::connect fn">connect</a></div><div class="item-right docblock-short"><p>Establish a new connection to an X11 server.</p>
-</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="x11rb" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (f624427f8 2022-02-06)" ></div>
+</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="x11rb" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (e789f3a3a 2022-02-11)" ></div>
 </body></html>

@@ -28,7 +28,7 @@ and max_keycode in the connection setup, or a BadValue error results.</p>
 <p>If some other client has issued a XGrabKey with the same key combination on the same window, a BadAccess
 error results.  When using AnyModifier or AnyKey, the request fails completely, and a BadAccess error
 results (no grabs are established) if there is a conflicting grab for any combination.</p>
-<h2 id="fields-1" class="section-header"><a href="#fields-1">Fields</a></h2>
+<h2 id="fields-1"><a href="#fields-1">Fields</a></h2>
 <ul>
 <li><code>owner_events</code> - If 1, the <code>grab_window</code> will still get the pointer events. If 0, events are not
 reported to the <code>grab_window</code>.</li>
@@ -47,16 +47,16 @@ possible modifier combinations.</p>
 <li><code>pointer_mode</code> -</li>
 <li><code>keyboard_mode</code> -</li>
 </ul>
-<h2 id="errors" class="section-header"><a href="#errors">Errors</a></h2>
+<h2 id="errors"><a href="#errors">Errors</a></h2>
 <ul>
 <li><code>Access</code> - Another client has already issued a GrabKey with the same button/key
 combination on the same window.</li>
 <li><code>Value</code> - TODO: reasons?</li>
 <li><code>Window</code> - The specified <code>window</code> does not exist.</li>
 </ul>
-<h2 id="see" class="section-header"><a href="#see">See</a></h2>
+<h2 id="see"><a href="#see">See</a></h2>
 <ul>
 <li><code>GrabKeyboard</code>: request</li>
 </ul>
-</div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="x11rb" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (f624427f8 2022-02-06)" ></div>
+</div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="x11rb" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (e789f3a3a 2022-02-11)" ></div>
 </body></html>

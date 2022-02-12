@@ -11,7 +11,7 @@ kinds of requests.</p>
 by a <a href="struct.Cookie.html" title="Cookie"><code>Cookie</code></a> or a <a href="struct.CookieWithFds.html" title="CookieWithFds"><code>CookieWithFds</code></a> if the reply also contains file descriptors.
 Additionally, there are two special cases for requests which generate more than one reply:
 <a href="struct.ListFontsWithInfoCookie.html" title="ListFontsWithInfoCookie"><code>ListFontsWithInfoCookie</code></a> and [<code>RecordEnableContextCookie</code>].</p>
-<h2 id="handling-x11-errors" class="section-header"><a href="#handling-x11-errors">Handling X11 errors</a></h2>
+<h2 id="handling-x11-errors"><a href="#handling-x11-errors">Handling X11 errors</a></h2>
 <p>The X11 server can answer requests with an error packet for various reasons, e.g. because an
 invalid window ID was given. There are three options what can be done with errors:</p>
 <ul>
@@ -20,7 +20,7 @@ invalid window ID was given. There are three options what can be done with error
 <li>Errors can be completely ignored (the closest analog in XCB would be <code>xcb_discard_reply()</code>)</li>
 </ul>
 <p>There is an additional difference between requests with and without replies.</p>
-<h3 id="requests-without-a-reply" class="section-header"><a href="#requests-without-a-reply">Requests without a reply</a></h3>
+<h3 id="requests-without-a-reply"><a href="#requests-without-a-reply">Requests without a reply</a></h3>
 <p>For requests that do not have a reply, you get an instance of <code>VoidCookie</code> after sending the
 request. The different behaviors can be achieved via interacting with this cookie as foolows:</p>
 <div><table><thead><tr><th>What?</th><th>How?</th></tr></thead><tbody>
@@ -28,7 +28,7 @@ request. The different behaviors can be achieved via interacting with this cooki
 <tr><td>Check locally</td><td><code>VoidCookie::check</code></td></tr>
 <tr><td>Ignore</td><td><code>VoidCookie::ignore_error</code></td></tr>
 </tbody></table>
-</div><h3 id="requests-with-a-reply" class="section-header"><a href="#requests-with-a-reply">Requests with a reply</a></h3>
+</div><h3 id="requests-with-a-reply"><a href="#requests-with-a-reply">Requests with a reply</a></h3>
 <p>For requests with a reply, an additional option is what should happen to the reply. You can get
 the reply, but any errors are still treated as events. This allows to centralise X11 error
 handling a bit in case you only want to log errors.</p>
@@ -43,5 +43,5 @@ error.</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.CookieWithFds.html" title="x11rb::cookie::CookieWithFds struct">CookieWithFds</a></div><div class="item-right docblock-short"><p>A handle to a response containing <code>RawFd</code> from the X11 server.</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ListFontsWithInfoCookie.html" title="x11rb::cookie::ListFontsWithInfoCookie struct">ListFontsWithInfoCookie</a></div><div class="item-right docblock-short"><p>A handle to the replies to a <code>ListFontsWithInfo</code> request.</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.VoidCookie.html" title="x11rb::cookie::VoidCookie struct">VoidCookie</a></div><div class="item-right docblock-short"><p>A handle to a possible error from the X11 server.</p>
-</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="x11rb" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (f624427f8 2022-02-06)" ></div>
+</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="x11rb" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (e789f3a3a 2022-02-11)" ></div>
 </body></html>

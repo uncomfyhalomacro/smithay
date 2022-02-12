@@ -62,7 +62,7 @@ to the new device accordingly.</p>
 <p>If the logical seat name already exists in the device’s
 physical seat, the device is added to this seat. Otherwise, a
 new seat is created.</p>
-<h6 id="note" class="section-header"><a href="#note">Note</a></h6>
+<h6 id="note"><a href="#note">Note</a></h6>
 <p>This change applies to this device until removal or <code>suspend</code>,
 whichever happens earlier.</p>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><section id="method.udev_device" class="method has-srclink"><span class="rightside"><a class="srclink" href="../src/input/device.rs.html#345-353">source</a></span><a href="#method.udev_device" class="anchor"></a><h4 class="code-header">pub unsafe fn <a href="#method.udev_device" class="fnname">udev_device</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../udev/device/struct.Device.html" title="struct udev::device::Device">UdevDevice</a>&gt;</h4></section></summary><div class="docblock"><p>Return a udev handle to the device that is this libinput
@@ -72,13 +72,13 @@ may be unobtainable. This function returns <code>None</code> if no udev
 device was available.</p>
 <p>Calling this function multiple times for the same device may
 not return the same udev handle each time.</p>
-<h5 id="safety" class="section-header"><a href="#safety">Safety</a></h5>
+<h5 id="safety"><a href="#safety">Safety</a></h5>
 <p>The result of this function is not definied if the passed udev <code>Context</code>
 is not the same as the one the libinput <code>Context</code> was created from.</p>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><section id="method.led_update" class="method has-srclink"><span class="rightside"><a class="srclink" href="../src/input/device.rs.html#366-368">source</a></span><a href="#method.led_update" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.led_update" class="fnname">led_update</a>(&amp;mut self, leds: <a class="struct" href="struct.Led.html" title="struct input::Led">Led</a>)</h4></section></summary><div class="docblock"><p>Update the LEDs on the device, if any.</p>
 <p>If the device does not have LEDs, or does not have one or more
 of the LEDs given in the mask, this function does nothing.</p>
-<h6 id="arguments" class="section-header"><a href="#arguments">Arguments</a></h6>
+<h6 id="arguments"><a href="#arguments">Arguments</a></h6>
 <p>leds: Leds to turn on</p>
 <p>Missing <code>Led</code>s will be turned off.
 The slice is interpreted as a bitmap.</p>
@@ -117,7 +117,7 @@ call to <code>dispatch</code>, this function returns the third mode but
 the events in the event queue will return the modes 1, 2 and
 3, respectively.</p>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><section id="method.touch_count" class="method has-srclink"><span class="rightside"><a class="srclink" href="../src/input/device.rs.html#527-532">source</a></span><a href="#method.touch_count" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.touch_count" class="fnname">touch_count</a>(&amp;mut self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>&gt;</h4></section></summary><div class="docblock"><p>Check how many touches a <code>DeviceCapability::Touch</code>-exposing Device supports simultaneously.</p>
-<h6 id="returns" class="section-header"><a href="#returns">Returns</a></h6>
+<h6 id="returns"><a href="#returns">Returns</a></h6>
 <ul>
 <li><code>Some(n)</code> amount of touches</li>
 <li><code>Some(0)</code> if unknown</li>
@@ -197,7 +197,7 @@ have a specific physical button available.</p>
 <p>The button click method defines when to generate
 software-emulated buttons, usually on a device that does not
 have a specific physical button available.</p>
-<h6 id="note-1" class="section-header"><a href="#note-1">Note</a></h6>
+<h6 id="note-1"><a href="#note-1">Note</a></h6>
 <p>The selected click method may not take effect immediately. The
 device may require changing to a neutral state first before
 activating the new method.</p>
@@ -218,7 +218,7 @@ for details.</p>
 <p>When enabled, the device will be disabled while typing and
 for a short period after. See Disable-while-typing for
 details.</p>
-<h6 id="note-2" class="section-header"><a href="#note-2">Note</a></h6>
+<h6 id="note-2"><a href="#note-2">Note</a></h6>
 <p>Enabling or disabling disable-while-typing may not take
 effect immediately.</p>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><section id="method.config_left_handed" class="method has-srclink"><span class="rightside"><a class="srclink" href="../src/input/device.rs.html#933-935">source</a></span><a href="#method.config_left_handed" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.config_left_handed" class="fnname">config_left_handed</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></h4></section></summary><div class="docblock"><p>Get the current left-handed configuration of the device.</p>
@@ -240,7 +240,7 @@ default on this device.</p>
 <p>See <a href="https://wayland.freedesktop.org/libinput/doc/latest/middle_button_emulation.html">Middle button emulation</a> for details.</p>
 <p>If the device does not have configurable middle button
 emulation, this function returns <code>false</code>.</p>
-<h6 id="note-3" class="section-header"><a href="#note-3">Note</a></h6>
+<h6 id="note-3"><a href="#note-3">Note</a></h6>
 <p>Some devices provide middle mouse button emulation but do not
 allow enabling/disabling that emulation. These devices always
 return <code>false</code>.</p>
@@ -250,7 +250,7 @@ this device.</p>
 for details.</p>
 <p>If the device does not have configurable middle button
 emulation, this function returns <code>false</code>.</p>
-<h6 id="note-4" class="section-header"><a href="#note-4">Note</a></h6>
+<h6 id="note-4"><a href="#note-4">Note</a></h6>
 <p>Some devices provide middle mouse button emulation but do not
 allow enabling/disabling that emulation. These devices always
 return <code>false</code>.</p>
@@ -258,7 +258,7 @@ return <code>false</code>.</p>
 available on this device.</p>
 <p>See <a href="https://wayland.freedesktop.org/libinput/doc/latest/middle_button_emulation.html">Middle button emulation</a>
 for details.</p>
-<h6 id="note-5" class="section-header"><a href="#note-5">Note</a></h6>
+<h6 id="note-5"><a href="#note-5">Note</a></h6>
 <p>Some devices provide middle mouse button emulation but do not
 allow enabling/disabling that emulation. These devices return
 <code>false</code> in <code>config_middle_emulation_is_available</code>.</p>
@@ -300,7 +300,7 @@ support rotation always succeeds.</p>
 for this device.</p>
 <p>If <code>ScrollMethod::OnButtonDown</code> scroll method is not
 supported, or no button is set, this function returns 0.</p>
-<h6 id="note-6" class="section-header"><a href="#note-6">Note</a></h6>
+<h6 id="note-6"><a href="#note-6">Note</a></h6>
 <p>The return value is independent of the currently selected
 scroll-method. For button scrolling to activate, a device
 must have the <code>ScrollMethod::OnButtonDown</code> method enabled,
@@ -324,7 +324,7 @@ instead of pointer motion events.</p>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><section id="method.config_scroll_set_method" class="method has-srclink"><span class="rightside"><a class="srclink" href="../src/input/device.rs.html#1233-1262">source</a></span><a href="#method.config_scroll_set_method" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.config_scroll_set_method" class="fnname">config_scroll_set_method</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;&amp;mut self, <br>&nbsp;&nbsp;&nbsp;&nbsp;method: <a class="enum" href="enum.ScrollMethod.html" title="enum input::ScrollMethod">ScrollMethod</a><br>) -&gt; <a class="type" href="type.DeviceConfigResult.html" title="type input::DeviceConfigResult">DeviceConfigResult</a></h4></section></summary><div class="docblock"><p>Set the scroll method for this device.</p>
 <p>The method defines when to generate scroll axis events
 instead of pointer motion events.</p>
-<h6 id="note-7" class="section-header"><a href="#note-7">Note</a></h6>
+<h6 id="note-7"><a href="#note-7">Note</a></h6>
 <p>Setting <code>ScrollMethod::OnButtonDown</code> enables the scroll
 method, but scrolling is only activated when the configured
 button is held down. If no button is set, i.e.
@@ -355,7 +355,7 @@ will be send for the configured button.</p>
 <p>When the configured button is pressed, any motion events
 along a scroll-capable axis are turned into scroll axis
 events.</p>
-<h6 id="note-8" class="section-header"><a href="#note-8">Note</a></h6>
+<h6 id="note-8"><a href="#note-8">Note</a></h6>
 <p>Setting the button does not change the scroll method. To
 change the scroll method call <code>config_scroll_set_method</code>.
 If the button is 0, button scrolling is effectively disabled.</p>
@@ -431,7 +431,7 @@ applying any changes.</p>
 <p>The mapping may be changed when tap-to-click is disabled. The
 new mapping takes effect when tap-to-click is enabled in the
 future.</p>
-<h6 id="note-9" class="section-header"><a href="#note-9">Note</a></h6>
+<h6 id="note-9"><a href="#note-9">Note</a></h6>
 <p>This will return <code>None</code> for devices where
 <code>config_tap_finger_count</code> returns 0.</p>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><section id="method.config_tap_set_drag_enabled" class="method has-srclink"><span class="rightside"><a class="srclink" href="../src/input/device.rs.html#1649-1669">source</a></span><a href="#method.config_tap_set_drag_enabled" class="anchor"></a><h4 class="code-header">pub fn <a href="#method.config_tap_set_drag_enabled" class="fnname">config_tap_set_drag_enabled</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;&amp;mut self, <br>&nbsp;&nbsp;&nbsp;&nbsp;enabled: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a><br>) -&gt; <a class="type" href="type.DeviceConfigResult.html" title="type input::DeviceConfigResult">DeviceConfigResult</a></h4></section></summary><div class="docblock"><p>Enable or disable tap-and-drag on this device.</p>
@@ -476,9 +476,9 @@ by <code>==</code>. <a href="https://doc.rust-lang.org/nightly/core/cmp/trait.Pa
 </div></details></div></details><details class="rustdoc-toggle implementors-toggle" open><summary><section id="impl-ToOwned" class="impl has-srclink"><span class="rightside"><a class="srclink" href="https://doc.rust-lang.org/nightly/src/alloc/borrow.rs.html#84-96">source</a></span><a href="#impl-ToOwned" class="anchor"></a><h3 class="code-header in-band">impl&lt;T&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/alloc/borrow/trait.ToOwned.html" title="trait alloc::borrow::ToOwned">ToOwned</a> for T <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a>,&nbsp;</span></h3></section></summary><div class="impl-items"><details class="rustdoc-toggle" open><summary><section id="associatedtype.Owned" class="type trait-impl has-srclink"><a href="#associatedtype.Owned" class="anchor"></a><h4 class="code-header">type <a href="https://doc.rust-lang.org/nightly/alloc/borrow/trait.ToOwned.html#associatedtype.Owned" class="associatedtype">Owned</a> = T</h4></section></summary><div class='docblock'><p>The resulting type after obtaining ownership.</p>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><section id="method.to_owned" class="method trait-impl has-srclink"><span class="rightside"><a class="srclink" href="https://doc.rust-lang.org/nightly/src/alloc/borrow.rs.html#89">source</a></span><a href="#method.to_owned" class="anchor"></a><h4 class="code-header">pub fn <a href="https://doc.rust-lang.org/nightly/alloc/borrow/trait.ToOwned.html#tymethod.to_owned" class="fnname">to_owned</a>(&amp;self) -&gt; T</h4></section></summary><div class='docblock'><p>Creates owned data from borrowed data, usually by cloning. <a href="https://doc.rust-lang.org/nightly/alloc/borrow/trait.ToOwned.html#tymethod.to_owned">Read more</a></p>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><section id="method.clone_into" class="method trait-impl has-srclink"><span class="rightside"><a class="srclink" href="https://doc.rust-lang.org/nightly/src/alloc/borrow.rs.html#93">source</a></span><a href="#method.clone_into" class="anchor"></a><h4 class="code-header">pub fn <a href="https://doc.rust-lang.org/nightly/alloc/borrow/trait.ToOwned.html#method.clone_into" class="fnname">clone_into</a>(&amp;self, target: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;mut </a>T)</h4></section></summary><div class="item-info"><div class="stab unstable"><span class="emoji">🔬</span> This is a nightly-only experimental API. (<code>toowned_clone_into</code>)</div></div><div class='docblock'><p>Uses borrowed data to replace owned data, usually by cloning. <a href="https://doc.rust-lang.org/nightly/alloc/borrow/trait.ToOwned.html#method.clone_into">Read more</a></p>
-</div></details></div></details><details class="rustdoc-toggle implementors-toggle" open><summary><section id="impl-TryFrom%3CU%3E" class="impl has-srclink"><span class="rightside"><a class="srclink" href="https://doc.rust-lang.org/nightly/src/core/convert/mod.rs.html#589-598">source</a></span><a href="#impl-TryFrom%3CU%3E" class="anchor"></a><h3 class="code-header in-band">impl&lt;T, U&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.TryFrom.html" title="trait core::convert::TryFrom">TryFrom</a>&lt;U&gt; for T <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;U: <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;T&gt;,&nbsp;</span></h3></section></summary><div class="impl-items"><details class="rustdoc-toggle" open><summary><section id="associatedtype.Error" class="type trait-impl has-srclink"><a href="#associatedtype.Error" class="anchor"></a><h4 class="code-header">type <a href="https://doc.rust-lang.org/nightly/core/convert/trait.TryFrom.html#associatedtype.Error" class="associatedtype">Error</a> = <a class="enum" href="https://doc.rust-lang.org/nightly/core/convert/enum.Infallible.html" title="enum core::convert::Infallible">Infallible</a></h4></section></summary><div class='docblock'><p>The type returned in the event of a conversion error.</p>
+</div></details></div></details><details class="rustdoc-toggle implementors-toggle" open><summary><section id="impl-TryFrom%3CU%3E" class="impl has-srclink"><span class="rightside"><a class="srclink" href="https://doc.rust-lang.org/nightly/src/core/convert/mod.rs.html#589-598">source</a></span><a href="#impl-TryFrom%3CU%3E" class="anchor"></a><h3 class="code-header in-band">impl&lt;T, U&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.TryFrom.html" title="trait core::convert::TryFrom">TryFrom</a>&lt;U&gt; for T <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;U: <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;T&gt;,&nbsp;</span></h3></section></summary><div class="impl-items"><details class="rustdoc-toggle" open><summary><section id="associatedtype.Error-1" class="type trait-impl has-srclink"><a href="#associatedtype.Error-1" class="anchor"></a><h4 class="code-header">type <a href="https://doc.rust-lang.org/nightly/core/convert/trait.TryFrom.html#associatedtype.Error" class="associatedtype">Error</a> = <a class="enum" href="https://doc.rust-lang.org/nightly/core/convert/enum.Infallible.html" title="enum core::convert::Infallible">Infallible</a></h4></section></summary><div class='docblock'><p>The type returned in the event of a conversion error.</p>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><section id="method.try_from" class="method trait-impl has-srclink"><span class="rightside"><span class="since" title="const unstable">const: <a href="https://github.com/rust-lang/rust/issues/88674" title="Tracking issue for const_convert">unstable</a></span> · <a class="srclink" href="https://doc.rust-lang.org/nightly/src/core/convert/mod.rs.html#595">source</a></span><a href="#method.try_from" class="anchor"></a><h4 class="code-header">pub fn <a href="https://doc.rust-lang.org/nightly/core/convert/trait.TryFrom.html#tymethod.try_from" class="fnname">try_from</a>(value: U) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;T, &lt;T as <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.TryFrom.html" title="trait core::convert::TryFrom">TryFrom</a>&lt;U&gt;&gt;::<a class="associatedtype" href="https://doc.rust-lang.org/nightly/core/convert/trait.TryFrom.html#associatedtype.Error" title="type core::convert::TryFrom::Error">Error</a>&gt;</h4></section></summary><div class='docblock'><p>Performs the conversion.</p>
-</div></details></div></details><details class="rustdoc-toggle implementors-toggle" open><summary><section id="impl-TryInto%3CU%3E" class="impl has-srclink"><span class="rightside"><a class="srclink" href="https://doc.rust-lang.org/nightly/src/core/convert/mod.rs.html#574-583">source</a></span><a href="#impl-TryInto%3CU%3E" class="anchor"></a><h3 class="code-header in-band">impl&lt;T, U&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.TryInto.html" title="trait core::convert::TryInto">TryInto</a>&lt;U&gt; for T <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;U: <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.TryFrom.html" title="trait core::convert::TryFrom">TryFrom</a>&lt;T&gt;,&nbsp;</span></h3></section></summary><div class="impl-items"><details class="rustdoc-toggle" open><summary><section id="associatedtype.Error-1" class="type trait-impl has-srclink"><a href="#associatedtype.Error-1" class="anchor"></a><h4 class="code-header">type <a href="https://doc.rust-lang.org/nightly/core/convert/trait.TryInto.html#associatedtype.Error" class="associatedtype">Error</a> = &lt;U as <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.TryFrom.html" title="trait core::convert::TryFrom">TryFrom</a>&lt;T&gt;&gt;::<a class="associatedtype" href="https://doc.rust-lang.org/nightly/core/convert/trait.TryFrom.html#associatedtype.Error" title="type core::convert::TryFrom::Error">Error</a></h4></section></summary><div class='docblock'><p>The type returned in the event of a conversion error.</p>
+</div></details></div></details><details class="rustdoc-toggle implementors-toggle" open><summary><section id="impl-TryInto%3CU%3E" class="impl has-srclink"><span class="rightside"><a class="srclink" href="https://doc.rust-lang.org/nightly/src/core/convert/mod.rs.html#574-583">source</a></span><a href="#impl-TryInto%3CU%3E" class="anchor"></a><h3 class="code-header in-band">impl&lt;T, U&gt; <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.TryInto.html" title="trait core::convert::TryInto">TryInto</a>&lt;U&gt; for T <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;U: <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.TryFrom.html" title="trait core::convert::TryFrom">TryFrom</a>&lt;T&gt;,&nbsp;</span></h3></section></summary><div class="impl-items"><details class="rustdoc-toggle" open><summary><section id="associatedtype.Error" class="type trait-impl has-srclink"><a href="#associatedtype.Error" class="anchor"></a><h4 class="code-header">type <a href="https://doc.rust-lang.org/nightly/core/convert/trait.TryInto.html#associatedtype.Error" class="associatedtype">Error</a> = &lt;U as <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.TryFrom.html" title="trait core::convert::TryFrom">TryFrom</a>&lt;T&gt;&gt;::<a class="associatedtype" href="https://doc.rust-lang.org/nightly/core/convert/trait.TryFrom.html#associatedtype.Error" title="type core::convert::TryFrom::Error">Error</a></h4></section></summary><div class='docblock'><p>The type returned in the event of a conversion error.</p>
 </div></details><details class="rustdoc-toggle method-toggle" open><summary><section id="method.try_into" class="method trait-impl has-srclink"><span class="rightside"><span class="since" title="const unstable">const: <a href="https://github.com/rust-lang/rust/issues/88674" title="Tracking issue for const_convert">unstable</a></span> · <a class="srclink" href="https://doc.rust-lang.org/nightly/src/core/convert/mod.rs.html#580">source</a></span><a href="#method.try_into" class="anchor"></a><h4 class="code-header">pub fn <a href="https://doc.rust-lang.org/nightly/core/convert/trait.TryInto.html#tymethod.try_into" class="fnname">try_into</a>(self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;U, &lt;U as <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.TryFrom.html" title="trait core::convert::TryFrom">TryFrom</a>&lt;T&gt;&gt;::<a class="associatedtype" href="https://doc.rust-lang.org/nightly/core/convert/trait.TryFrom.html#associatedtype.Error" title="type core::convert::TryFrom::Error">Error</a>&gt;</h4></section></summary><div class='docblock'><p>Performs the conversion.</p>
-</div></details></div></details></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="input" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (f624427f8 2022-02-06)" ></div>
+</div></details></div></details></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="input" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (e789f3a3a 2022-02-11)" ></div>
 </body></html>

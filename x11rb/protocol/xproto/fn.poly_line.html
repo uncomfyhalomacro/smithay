@@ -13,7 +13,7 @@ line, a pixel is not drawn more than once. If thin (zero line-width) lines
 intersect, the intersecting pixels are drawn multiple times. If wide lines
 intersect, the intersecting pixels are drawn only once, as though the entire
 request were a single, filled shape.</p>
-<h2 id="fields-1" class="section-header"><a href="#fields-1">Fields</a></h2>
+<h2 id="fields-1"><a href="#fields-1">Fields</a></h2>
 <ul>
 <li><code>drawable</code> - The drawable to draw the line(s) on.</li>
 <li><code>gc</code> - The graphics context to use.</li>
@@ -21,14 +21,14 @@ request were a single, filled shape.</p>
 <li><code>points</code> - An array of points.</li>
 <li><code>coordinate_mode</code> -</li>
 </ul>
-<h2 id="errors" class="section-header"><a href="#errors">Errors</a></h2>
+<h2 id="errors"><a href="#errors">Errors</a></h2>
 <ul>
 <li><code>Drawable</code> - TODO: reasons?</li>
 <li><code>GContext</code> - TODO: reasons?</li>
 <li><code>Match</code> - TODO: reasons?</li>
 <li><code>Value</code> - TODO: reasons?</li>
 </ul>
-<h2 id="example" class="section-header"><a href="#example">Example</a></h2><div class="example-wrap"><pre class="language-text"><code>/*
+<h2 id="example"><a href="#example">Example</a></h2><div class="example-wrap"><pre class="language-text"><code>/*
  * Draw a straight line.
  *
  */
@@ -36,5 +36,5 @@ void my_example(xcb_connection_t *conn, xcb_drawable_t drawable, xcb_gcontext_t 
     xcb_poly_line(conn, XCB_COORD_MODE_ORIGIN, drawable, gc, 2,
                   (xcb_point_t[]) { {10, 10}, {100, 10} });
     xcb_flush(conn);
-}</code></pre></div></div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="x11rb" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (f624427f8 2022-02-06)" ></div>
+}</code></pre></div></div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="x11rb" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (e789f3a3a 2022-02-11)" ></div>
 </body></html>

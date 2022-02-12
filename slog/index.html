@@ -4,7 +4,7 @@
     </nav>
     <nav class="sidebar"><a class="sidebar-logo" href="../slog/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"><a href="#">Crate slog</a></h2><div class="sidebar-elems"><div class="block"><ul><li class="version">Version 2.7.0</li><li><a id="all-types" href="all.html">All Items</a></li></div></ul><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#statics">Statics</a></li><li><a href="#traits">Traits</a></li><li><a href="#types">Type Definitions</a></li></ul></div><div id="sidebar-vars" data-name="slog" data-ty="mod" data-relpath=""></div><script defer src="sidebar-items.js"></script></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../slog/index.html"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
-    <h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">slog</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/slog/lib.rs.html#1-3748">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="slog----structured-extensible-composable-logging-for-rust" class="section-header"><a href="#slog----structured-extensible-composable-logging-for-rust">Slog -  Structured, extensible, composable logging for Rust</a></h2>
+    <h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">slog</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/slog/lib.rs.html#1-3748">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="slog----structured-extensible-composable-logging-for-rust"><a href="#slog----structured-extensible-composable-logging-for-rust">Slog -  Structured, extensible, composable logging for Rust</a></h2>
 <p><code>slog-rs</code> is an ecosystem of reusable components for structured, extensible,
 composable logging for Rust.</p>
 <p><code>slog</code> is <code>slog-rs</code>’s main crate providing core components shared between
@@ -12,7 +12,7 @@ all other parts of <code>slog-rs</code> ecosystem.</p>
 <p>This is auto-generated technical documentation of <code>slog</code>. For information
 about project organization, development, help, etc. please see
 <a href="https://github.com/slog-rs/slog">slog github page</a></p>
-<h3 id="core-advantages-over-log-crate" class="section-header"><a href="#core-advantages-over-log-crate">Core advantages over <code>log</code> crate</a></h3>
+<h3 id="core-advantages-over-log-crate"><a href="#core-advantages-over-log-crate">Core advantages over <code>log</code> crate</a></h3>
 <ul>
 <li><strong>extensible</strong> - <code>slog</code> crate provides core functionality: a very basic
 and portable standard feature-set based on open <code>trait</code>s. This allows
@@ -35,7 +35,7 @@ in aesthetically pleasing and easy to understand ways.</li>
 pairs that contain the context of logging - information that otherwise
 would have to be repeated in every logging statement.</li>
 </ul>
-<h3 id="slog-features" class="section-header"><a href="#slog-features"><code>slog</code> features</a></h3>
+<h3 id="slog-features"><a href="#slog-features"><code>slog</code> features</a></h3>
 <ul>
 <li>performance oriented; read <a href="https://github.com/slog-rs/slog/wiki/What-makes-slog-fast">what makes slog
 fast</a> and see:
@@ -99,7 +99,7 @@ see <a href="https://docs.rs/slog-atomic">slog-atomic</a></li>
 </ul>
 </li>
 </ul>
-<h3 id="notable-details" class="section-header"><a href="#notable-details">Notable details</a></h3>
+<h3 id="notable-details"><a href="#notable-details">Notable details</a></h3>
 <p><strong>Note:</strong> At compile time <code>slog</code> by default removes trace and debug level
 statements in release builds, and trace level records in debug builds. This
 makes <code>trace</code> and <code>debug</code> level logging records practically free, which
@@ -111,12 +111,12 @@ your <code>Cargo.toml</code>:</p>
 <p>Root drain (passed to <code>Logger::root</code>) must be one that does not ever return
 errors. This forces user to pick error handing strategy.
 <code>Drain::fuse()</code> or <code>Drain::ignore_res()</code>.</p>
-<h3 id="where-to-start" class="section-header"><a href="#where-to-start">Where to start</a></h3>
+<h3 id="where-to-start"><a href="#where-to-start">Where to start</a></h3>
 <p><a href="trait.Drain.html"><code>Drain</code></a>, <a href="struct.Logger.html"><code>Logger</code></a> and
 <a href="macro.log.html"><code>log</code> macro</a> are the most important elements of
 slog. Make sure to read their respective documentation</p>
 <p>Typically the biggest problem is creating a <code>Drain</code></p>
-<h4 id="logging-to-the-terminal" class="section-header"><a href="#logging-to-the-terminal">Logging to the terminal</a></h4>
+<h4 id="logging-to-the-terminal"><a href="#logging-to-the-terminal">Logging to the terminal</a></h4>
 <div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">slog</span>;
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">slog_term</span>;
@@ -131,7 +131,7 @@ slog. Make sure to read their respective documentation</p>
 
     <span class="kw">let</span> <span class="ident">_log</span> <span class="op">=</span> <span class="ident">slog::Logger::root</span>(<span class="ident">drain</span>, <span class="macro">o!</span>());
 }</code></pre></div>
-<h4 id="logging-to-a-file" class="section-header"><a href="#logging-to-a-file">Logging to a file</a></h4>
+<h4 id="logging-to-a-file"><a href="#logging-to-a-file">Logging to a file</a></h4>
 <div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">slog</span>;
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">slog_term</span>;
@@ -159,7 +159,7 @@ slog. Make sure to read their respective documentation</p>
 <code>slog-term</code> only coincidently fits the role of a file output format. A
 proper <code>slog-file</code> crate with suitable format, log file rotation and other
 file-logging related features would be awesome. Contributions are welcome!</p>
-<h4 id="change-logging-level-at-runtime" class="section-header"><a href="#change-logging-level-at-runtime">Change logging level at runtime</a></h4>
+<h4 id="change-logging-level-at-runtime"><a href="#change-logging-level-at-runtime">Change logging level at runtime</a></h4>
 <div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">slog</span>;
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">slog_term</span>;
@@ -229,7 +229,7 @@ There is also nothing stopping anyone from publishing their own crate
 implementing it.</p>
 <p>Alternative to the above approach is <code>slog-atomic</code> crate. It implements
 swapping whole parts of <code>Drain</code> logging hierarchy.</p>
-<h3 id="examples--help" class="section-header"><a href="#examples--help">Examples &amp; help</a></h3>
+<h3 id="examples--help"><a href="#examples--help">Examples &amp; help</a></h3>
 <p>Basic examples that are kept up-to-date are typically stored in
 respective git repository, under <code>examples/</code> subdirectory. Eg.
 <a href="https://github.com/slog-rs/term/tree/master/examples">slog-term examples</a>.</p>
@@ -240,7 +240,7 @@ slog-rs</a> can
 be an useful reference.</p>
 <p>Visit <a href="https://gitter.im/slog-rs/slog">slog-rs gitter channel</a> for immediate
 help.</p>
-<h3 id="migrating-from-slog-v1-to-slog-v2" class="section-header"><a href="#migrating-from-slog-v1-to-slog-v2">Migrating from slog v1 to slog v2</a></h3><h4 id="key-value-pairs-come-now-after-format-string" class="section-header"><a href="#key-value-pairs-come-now-after-format-string">Key-value pairs come now after format string</a></h4>
+<h3 id="migrating-from-slog-v1-to-slog-v2"><a href="#migrating-from-slog-v1-to-slog-v2">Migrating from slog v1 to slog v2</a></h3><h4 id="key-value-pairs-come-now-after-format-string"><a href="#key-value-pairs-come-now-after-format-string">Key-value pairs come now after format string</a></h4>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">slog</span>;
 
@@ -250,7 +250,7 @@ help.</p>
     <span class="macro">info!</span>(<span class="ident">root</span>, <span class="string">&quot;formatted: {}&quot;</span>, <span class="number">1</span>; <span class="string">&quot;log-key&quot;</span> =&gt; <span class="bool-val">true</span>);
 }</code></pre></div>
 <p>See more information about format at <a href="macro.log.html"><code>log</code></a>.</p>
-<h4 id="slog-streamer-is-gone" class="section-header"><a href="#slog-streamer-is-gone"><code>slog-streamer</code> is gone</a></h4>
+<h4 id="slog-streamer-is-gone"><a href="#slog-streamer-is-gone"><code>slog-streamer</code> is gone</a></h4>
 <p>Create simple terminal logger like this:</p>
 
 <div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
@@ -267,7 +267,7 @@ help.</p>
 
     <span class="kw">let</span> <span class="ident">_log</span> <span class="op">=</span> <span class="ident">slog::Logger::root</span>(<span class="ident">drain</span>, <span class="macro">o!</span>());
 }</code></pre></div>
-<h4 id="logging-macros-now-takes-ownership-of-values" class="section-header"><a href="#logging-macros-now-takes-ownership-of-values">Logging macros now takes ownership of values.</a></h4>
+<h4 id="logging-macros-now-takes-ownership-of-values"><a href="#logging-macros-now-takes-ownership-of-values">Logging macros now takes ownership of values.</a></h4>
 <p>Pass them by reference: <code>&amp;x</code>.</p>
 </div></details><h2 id="modules" class="small-section-header"><a href="#modules">Modules</a></h2>
 <div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="mod" href="ser/index.html" title="slog::ser mod">ser</a><span class="stab deprecated" title="">Deprecated</span></div><div class="item-right docblock-short"><p>Compatibility name to ease upgrading from <code>slog v1</code></p>
@@ -346,5 +346,5 @@ record creation to be done mostly at compile-time.</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.Result.html" title="slog::Result type">Result</a></div><div class="item-right docblock-short"><p>Serialization <code>Result</code></p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.Serialize.html" title="slog::Serialize type">Serialize</a><span class="stab deprecated" title="">Deprecated</span></div><div class="item-right docblock-short"><p>Compatibility name to ease upgrading from <code>slog v1</code></p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.ValueSerializer.html" title="slog::ValueSerializer type">ValueSerializer</a><span class="stab deprecated" title="">Deprecated</span></div><div class="item-right docblock-short"><p>Compatibility name to ease upgrading from <code>slog v1</code></p>
-</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="slog" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (f624427f8 2022-02-06)" ></div>
+</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="slog" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (e789f3a3a 2022-02-11)" ></div>
 </body></html>

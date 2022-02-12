@@ -12,7 +12,7 @@
 <p>Err is returned either if no temporary filename could be created or the template doesn’t
 end with XXXXXX</p>
 <p>See also <a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/mkstemp.html">mkstemp(2)</a></p>
-<h2 id="example" class="section-header"><a href="#example">Example</a></h2>
+<h2 id="example"><a href="#example">Example</a></h2>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">nix::unistd</span>;
 
 <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">unistd::mkstemp</span>(<span class="string">&quot;/tmp/tempfile_XXXXXX&quot;</span>) {
@@ -23,5 +23,5 @@ end with XXXXXX</p>
     <span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;mkstemp failed: {}&quot;</span>, <span class="ident">e</span>)
 };
 <span class="comment">// do something with fd</span></code></pre></div>
-</div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="nix" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (f624427f8 2022-02-06)" ></div>
+</div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="nix" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (e789f3a3a 2022-02-11)" ></div>
 </body></html>

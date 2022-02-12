@@ -5,7 +5,7 @@
     <nav class="sidebar"><a class="sidebar-logo" href="../wayland_server/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"><a href="#">Crate wayland_server</a></h2><div class="sidebar-elems"><div class="block"><ul><li class="version">Version 0.29.4</li><li><a id="all-types" href="all.html">All Items</a></li></div></ul><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li></ul></div><div id="sidebar-vars" data-name="wayland_server" data-ty="mod" data-relpath=""></div><script defer src="sidebar-items.js"></script></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../wayland_server/index.html"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
     <h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">wayland_server</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/wayland_server/lib.rs.html#1-267">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Server-side Wayland connector</p>
-<h3 id="overview" class="section-header"><a href="#overview">Overview</a></h3>
+<h3 id="overview"><a href="#overview">Overview</a></h3>
 <p>This crate provides the interfaces and machinery to safely create servers
 for the Wayland protocol. It can be used as either a rust implementatin of the protocol,
 or as a wrapper around the system-wide <code>libwayland-server.so</code> if you need interoperability
@@ -14,11 +14,11 @@ with other libraries. This last case is activated by the <code>use_system_lib</c
 of messages associated to these objects. Whenever a client connects, a <code>Display</code> object
 is automatically created in their object space, which they use as a root to create new
 objects and bootstrap their state.</p>
-<h3 id="protocol-and-messages-handling-model" class="section-header"><a href="#protocol-and-messages-handling-model">Protocol and messages handling model</a></h3>
+<h3 id="protocol-and-messages-handling-model"><a href="#protocol-and-messages-handling-model">Protocol and messages handling model</a></h3>
 <p>The protocol being bi-directional, you can send and receive messages.
 Sending messages is done via methods of Rust objects corresponding to the wayland protocol
 objects, receiving and handling them is done by providing callbacks.</p>
-<h4 id="resources" class="section-header"><a href="#resources">Resources</a></h4>
+<h4 id="resources"><a href="#resources">Resources</a></h4>
 <p>The protocol and message model is very similar to the one of <code>wayland-client</code>, with the
 main difference being that the underlying handles to objects are represented by the <code>Resource&lt;I&gt;</code>
 type, very similarly to proxies in <code>wayland-client</code>.</p>
@@ -36,7 +36,7 @@ messages, it can happen that an object gets destroyed while one or more
 Rust objects still refer to it. In such case, these Rust objects will be disabled
 and the <code>alive()</code> method on the underlying <code>Resource&lt;I&gt;</code> will start to return <code>false</code>.
 Events that are subsequently sent to them are ignored.</p>
-<h4 id="filters" class="section-header"><a href="#filters">Filters</a></h4>
+<h4 id="filters"><a href="#filters">Filters</a></h4>
 <p>Your wayland objects can receive requests from the client, which need to be processed.
 To do so, you can assign <code>Filter</code>s to your object. These are specially wrapped closure
 so that several objects can be assigned to the same <code>Filter</code>, to ease state sharing
@@ -46,7 +46,7 @@ Failure to do will cause a <code>panic!()</code> if a request is dispatched to t
 <p>A Rust object passed to your implementation is guaranteed to be alive (as it just received
 a request), unless the exact message received is a destructor (which is indicated in the API
 documentations).</p>
-<h3 id="general-structure" class="section-header"><a href="#general-structure">General structure</a></h3>
+<h3 id="general-structure"><a href="#general-structure">General structure</a></h3>
 <p>The core of your server is the <code>Display</code> object. It represent the ability of your program to
 process Wayland messages. Once this object is created, you can configure it to listen on one
 or more sockets for incoming client connections (see the <code>Display</code> docs for details).</p>
@@ -78,5 +78,5 @@ of different types. It behaves similarly to a <code>TypeMap</code>.</p>
 </div></div></div><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2>
 <div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.Interface.html" title="wayland_server::Interface trait">Interface</a></div><div class="item-right docblock-short"><p>The description of a wayland interface</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.MessageGroup.html" title="wayland_server::MessageGroup trait">MessageGroup</a></div><div class="item-right docblock-short"><p>A group of messages</p>
-</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="wayland_server" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (f624427f8 2022-02-06)" ></div>
+</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="wayland_server" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (e789f3a3a 2022-02-11)" ></div>
 </body></html>

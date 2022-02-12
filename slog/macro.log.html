@@ -28,7 +28,7 @@ statically disable logging at various levels. See <a href="index.html#notable-de
 details</a></p>
 <p>Use <a href="macro.slog_log.html">version with longer name</a> if you want to prevent
 clash with legacy <code>log</code> crate macro names.</p>
-<h3 id="supported-invocations" class="section-header"><a href="#supported-invocations">Supported invocations</a></h3><h4 id="simple" class="section-header"><a href="#simple">Simple</a></h4>
+<h3 id="supported-invocations"><a href="#supported-invocations">Supported invocations</a></h3><h4 id="simple"><a href="#simple">Simple</a></h4>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">slog</span>;
 
@@ -52,7 +52,7 @@ clash with legacy <code>log</code> crate macro names.</p>
     );
     <span class="macro">info!</span>(<span class="ident">root</span>, <span class="string">&quot;test info log&quot;</span>);
 }</code></pre></div>
-<h4 id="formatting-support" class="section-header"><a href="#formatting-support">Formatting support:</a></h4>
+<h4 id="formatting-support"><a href="#formatting-support">Formatting support:</a></h4>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">slog</span>;
 
@@ -83,7 +83,7 @@ clash with legacy <code>log</code> crate macro names.</p>
 }</code></pre></div>
 <p>Use formatting support wisely. Prefer named arguments, so the associated
 data is not “lost” by becoming an untyped string in the message.</p>
-<h4 id="tags" class="section-header"><a href="#tags">Tags</a></h4>
+<h4 id="tags"><a href="#tags">Tags</a></h4>
 <p>All above versions can be supplemented with a tag - string literal prefixed
 with <code>#</code>.</p>
 
@@ -102,7 +102,7 @@ with <code>#</code>.</p>
     );
 }</code></pre></div>
 <p>See <code>Record::tag()</code> for more information about tags.</p>
-<h4 id="own-implementations-of-kv-and-value" class="section-header"><a href="#own-implementations-of-kv-and-value">Own implementations of <code>KV</code> and <code>Value</code></a></h4>
+<h4 id="own-implementations-of-kv-and-value"><a href="#own-implementations-of-kv-and-value">Own implementations of <code>KV</code> and <code>Value</code></a></h4>
 <p>List of key value pairs is a comma separated list of key-values. Typically,
 a designed syntax is used in form of <code>k =&gt; v</code> where <code>k</code> can be any type
 that implements <code>Value</code> type.</p>
@@ -146,7 +146,7 @@ that implements <code>Value</code> type.</p>
         <span class="string">&quot;testing MyV&quot;</span>; <span class="string">&quot;MyV&quot;</span> =&gt; <span class="ident">MyV</span>
     );
 }</code></pre></div>
-<h4 id="fmtdisplay-and-fmtdebug-values" class="section-header"><a href="#fmtdisplay-and-fmtdebug-values"><code>fmt::Display</code> and <code>fmt::Debug</code> values</a></h4>
+<h4 id="fmtdisplay-and-fmtdebug-values"><a href="#fmtdisplay-and-fmtdebug-values"><code>fmt::Display</code> and <code>fmt::Debug</code> values</a></h4>
 <p>Value of any type that implements <code>std::fmt::Display</code> can be prefixed with
 <code>%</code> in <code>k =&gt; v</code> expression to use its text representation returned by
 <code>format_args!(&quot;{}&quot;, v)</code>. This is especially useful for errors. Not that
@@ -170,5 +170,5 @@ or pretty-printed with <code>#?</code>.</p>
         <span class="macro">error!</span>(<span class="ident">log</span>, <span class="string">&quot;write failed&quot;</span>; <span class="string">&quot;err&quot;</span> =&gt; <span class="op">%</span><span class="ident">e</span>);
     }
 }</code></pre></div>
-</div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="slog" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (f624427f8 2022-02-06)" ></div>
+</div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="slog" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (e789f3a3a 2022-02-11)" ></div>
 </body></html>

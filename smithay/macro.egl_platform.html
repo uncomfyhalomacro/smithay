@@ -9,21 +9,21 @@
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">platform</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">native_display</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">required_extensions</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">attrib_list</span>:<span class="ident">expr</span>) =&gt; { ... };
 }</code></pre></div>
 </div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Create a <code>EGLPlatform&lt;'a&gt;</code> for the provided platform.</p>
-<h2 id="arguments" class="section-header"><a href="#arguments">Arguments</a></h2>
+<h2 id="arguments"><a href="#arguments">Arguments</a></h2>
 <ul>
 <li><code>platform</code> - The platform defined in <code>ffi::egl::</code></li>
 <li><code>native_display</code> - The native display raw pointer which can be casted to <code>*mut c_void</code></li>
 <li><code>required_extensions</code> - The name of the required EGL Extension for this platform</li>
 </ul>
-<h2 id="optional-arguments" class="section-header"><a href="#optional-arguments">Optional Arguments</a></h2>
+<h2 id="optional-arguments"><a href="#optional-arguments">Optional Arguments</a></h2>
 <ul>
 <li><code>attrib_list</code> - A list of <code>ffi::EGLint</code> like defined in the EGL Extension</li>
 </ul>
-<h2 id="examples" class="section-header"><a href="#examples">Examples</a></h2>
+<h2 id="examples"><a href="#examples">Examples</a></h2>
 <div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore"><code><span class="kw">use</span> <span class="ident">smithay::backend::egl</span>::{<span class="ident">ffi</span>, <span class="ident">native::EGLPlatform</span>};
 <span class="kw">use</span> <span class="ident">smithay::egl_platform</span>;
 
 <span class="comment">// see: https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_platform_gbm.txt</span>
 <span class="macro">egl_platform!</span>(<span class="ident">PLATFORM_GBM_KHR</span>, <span class="ident">native_display</span>, <span class="kw-2">&amp;</span>[<span class="string">&quot;EGL_KHR_platform_gbm&quot;</span>]);</code></pre></div>
-</div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (f624427f8 2022-02-06)" ></div>
+</div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (e789f3a3a 2022-02-11)" ></div>
 </body></html>

@@ -6,10 +6,10 @@
         </a><h2 class="location"><a href="#">Module backend</a></h2><div class="sidebar-elems"><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#enums">Enums</a></li></ul></div><div id="sidebar-vars" data-name="backend" data-ty="mod" data-relpath="./"></div><script defer src="./sidebar-items.js"></script></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../smithay/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
     <h1 class="fqn"><span class="in-band">Module <a href="../index.html">smithay</a>::<wbr><a class="mod" href="#">backend</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../src/smithay/backend/mod.rs.html#1-130">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Backend (rendering/input) helpers</p>
 <p>This module provides helpers for interaction with the operating system.</p>
-<h3 id="module-structure" class="section-header"><a href="#module-structure">Module structure</a></h3>
+<h3 id="module-structure"><a href="#module-structure">Module structure</a></h3>
 <p>The module is largely structured around three main aspects of interaction with the OS:
 session management, input handling, and graphics.</p>
-<h4 id="session-management" class="section-header"><a href="#session-management">Session management</a></h4>
+<h4 id="session-management"><a href="#session-management">Session management</a></h4>
 <p>Session management relates to mechanisms allowing the compositor to access the resources
 it needs to function. It contains interaction with the login manager if any ((e)logind or
 seatd), as well as releasing those resources when TTY-switching. It is handled by the
@@ -18,14 +18,14 @@ it to run your compositor directly on a TTY.</p>
 <p>This module is tightly coupled with the <a href="udev/index.html" title="udev"><code>udev</code></a> module (gated by the <code>backend_udev</code> cargo
 feature), which allows the discovery of usable graphics and input devices on the system, using
 the udev system daemon.</p>
-<h4 id="input-handling" class="section-header"><a href="#input-handling">Input handling</a></h4>
+<h4 id="input-handling"><a href="#input-handling">Input handling</a></h4>
 <p>Input handling consists in discovering the various available input devices, and receiving
 all inputs events from it. Smithay is build to support different possible sources for
 that input data, with a generic API provided by the traits and types defined in the
 <a href="input/index.html" title="input"><code>input</code></a> module. An input provider following this API based on <code>libinput</code> is given in the
 <a href="libinput/index.html" title="libinput"><code>libinput</code></a> module, gated by the <code>backend_libinput</code> cargo feature. The winit backend
 (see below) also provides an input provider.</p>
-<h4 id="graphics" class="section-header"><a href="#graphics">Graphics</a></h4>
+<h4 id="graphics"><a href="#graphics">Graphics</a></h4>
 <p>Combining content from the clients and displaying it on the screen is the central role of
 a wayland compositor, and also one of its most complex tasks; several backend modules are
 dedicated to this task.</p>
@@ -47,7 +47,7 @@ the <code>wl_drm</code>-based hardware-acceleration provided by Mesa, a precurso
 <a href="../wayland/dmabuf/index.html"><code>linux_dmabuf</code></a> Wayland protocol extension. Note that, at the
 moment, even clients using dma-buf still require that the <code>wl_drm</code> infrastructure is
 initialized to have hardware-acceleration.</p>
-<h3 id="x11-backend" class="section-header"><a href="#x11-backend">X11 backend</a></h3>
+<h3 id="x11-backend"><a href="#x11-backend">X11 backend</a></h3>
 <p>Alongside this infrastructure, Smithay also provides an alternative backend based on
 <a href="https://crates.io/crates/x11rb">x11rb</a>, which makes it possible to run your compositor as
 an X11 client. This is generally quite helpful for development and debugging.</p>
@@ -55,7 +55,7 @@ an X11 client. This is generally quite helpful for development and debugging.</p
 the window assuming you can provide it with a <a href="allocator/dmabuf/struct.Dmabuf.html"><code>Dmabuf</code></a>.
 The X11 backend is also an input provider, and is accessible in the <a href="x11/index.html" title="x11"><code>x11</code></a> module, gated by
 the <code>backend_x11</code> cargo feature.</p>
-<h3 id="winit-backend" class="section-header"><a href="#winit-backend">Winit backend</a></h3>
+<h3 id="winit-backend"><a href="#winit-backend">Winit backend</a></h3>
 <p>Alongside this infrastructure, Smithay also provides an alternative backend based on
 <a href="https://crates.io/crates/winit">winit</a>, which makes it possible to run your compositor as
 a Wayland or X11 client. You are encouraged to use the X11 backend where possible since winit
@@ -75,5 +75,5 @@ accessible in the <a href="winit/index.html" title="winit"><code>winit</code></a
 </div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="x11/index.html" title="smithay::backend::x11 mod">x11</a></div><div class="item-right docblock-short"><p>Implementation of the backend types using X11.</p>
 </div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2>
 <div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.SwapBuffersError.html" title="smithay::backend::SwapBuffersError enum">SwapBuffersError</a></div><div class="item-right docblock-short"><p>Error that can happen when swapping buffers.</p>
-</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (f624427f8 2022-02-06)" ></div>
+</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (e789f3a3a 2022-02-11)" ></div>
 </body></html>

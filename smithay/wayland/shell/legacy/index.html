@@ -11,7 +11,7 @@ thus this module is provided as a compatibility layer with older clients. As a c
 you can as a compositor-writer decide to only support its functionality in a best-effort
 manner: as this global is part of the core protocol, you are still required to provide
 some support for it.</p>
-<h3 id="why-use-this-implementation" class="section-header"><a href="#why-use-this-implementation">Why use this implementation</a></h3>
+<h3 id="why-use-this-implementation"><a href="#why-use-this-implementation">Why use this implementation</a></h3>
 <p>This implementation can track for you the various shell surfaces defined by the
 clients by handling the <code>wl_shell</code> protocol.</p>
 <p>It allows you to easily access a list of all shell surfaces defined by your clients
@@ -19,7 +19,7 @@ access their associated metadata and underlying <code>wl_surface</code>s.</p>
 <p>This handler only handles the protocol exchanges with the client to present you the
 information in a coherent and relatively easy to use manner. All the actual drawing
 and positioning logic of windows is out of its scope.</p>
-<h3 id="how-to-use-it" class="section-header"><a href="#how-to-use-it">How to use it</a></h3><h4 id="initialization" class="section-header"><a href="#initialization">Initialization</a></h4>
+<h3 id="how-to-use-it"><a href="#how-to-use-it">How to use it</a></h3><h4 id="initialization"><a href="#initialization">Initialization</a></h4>
 <p>To initialize this handler, simple use the <a href="fn.wl_shell_init.html" title="wl_shell_init"><code>wl_shell_init</code></a> function provided in this module.
 You need to provide a closure that will be invoked whenever some action is required from you,
 are represented by the <a href="enum.ShellRequest.html" title="ShellRequest"><code>ShellRequest</code></a> enum.</p>
@@ -45,5 +45,5 @@ are represented by the <a href="enum.ShellRequest.html" title="ShellRequest"><co
 <div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="constant" href="constant.WL_SHELL_SURFACE_ROLE.html" title="smithay::wayland::shell::legacy::WL_SHELL_SURFACE_ROLE constant">WL_SHELL_SURFACE_ROLE</a></div><div class="item-right docblock-short"><p>The role of a wl_shell_surface.</p>
 </div></div></div><h2 id="functions" class="small-section-header"><a href="#functions">Functions</a></h2>
 <div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.wl_shell_init.html" title="smithay::wayland::shell::legacy::wl_shell_init fn">wl_shell_init</a></div><div class="item-right docblock-short"><p>Create a new <code>wl_shell</code> global</p>
-</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (f624427f8 2022-02-06)" ></div>
+</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (e789f3a3a 2022-02-11)" ></div>
 </body></html>

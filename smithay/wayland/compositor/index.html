@@ -9,7 +9,7 @@
 and region Wayland objects, by registering an implementation for
 for the <a href="../../../wayland_server/protocol/wl_compositor/index.html"><code>wl_compositor</code></a>
 and <a href="../../../wayland_server/protocol/wl_subcompositor/index.html"><code>wl_subcompositor</code></a> globals.</p>
-<h3 id="why-use-this-implementation" class="section-header"><a href="#why-use-this-implementation">Why use this implementation</a></h3>
+<h3 id="why-use-this-implementation"><a href="#why-use-this-implementation">Why use this implementation</a></h3>
 <p>This implementation does a simple job: it stores in a coherent way the state of
 surface trees with subsurfaces, to provide you direct access to the tree
 structure and all surface attributes, and handles the application of double-buffered
@@ -20,7 +20,7 @@ need to display the subsurface tree.</p>
 <p>This implementation will not do anything more than present you the metadata specified by the
 client in a coherent and practical way. All the logic regarding drawing itself, and
 the positioning of windows (surface trees) one relative to another is out of its scope.</p>
-<h3 id="how-to-use-it" class="section-header"><a href="#how-to-use-it">How to use it</a></h3><h4 id="initialization" class="section-header"><a href="#initialization">Initialization</a></h4>
+<h3 id="how-to-use-it"><a href="#how-to-use-it">How to use it</a></h3><h4 id="initialization"><a href="#initialization">Initialization</a></h4>
 <p>To initialize this implementation, use the <a href="fn.compositor_init.html" title="compositor_init"><code>compositor_init</code></a>
 method provided by this module. It’ll require you to first define as few things, as shown in
 this example:</p>
@@ -39,12 +39,12 @@ this example:</p>
 );
 
 <span class="comment">// You&#39;re now ready to go!</span></code></pre></div>
-<h4 id="use-the-surface-states" class="section-header"><a href="#use-the-surface-states">Use the surface states</a></h4>
+<h4 id="use-the-surface-states"><a href="#use-the-surface-states">Use the surface states</a></h4>
 <p>The main access to surface states is done through the <a href="fn.with_states.html" title="with_states"><code>with_states</code></a> function, which
 gives you access to the <a href="struct.SurfaceData.html" title="SurfaceData"><code>SurfaceData</code></a> instance associated with this surface. It acts
 as a general purpose container for associating state to a surface, double-buffered or
 not. See its documentation for more details.</p>
-<h4 id="state-application-and-hooks" class="section-header"><a href="#state-application-and-hooks">State application and hooks</a></h4>
+<h4 id="state-application-and-hooks"><a href="#state-application-and-hooks">State application and hooks</a></h4>
 <p>On commit of a surface several steps are taken to update the state of the surface. Actions
 are taken by smithay in the following order:</p>
 <ol>
@@ -62,7 +62,7 @@ like <a href="fn.with_surface_tree_upward.html" title="with_surface_tree_upward"
 if the surface is a sync subsurface, its current state will note have changed as
 the result of that commit. You can check if it is using <a href="fn.is_sync_subsurface.html" title="is_sync_subsurface"><code>is_sync_subsurface</code></a>.</li>
 </ol>
-<h4 id="surface-roles" class="section-header"><a href="#surface-roles">Surface roles</a></h4>
+<h4 id="surface-roles"><a href="#surface-roles">Surface roles</a></h4>
 <p>The wayland protocol specifies that a surface needs to be assigned a role before it can
 be displayed. Furthermore, a surface can only have a single role during its whole lifetime.
 Smithay represents this role as a <code>&amp;'static str</code> identifier, that can only be set once
@@ -97,5 +97,5 @@ and <a href="../../../wayland_server/protocol/wl_subcompositor/index.html"><code
 </div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.with_states.html" title="smithay::wayland::compositor::with_states fn">with_states</a></div><div class="item-right docblock-short"><p>Access the states associated to this surface</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.with_surface_tree_downward.html" title="smithay::wayland::compositor::with_surface_tree_downward fn">with_surface_tree_downward</a></div><div class="item-right docblock-short"><p>Access the data of a surface tree from top to bottom</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.with_surface_tree_upward.html" title="smithay::wayland::compositor::with_surface_tree_upward fn">with_surface_tree_upward</a></div><div class="item-right docblock-short"><p>Access the data of a surface tree from bottom to top</p>
-</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (f624427f8 2022-02-06)" ></div>
+</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (e789f3a3a 2022-02-11)" ></div>
 </body></html>

@@ -5,7 +5,7 @@
     <nav class="sidebar"><a class="sidebar-logo" href="../../../smithay/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"><a href="#">Module drm</a></h2><div class="sidebar-elems"><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li></ul></div><div id="sidebar-vars" data-name="drm" data-ty="mod" data-relpath="./"></div><script defer src="./sidebar-items.js"></script></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../smithay/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
     <h1 class="fqn"><span class="in-band">Module <a href="../../index.html">smithay</a>::<wbr><a href="../index.html">backend</a>::<wbr><a class="mod" href="#">drm</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../../src/smithay/backend/drm/mod.rs.html#1-171">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>This module represents abstraction on top the linux direct rendering manager api (drm).</p>
-<h3 id="drmdevice" class="section-header"><a href="#drmdevice"><code>DrmDevice</code></a></h3>
+<h3 id="drmdevice"><a href="#drmdevice"><code>DrmDevice</code></a></h3>
 <p>A device exposes certain properties, which are directly derived
 from the <em>device</em> as perceived by the direct rendering manager api (drm). These resources consists
 out of connectors, encoders, framebuffers, planes and crtcs.</p>
@@ -34,7 +34,7 @@ Surface creation requires a <code>crtc</code> (which cannot be the same as anoth
 as well as a <code>Mode</code> and a set of <code>connectors</code>.</p>
 <p>smithay does not make sure that <code>connectors</code> are not already in use by another <code>Surface</code>. Overlapping <code>connector</code>-Sets may
 be an error or result in undefined rendering behavior depending on the <code>Surface</code> implementation.</p>
-<h3 id="drmsurface" class="section-header"><a href="#drmsurface"><code>DrmSurface</code></a></h3>
+<h3 id="drmsurface"><a href="#drmsurface"><code>DrmSurface</code></a></h3>
 <p>A surface is a part of a <code>Device</code> that may output a picture to a number of connectors. It pumps pictures of buffers to outputs.</p>
 <p>On surface creation a matching encoder for your <code>connector</code> is automatically selected, if one exists(!),
 which means you still need to check your configuration beforehand, even if you do not need to provide an encoder.</p>
@@ -43,12 +43,12 @@ A surface also always needs at least one connector to output the resulting image
 <p>The state of a <code>Surface</code> is double-buffered, meaning all operations that chance the set of <code>connector</code>s or their <code>Mode</code> are stored and
 only applied on the next commit. <code>Surface</code>s do their best to validate these changes, if possible.</p>
 <p>A commit/page_flip may be triggered to apply the pending state.</p>
-<h3 id="rendering" class="section-header"><a href="#rendering">Rendering</a></h3>
+<h3 id="rendering"><a href="#rendering">Rendering</a></h3>
 <p>The drm infrastructure makes no assumptions about the used renderer and does not interface with them directly.
 It just provides a way to create framebuffers from various buffer types (mainly <code>DumbBuffer</code>s and hardware-backed gbm <code>BufferObject</code>s).</p>
 <p>Buffer management and details about the various types can be found in the <a href="../allocator/index.html"><code>allocator</code>-Module</a> and
 rendering abstractions, which can target these buffers can be found in the <a href="../renderer/index.html"><code>renderer</code>-Module</a>.</p>
-<h3 id="drmnode" class="section-header"><a href="#drmnode"><code>DrmNode</code></a></h3>
+<h3 id="drmnode"><a href="#drmnode"><code>DrmNode</code></a></h3>
 <p>A drm node refers to a drm device and the capabilities that may be performed using the node.
 Generally <a href="node/struct.DrmNode.html" title="DrmNode"><code>DrmNode</code></a> is primarily used by clients (such as the output backends) which need
 to allocate buffers for use in X11 or Wayland. If you need to do mode setting, you should use
@@ -70,5 +70,5 @@ and the <a href="struct.DrmSurface.html"><code>DrmSurface</code></a>.</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.GbmBufferedSurfaceError.html" title="smithay::backend::drm::GbmBufferedSurfaceError enum">GbmBufferedSurfaceError</a></div><div class="item-right docblock-short"><p>Errors thrown by a <a href="struct.GbmBufferedSurface.html" title="GbmBufferedSurface"><code>GbmBufferedSurface</code></a></p>
 </div></div></div><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2>
 <div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.DevPath.html" title="smithay::backend::drm::DevPath trait">DevPath</a></div><div class="item-right docblock-short"><p>Trait representing open devices that <em>may</em> return a <code>Path</code></p>
-</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (f624427f8 2022-02-06)" ></div>
+</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (e789f3a3a 2022-02-11)" ></div>
 </body></html>

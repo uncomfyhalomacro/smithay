@@ -9,7 +9,7 @@
 is earlier than the current last-focus-change time, the request is ignored (to
 avoid race conditions when running X over the network).</p>
 <p>A FocusIn and FocusOut event is generated when focus is changed.</p>
-<h2 id="fields-1" class="section-header"><a href="#fields-1">Fields</a></h2>
+<h2 id="fields-1"><a href="#fields-1">Fields</a></h2>
 <ul>
 <li><code>focus</code> - The window to focus. All keyboard events will be reported to this window. The
 window must be viewable (TODO), or a <code>xcb_match_error_t</code> occurs (TODO).</li>
@@ -27,16 +27,16 @@ time.</p>
 <li><code>revert_to</code> - Specifies what happens when the <code>focus</code> window becomes unviewable (if <code>focus</code>
 is neither <code>XCB_NONE</code> nor <code>XCB_POINTER_ROOT</code>).</li>
 </ul>
-<h2 id="errors" class="section-header"><a href="#errors">Errors</a></h2>
+<h2 id="errors"><a href="#errors">Errors</a></h2>
 <ul>
 <li><code>Window</code> - The specified <code>focus</code> window does not exist.</li>
 <li><code>Match</code> - The specified <code>focus</code> window is not viewable.</li>
 <li><code>Value</code> - TODO: Reasons?</li>
 </ul>
-<h2 id="see" class="section-header"><a href="#see">See</a></h2>
+<h2 id="see"><a href="#see">See</a></h2>
 <ul>
 <li><code>FocusIn</code>: event</li>
 <li><code>FocusOut</code>: event</li>
 </ul>
-</div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="x11rb" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (f624427f8 2022-02-06)" ></div>
+</div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="x11rb" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (e789f3a3a 2022-02-11)" ></div>
 </body></html>

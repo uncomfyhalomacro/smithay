@@ -7,7 +7,7 @@
     <h1 class="fqn"><span class="in-band">Function <a href="../../index.html">nix</a>::<wbr><a href="../index.html">sys</a>::<wbr><a href="index.html">mman</a>::<wbr><a class="fn" href="#">mprotect</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../../src/nix/sys/mman.rs.html#398-400">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><div class="docblock item-decl"><pre class="rust fn"><code>pub unsafe fn mprotect(<br>&nbsp;&nbsp;&nbsp;&nbsp;addr: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/nightly/core/ffi/enum.c_void.html" title="enum core::ffi::c_void">c_void</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;length: size_t, <br>&nbsp;&nbsp;&nbsp;&nbsp;prot: <a class="struct" href="struct.ProtFlags.html" title="struct nix::sys::mman::ProtFlags">ProtFlags</a><br>) -&gt; <a class="type" href="../../type.Result.html" title="type nix::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.unit.html">()</a>&gt;</code></pre></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Set protection of memory mapping.</p>
 <p>See <a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/mprotect.html"><code>mprotect(3)</code></a> for
 details.</p>
-<h2 id="safety" class="section-header"><a href="#safety">Safety</a></h2>
+<h2 id="safety"><a href="#safety">Safety</a></h2>
 <p>Calls to <code>mprotect</code> are inherently unsafe, as changes to memory protections can lead to
 SIGSEGVs.</p>
 
@@ -21,5 +21,5 @@ SIGSEGVs.</p>
 <span class="macro">assert_eq!</span>(<span class="ident">slice</span>[<span class="number">0</span>], <span class="number">0x00</span>);
 <span class="ident">slice</span>[<span class="number">0</span>] <span class="op">=</span> <span class="number">0xFF</span>;
 <span class="macro">assert_eq!</span>(<span class="ident">slice</span>[<span class="number">0</span>], <span class="number">0xFF</span>);</code></pre></div>
-</div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="nix" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (f624427f8 2022-02-06)" ></div>
+</div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="nix" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (e789f3a3a 2022-02-11)" ></div>
 </body></html>

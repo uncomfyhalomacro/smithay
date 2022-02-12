@@ -126,7 +126,7 @@ axis aligns with the y axis and the major axis with the x axis.</p>
 the tablet in its current logical orientation.</p>
 <p>Use <code>x_transformed</code> for transforming the axis value into a different coordinate
 space.</p>
-<h6 id="note" class="section-header"><a href="#note">Note</a></h6>
+<h6 id="note"><a href="#note">Note</a></h6>
 <p>On some devices, returned value may be negative or larger than the width of the
 device. See <a href="https://wayland.freedesktop.org/libinput/doc/latest/tablet-support.html#tablet-bounds">Out-of-bounds motion events</a>
 for more details.</p>
@@ -134,13 +134,13 @@ for more details.</p>
 the tablet in its current logical orientation.</p>
 <p>Use <code>y_transformed</code> for transforming the axis value into a different coordinate
 space.</p>
-<h6 id="note-1" class="section-header"><a href="#note-1">Note</a></h6>
+<h6 id="note-1"><a href="#note-1">Note</a></h6>
 <p>On some devices, returned value may be negative or larger than the width of the
 device. See <a href="https://wayland.freedesktop.org/libinput/doc/latest/tablet-support.html#tablet-bounds">Out-of-bounds motion events</a>
 for more details.</p>
 </div></details><details class="rustdoc-toggle" open><summary><div id="method.x_transformed" class="method has-srclink"><div class="rightside"><a class="srclink" href="../../../src/input/event/tablet_tool.rs.html#215-217">source</a></div><h4 class="code-header">fn <a href="#method.x_transformed" class="fnname">x_transformed</a>(&amp;self, width: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.f64.html">f64</a></h4></div></summary><div class="docblock"><p>Return the current absolute x coordinate of the tablet tool event, transformed
 to screen coordinates.</p>
-<h6 id="note-2" class="section-header"><a href="#note-2">Note</a></h6>
+<h6 id="note-2"><a href="#note-2">Note</a></h6>
 <p>This function may be called for a specific axis even if <code>x_has_changed</code> returns
 <code>false</code> for that axis. libinput always includes all device axes in the event.</p>
 <p>On some devices, returned value may be negative or larger than the width of the
@@ -148,17 +148,17 @@ device. See <a href="https://wayland.freedesktop.org/libinput/doc/latest/tablet-
 for more details.</p>
 </div></details><details class="rustdoc-toggle" open><summary><div id="method.y_transformed" class="method has-srclink"><div class="rightside"><a class="srclink" href="../../../src/input/event/tablet_tool.rs.html#230-232">source</a></div><h4 class="code-header">fn <a href="#method.y_transformed" class="fnname">y_transformed</a>(&amp;self, height: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.f64.html">f64</a></h4></div></summary><div class="docblock"><p>Return the current absolute y coordinate of the tablet tool event, transformed
 to screen coordinates.</p>
-<h6 id="note-3" class="section-header"><a href="#note-3">Note</a></h6>
+<h6 id="note-3"><a href="#note-3">Note</a></h6>
 <p>This function may be called for a specific axis even if <code>y_has_changed</code> returns
 <code>false</code> for that axis. libinput always includes all device axes in the event.</p>
 <p>On some devices, returned value may be negative or larger than the width of the
 device. See <a href="https://wayland.freedesktop.org/libinput/doc/latest/tablet-support.html#tablet-bounds">Out-of-bounds motion events</a>
 for more details.</p>
 </div></details><details class="rustdoc-toggle" open><summary><div id="method.tool" class="method has-srclink"><div class="rightside"><a class="srclink" href="../../../src/input/event/tablet_tool.rs.html#241-248">source</a></div><h4 class="code-header">fn <a href="#method.tool" class="fnname">tool</a>(&amp;self) -&gt; <a class="struct" href="struct.TabletTool.html" title="struct input::event::tablet_tool::TabletTool">TabletTool</a></h4></div></summary><div class="docblock"><p>Returns the tool that was in use during this event.</p>
-<h6 id="note-4" class="section-header"><a href="#note-4">Note</a></h6>
+<h6 id="note-4"><a href="#note-4">Note</a></h6>
 <p>Physical tool tracking requires hardware support. If unavailable, libinput
 creates one tool per type per tablet. See <a href="https://wayland.freedesktop.org/libinput/doc/latest/tablet-support.html#tablet-serial-numbers">Tracking unique tools</a>
 for more details.</p>
 </div></details><details class="rustdoc-toggle" open><summary><div id="method.into_tablet_tool_event" class="method has-srclink"><div class="rightside"><a class="srclink" href="../../../src/input/event/tablet_tool.rs.html#251-256">source</a></div><h4 class="code-header">fn <a href="#method.into_tablet_tool_event" class="fnname">into_tablet_tool_event</a>(self) -&gt; <a class="enum" href="enum.TabletToolEvent.html" title="enum input::event::tablet_tool::TabletToolEvent">TabletToolEvent</a> <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;Self: <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,&nbsp;</span></h4></div></summary><div class="docblock"><p>Convert into a general <code>TabletToolEvent</code> again</p>
-</div></details></div><h2 id="implementors" class="small-section-header">Implementors<a href="#implementors" class="anchor"></a></h2><div class="item-list" id="implementors-list"><section id="impl-TabletToolEventTrait" class="impl has-srclink"><span class="rightside"><a class="srclink" href="../../../src/input/event/tablet_tool.rs.html#259">source</a></span><a href="#impl-TabletToolEventTrait" class="anchor"></a><h3 class="code-header in-band">impl&lt;T:&nbsp;<a class="trait" href="../../trait.AsRaw.html" title="trait input::AsRaw">AsRaw</a>&lt;<a class="struct" href="../../ffi/struct.libinput_event_tablet_tool.html" title="struct input::ffi::libinput_event_tablet_tool">libinput_event_tablet_tool</a>&gt; + <a class="trait" href="../../trait.Context.html" title="trait input::Context">Context</a>&gt; <a class="trait" href="trait.TabletToolEventTrait.html" title="trait input::event::tablet_tool::TabletToolEventTrait">TabletToolEventTrait</a> for T</h3></section></div><script type="text/javascript" src="../../../implementors/input/event/tablet_tool/trait.TabletToolEventTrait.js" async></script></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="input" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (f624427f8 2022-02-06)" ></div>
+</div></details></div><h2 id="implementors" class="small-section-header">Implementors<a href="#implementors" class="anchor"></a></h2><div class="item-list" id="implementors-list"><section id="impl-TabletToolEventTrait" class="impl has-srclink"><span class="rightside"><a class="srclink" href="../../../src/input/event/tablet_tool.rs.html#259">source</a></span><a href="#impl-TabletToolEventTrait" class="anchor"></a><h3 class="code-header in-band">impl&lt;T:&nbsp;<a class="trait" href="../../trait.AsRaw.html" title="trait input::AsRaw">AsRaw</a>&lt;<a class="struct" href="../../ffi/struct.libinput_event_tablet_tool.html" title="struct input::ffi::libinput_event_tablet_tool">libinput_event_tablet_tool</a>&gt; + <a class="trait" href="../../trait.Context.html" title="trait input::Context">Context</a>&gt; <a class="trait" href="trait.TabletToolEventTrait.html" title="trait input::event::tablet_tool::TabletToolEventTrait">TabletToolEventTrait</a> for T</h3></section></div><script type="text/javascript" src="../../../implementors/input/event/tablet_tool/trait.TabletToolEventTrait.js" async></script></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="input" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (e789f3a3a 2022-02-11)" ></div>
 </body></html>

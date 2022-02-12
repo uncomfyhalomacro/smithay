@@ -12,7 +12,7 @@ return value indicates a failure, this function will return
 <p>On platforms where libc does not provide <code>clearenv()</code>, a fallback
 implementation will be used that iterates over all environment variables and
 removes them one-by-one.</p>
-<h2 id="safety" class="section-header"><a href="#safety">Safety</a></h2>
+<h2 id="safety"><a href="#safety">Safety</a></h2>
 <p>This function is not threadsafe and can cause undefined behavior in
 combination with <code>std::env</code> or other program components that access the
 environment. See, for example, the discussion on <code>std::env::remove_var</code>; this
@@ -23,5 +23,5 @@ this function executes and that no raw pointers to an element of libc’s
 <code>environ</code> is currently held. The latter is not an issue if the only other
 environment access in the program is via <code>std::env</code>, but the requirement on
 thread safety must still be upheld.</p>
-</div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="nix" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (f624427f8 2022-02-06)" ></div>
+</div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="nix" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (e789f3a3a 2022-02-11)" ></div>
 </body></html>

@@ -9,10 +9,10 @@
 handler. <code>signal</code> should only be used following another call to <code>signal</code> or
 if the current handler is the default. The return value of <code>signal</code> is
 undefined after setting the handler with <a href="fn.sigaction.html"><code>sigaction</code></a>.</p>
-<h2 id="safety" class="section-header"><a href="#safety">Safety</a></h2>
+<h2 id="safety"><a href="#safety">Safety</a></h2>
 <p>If the pointer to the previous signal handler is invalid, undefined
 behavior could be invoked when casting it back to a <a href="struct.SigAction.html"><code>SigAction</code></a>.</p>
-<h2 id="examples" class="section-header"><a href="#examples">Examples</a></h2>
+<h2 id="examples"><a href="#examples">Examples</a></h2>
 <p>Ignore <code>SIGINT</code>:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">unsafe</span> { <span class="ident">signal::signal</span>(<span class="ident">Signal::SIGINT</span>, <span class="ident">SigHandler::SigIgn</span>) }.<span class="ident">unwrap</span>();</code></pre></div>
@@ -31,11 +31,11 @@ behavior could be invoked when casting it back to a <a href="struct.SigAction.ht
     <span class="kw">let</span> <span class="ident">handler</span> <span class="op">=</span> <span class="ident">SigHandler::Handler</span>(<span class="ident">handle_sigint</span>);
     <span class="kw">unsafe</span> { <span class="ident">signal::signal</span>(<span class="ident">Signal::SIGINT</span>, <span class="ident">handler</span>) }.<span class="ident">unwrap</span>();
 }</code></pre></div>
-<h2 id="errors" class="section-header"><a href="#errors">Errors</a></h2>
+<h2 id="errors"><a href="#errors">Errors</a></h2>
 <p>Returns [<code>Error(Errno::EOPNOTSUPP)</code>] if <code>handler</code> is
 <a href="struct.SigAction.html"><code>SigAction</code></a>. Use <a href="fn.sigaction.html"><code>sigaction</code></a> instead.</p>
 <p><code>signal</code> also returns any error from <code>libc::signal</code>, such as when an attempt
 is made to catch a signal that cannot be caught or to ignore a signal that
 cannot be ignored.</p>
-</div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="nix" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (f624427f8 2022-02-06)" ></div>
+</div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="nix" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (e789f3a3a 2022-02-11)" ></div>
 </body></html>

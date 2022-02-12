@@ -12,7 +12,7 @@ window title, encoded as UTF-8 string, in the <code>_NET_WM_NAME</code> property
 <p>TODO: talk about <code>type</code></p>
 <p>TODO: talk about <code>delete</code></p>
 <p>TODO: talk about the offset/length thing. what’s a valid use case?</p>
-<h2 id="fields-1" class="section-header"><a href="#fields-1">Fields</a></h2>
+<h2 id="fields-1"><a href="#fields-1">Fields</a></h2>
 <ul>
 <li><code>window</code> - The window whose property you want to get.</li>
 <li><code>delete</code> - Whether the property should actually be deleted. For deleting a property, the
@@ -24,7 +24,7 @@ data is to be retrieved.</li>
 <li><code>long_length</code> - Specifies how many 32-bit multiples of data should be retrieved (e.g. if you
 set <code>long_length</code> to 4, you will receive 16 bytes of data).</li>
 </ul>
-<h2 id="errors" class="section-header"><a href="#errors">Errors</a></h2>
+<h2 id="errors"><a href="#errors">Errors</a></h2>
 <ul>
 <li><code>Window</code> - The specified <code>window</code> does not exist.</li>
 <li><code>Atom</code> - <code>property</code> or <code>type</code> do not refer to a valid atom.</li>
@@ -32,12 +32,12 @@ set <code>long_length</code> to 4, you will receive 16 bytes of data).</li>
 property has a length of 3 bytes and you are setting <code>long_offset</code> to 1,
 resulting in a byte offset of 4).</li>
 </ul>
-<h2 id="see" class="section-header"><a href="#see">See</a></h2>
+<h2 id="see"><a href="#see">See</a></h2>
 <ul>
 <li><code>InternAtom</code>: request</li>
 <li><code>xprop</code>: program</li>
 </ul>
-<h2 id="example" class="section-header"><a href="#example">Example</a></h2><div class="example-wrap"><pre class="language-text"><code>/*
+<h2 id="example"><a href="#example">Example</a></h2><div class="example-wrap"><pre class="language-text"><code>/*
  * Prints the WM_NAME property of the window.
  *
  */
@@ -62,5 +62,5 @@ void my_example(xcb_connection_t *c, xcb_window_t window) {
                (char*)xcb_get_property_value(reply));
     }
     free(reply);
-}</code></pre></div></div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="x11rb" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (f624427f8 2022-02-06)" ></div>
+}</code></pre></div></div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="x11rb" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (e789f3a3a 2022-02-11)" ></div>
 </body></html>
