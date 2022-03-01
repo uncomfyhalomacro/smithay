@@ -1327,9 +1327,12 @@
 <span id="1322">1322</span>
 <span id="1323">1323</span>
 <span id="1324">1324</span>
+<span id="1325">1325</span>
+<span id="1326">1326</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::fmt</span>;
 <span class="kw">use</span> <span class="ident">std::ops</span>::{<span class="ident">Add</span>, <span class="ident">AddAssign</span>, <span class="ident">Sub</span>, <span class="ident">SubAssign</span>};
 
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;wayland_frontend&quot;</span>)]</span>
 <span class="kw">use</span> <span class="ident">wayland_server::protocol::wl_output::Transform</span> <span class="kw">as</span> <span class="ident">WlTransform</span>;
 
 <span class="doccomment">/// Type-level marker for the logical coordinate space</span>
@@ -2539,6 +2542,7 @@
     }
 }
 
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;wayland_frontend&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Transform</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">WlTransform</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">transform</span>: <span class="ident">Transform</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">match</span> <span class="ident">transform</span> {
@@ -2652,5 +2656,5 @@
     }
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (6a7055661 2022-02-27)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (4ce374923 2022-02-28)" ></div>
 </body></html>
