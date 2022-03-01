@@ -612,8 +612,8 @@
 }
 
 <span class="kw">impl</span> <span class="ident">TouchDownEvent</span><span class="op">&lt;</span><span class="ident">WinitInput</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">WinitTouchStartedEvent</span> {
-    <span class="kw">fn</span> <span class="ident">slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TouchSlot</span><span class="op">&gt;</span> {
-        <span class="prelude-val">Some</span>(<span class="ident">TouchSlot::new</span>(<span class="self">self</span>.<span class="ident">id</span>))
+    <span class="kw">fn</span> <span class="ident">slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TouchSlot</span> {
+        <span class="prelude-val">Some</span>(<span class="self">self</span>.<span class="ident">id</span> <span class="kw">as</span> <span class="ident">u32</span>).<span class="ident">into</span>()
     }
 
     <span class="kw">fn</span> <span class="ident">x</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">f64</span> {
@@ -659,8 +659,8 @@
 }
 
 <span class="kw">impl</span> <span class="ident">TouchMotionEvent</span><span class="op">&lt;</span><span class="ident">WinitInput</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">WinitTouchMovedEvent</span> {
-    <span class="kw">fn</span> <span class="ident">slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TouchSlot</span><span class="op">&gt;</span> {
-        <span class="prelude-val">Some</span>(<span class="ident">TouchSlot::new</span>(<span class="self">self</span>.<span class="ident">id</span>))
+    <span class="kw">fn</span> <span class="ident">slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TouchSlot</span> {
+        <span class="prelude-val">Some</span>(<span class="self">self</span>.<span class="ident">id</span> <span class="kw">as</span> <span class="ident">u32</span>).<span class="ident">into</span>()
     }
 
     <span class="kw">fn</span> <span class="ident">x</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">f64</span> {
@@ -704,8 +704,8 @@
 }
 
 <span class="kw">impl</span> <span class="ident">TouchUpEvent</span><span class="op">&lt;</span><span class="ident">WinitInput</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">WinitTouchEndedEvent</span> {
-    <span class="kw">fn</span> <span class="ident">slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TouchSlot</span><span class="op">&gt;</span> {
-        <span class="prelude-val">Some</span>(<span class="ident">TouchSlot::new</span>(<span class="self">self</span>.<span class="ident">id</span>))
+    <span class="kw">fn</span> <span class="ident">slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TouchSlot</span> {
+        <span class="prelude-val">Some</span>(<span class="self">self</span>.<span class="ident">id</span> <span class="kw">as</span> <span class="ident">u32</span>).<span class="ident">into</span>()
     }
 }
 
@@ -727,8 +727,8 @@
 }
 
 <span class="kw">impl</span> <span class="ident">TouchCancelEvent</span><span class="op">&lt;</span><span class="ident">WinitInput</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">WinitTouchCancelledEvent</span> {
-    <span class="kw">fn</span> <span class="ident">slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TouchSlot</span><span class="op">&gt;</span> {
-        <span class="prelude-val">Some</span>(<span class="ident">TouchSlot::new</span>(<span class="self">self</span>.<span class="ident">id</span>))
+    <span class="kw">fn</span> <span class="ident">slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TouchSlot</span> {
+        <span class="prelude-val">Some</span>(<span class="self">self</span>.<span class="ident">id</span> <span class="kw">as</span> <span class="ident">u32</span>).<span class="ident">into</span>()
     }
 }
 

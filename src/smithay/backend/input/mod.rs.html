@@ -655,6 +655,11 @@
 <span id="650">650</span>
 <span id="651">651</span>
 <span id="652">652</span>
+<span id="653">653</span>
+<span id="654">654</span>
+<span id="655">655</span>
+<span id="656">656</span>
+<span id="657">657</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Common traits for input backends to receive input from.</span>
 
 <span class="kw">use</span> <span class="ident">std::path::PathBuf</span>;
@@ -993,22 +998,27 @@
 <span class="doccomment">/// Touch events are grouped by slots, usually to identify different</span>
 <span class="doccomment">/// fingers on a multi-touch enabled input device. Events should only</span>
 <span class="doccomment">/// be interpreted in the context of other events on the same slot.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Hash</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>, <span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Hash</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TouchSlot</span> {
-    <span class="ident">id</span>: <span class="ident">u64</span>,
+    <span class="ident">id</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>,
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;backend_winit&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;backend_libinput&quot;</span>))]</span>
-<span class="kw">impl</span> <span class="ident">TouchSlot</span> {
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">id</span>: <span class="ident">u64</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">TouchSlot</span> { <span class="ident">id</span> }
+<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">TouchSlot</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">id</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
+        <span class="self">Self</span> { <span class="ident">id</span> }
+    }
+}
+
+<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">TouchSlot</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">i32</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">slot</span>: <span class="ident">TouchSlot</span>) -&gt; <span class="ident">i32</span> {
+        <span class="ident">slot</span>.<span class="ident">id</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">id</span><span class="op">|</span> <span class="ident">id</span> <span class="kw">as</span> <span class="ident">i32</span>).<span class="ident">unwrap_or</span>(<span class="op">-</span><span class="number">1</span>)
     }
 }
 
 <span class="doccomment">/// Trait for touch events starting at a given position.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">TouchDownEvent</span><span class="op">&lt;</span><span class="ident">B</span>: <span class="ident">InputBackend</span><span class="op">&gt;</span>: <span class="ident">Event</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// [`TouchSlot`], if the device has multi-touch capabilities</span>
-    <span class="kw">fn</span> <span class="ident">slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TouchSlot</span><span class="op">&gt;</span>;
+    <span class="doccomment">/// Multi-touch slot identifier.</span>
+    <span class="kw">fn</span> <span class="ident">slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TouchSlot</span>;
 
     <span class="doccomment">/// Touch position in the device&#39;s native coordinate space</span>
     <span class="doccomment">///</span>
@@ -1047,7 +1057,7 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">B</span>: <span class="ident">InputBackend</span><span class="op">&gt;</span> <span class="ident">TouchDownEvent</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">UnusedEvent</span> {
-    <span class="kw">fn</span> <span class="ident">slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TouchSlot</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TouchSlot</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {}
     }
 
@@ -1070,8 +1080,8 @@
 
 <span class="doccomment">/// Trait for touch events regarding movement on the screen</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">TouchMotionEvent</span><span class="op">&lt;</span><span class="ident">B</span>: <span class="ident">InputBackend</span><span class="op">&gt;</span>: <span class="ident">Event</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// [`TouchSlot`], if the device has multi-touch capabilities</span>
-    <span class="kw">fn</span> <span class="ident">slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TouchSlot</span><span class="op">&gt;</span>;
+    <span class="doccomment">/// Multi-touch slot identifier.</span>
+    <span class="kw">fn</span> <span class="ident">slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TouchSlot</span>;
 
     <span class="doccomment">/// Touch position in the device&#39;s native coordinate space</span>
     <span class="doccomment">///</span>
@@ -1110,7 +1120,7 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">B</span>: <span class="ident">InputBackend</span><span class="op">&gt;</span> <span class="ident">TouchMotionEvent</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">UnusedEvent</span> {
-    <span class="kw">fn</span> <span class="ident">slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TouchSlot</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TouchSlot</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {}
     }
 
@@ -1133,24 +1143,24 @@
 
 <span class="doccomment">/// Trait for touch events finishing.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">TouchUpEvent</span><span class="op">&lt;</span><span class="ident">B</span>: <span class="ident">InputBackend</span><span class="op">&gt;</span>: <span class="ident">Event</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// [`TouchSlot`], if the device has multi-touch capabilities</span>
-    <span class="kw">fn</span> <span class="ident">slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TouchSlot</span><span class="op">&gt;</span>;
+    <span class="doccomment">/// Multi-touch slot identifier.</span>
+    <span class="kw">fn</span> <span class="ident">slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TouchSlot</span>;
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">B</span>: <span class="ident">InputBackend</span><span class="op">&gt;</span> <span class="ident">TouchUpEvent</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">UnusedEvent</span> {
-    <span class="kw">fn</span> <span class="ident">slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TouchSlot</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TouchSlot</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {}
     }
 }
 
 <span class="doccomment">/// Trait for touch events canceling the chain</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">TouchCancelEvent</span><span class="op">&lt;</span><span class="ident">B</span>: <span class="ident">InputBackend</span><span class="op">&gt;</span>: <span class="ident">Event</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// [`TouchSlot`], if the device has multi-touch capabilities</span>
-    <span class="kw">fn</span> <span class="ident">slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TouchSlot</span><span class="op">&gt;</span>;
+    <span class="doccomment">/// Multi-touch slot identifier.</span>
+    <span class="kw">fn</span> <span class="ident">slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TouchSlot</span>;
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">B</span>: <span class="ident">InputBackend</span><span class="op">&gt;</span> <span class="ident">TouchCancelEvent</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">UnusedEvent</span> {
-    <span class="kw">fn</span> <span class="ident">slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TouchSlot</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">slot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TouchSlot</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {}
     }
 }

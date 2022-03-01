@@ -374,6 +374,71 @@
 <span id="369">369</span>
 <span id="370">370</span>
 <span id="371">371</span>
+<span id="372">372</span>
+<span id="373">373</span>
+<span id="374">374</span>
+<span id="375">375</span>
+<span id="376">376</span>
+<span id="377">377</span>
+<span id="378">378</span>
+<span id="379">379</span>
+<span id="380">380</span>
+<span id="381">381</span>
+<span id="382">382</span>
+<span id="383">383</span>
+<span id="384">384</span>
+<span id="385">385</span>
+<span id="386">386</span>
+<span id="387">387</span>
+<span id="388">388</span>
+<span id="389">389</span>
+<span id="390">390</span>
+<span id="391">391</span>
+<span id="392">392</span>
+<span id="393">393</span>
+<span id="394">394</span>
+<span id="395">395</span>
+<span id="396">396</span>
+<span id="397">397</span>
+<span id="398">398</span>
+<span id="399">399</span>
+<span id="400">400</span>
+<span id="401">401</span>
+<span id="402">402</span>
+<span id="403">403</span>
+<span id="404">404</span>
+<span id="405">405</span>
+<span id="406">406</span>
+<span id="407">407</span>
+<span id="408">408</span>
+<span id="409">409</span>
+<span id="410">410</span>
+<span id="411">411</span>
+<span id="412">412</span>
+<span id="413">413</span>
+<span id="414">414</span>
+<span id="415">415</span>
+<span id="416">416</span>
+<span id="417">417</span>
+<span id="418">418</span>
+<span id="419">419</span>
+<span id="420">420</span>
+<span id="421">421</span>
+<span id="422">422</span>
+<span id="423">423</span>
+<span id="424">424</span>
+<span id="425">425</span>
+<span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
+<span id="429">429</span>
+<span id="430">430</span>
+<span id="431">431</span>
+<span id="432">432</span>
+<span id="433">433</span>
+<span id="434">434</span>
+<span id="435">435</span>
+<span id="436">436</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Seat global utilities</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! This module provides you with utilities for handling the seat globals</span>
@@ -414,6 +479,7 @@
 
 <span class="kw">mod</span> <span class="ident">keyboard</span>;
 <span class="kw">mod</span> <span class="ident">pointer</span>;
+<span class="kw">mod</span> <span class="ident">touch</span>;
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::{
     <span class="ident">keyboard</span>::{
@@ -424,6 +490,7 @@
         <span class="ident">AxisFrame</span>, <span class="ident">CursorImageAttributes</span>, <span class="ident">CursorImageStatus</span>, <span class="ident">GrabStartData</span> <span class="kw">as</span> <span class="ident">PointerGrabStartData</span>,
         <span class="ident">PointerGrab</span>, <span class="ident">PointerHandle</span>, <span class="ident">PointerInnerHandle</span>,
     },
+    <span class="ident">touch::TouchHandle</span>,
 };
 
 <span class="kw">use</span> <span class="ident">wayland_server</span>::{
@@ -435,6 +502,7 @@
 <span class="kw">struct</span> <span class="ident">Inner</span> {
     <span class="ident">pointer</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PointerHandle</span><span class="op">&gt;</span>,
     <span class="ident">keyboard</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">KeyboardHandle</span><span class="op">&gt;</span>,
+    <span class="ident">touch</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TouchHandle</span><span class="op">&gt;</span>,
     <span class="ident">known_seats</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">wl_seat::WlSeat</span><span class="op">&gt;</span>,
 }
 
@@ -465,6 +533,9 @@
         }
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">keyboard</span>.<span class="ident">is_some</span>() {
             <span class="ident">caps</span> <span class="op">|</span><span class="op">=</span> <span class="ident">wl_seat::Capability::Keyboard</span>;
+        }
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">touch</span>.<span class="ident">is_some</span>() {
+            <span class="ident">caps</span> <span class="op">|</span><span class="op">=</span> <span class="ident">wl_seat::Capability::Touch</span>;
         }
         <span class="ident">caps</span>
     }
@@ -510,6 +581,7 @@
             <span class="ident">inner</span>: <span class="ident">RefCell::new</span>(<span class="ident">Inner</span> {
                 <span class="ident">pointer</span>: <span class="prelude-val">None</span>,
                 <span class="ident">keyboard</span>: <span class="prelude-val">None</span>,
+                <span class="ident">touch</span>: <span class="prelude-val">None</span>,
                 <span class="ident">known_seats</span>: <span class="ident">Vec::new</span>(),
             }),
             <span class="ident">log</span>: <span class="ident">log</span>.<span class="ident">new</span>(<span class="macro">slog::o!</span>(<span class="string">&quot;smithay_module&quot;</span> =&gt; <span class="string">&quot;seat_handler&quot;</span>, <span class="string">&quot;seat_name&quot;</span> =&gt; <span class="ident">name</span>.<span class="ident">clone</span>())),
@@ -689,6 +761,59 @@
         }
     }
 
+    <span class="doccomment">/// Adds the touch capability to this seat</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// You are provided a [`TouchHandle`], which allows you to send input events</span>
+    <span class="doccomment">/// to this pointer. This handle can be cloned.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Calling this method on a seat that already has a touch capability</span>
+    <span class="doccomment">/// will overwrite it, and will be seen by the clients as if the</span>
+    <span class="doccomment">/// touchscreen was unplugged and a new one was plugged in.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// # extern crate wayland_server;</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// # use smithay::wayland::seat::Seat;</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// # let mut display = wayland_server::Display::new();</span>
+    <span class="doccomment">/// # let (mut seat, seat_global) = Seat::new(</span>
+    <span class="doccomment">/// #     &amp;mut display,</span>
+    <span class="doccomment">/// #     &quot;seat-0&quot;.into(),</span>
+    <span class="doccomment">/// #     None</span>
+    <span class="doccomment">/// # );</span>
+    <span class="doccomment">/// let touch_handle = seat.add_touch();</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_touch</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">TouchHandle</span> {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">inner</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">arc</span>.<span class="ident">inner</span>.<span class="ident">borrow_mut</span>();
+        <span class="kw">let</span> <span class="ident">touch</span> <span class="op">=</span> <span class="ident">TouchHandle::new</span>();
+        <span class="kw">if</span> <span class="ident">inner</span>.<span class="ident">touch</span>.<span class="ident">is_some</span>() {
+            <span class="comment">// If there&#39;s already a tocuh device, remove it notify the clients about the change.</span>
+            <span class="ident">inner</span>.<span class="ident">touch</span> <span class="op">=</span> <span class="prelude-val">None</span>;
+            <span class="ident">inner</span>.<span class="ident">send_all_caps</span>();
+        }
+        <span class="ident">inner</span>.<span class="ident">touch</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">touch</span>.<span class="ident">clone</span>());
+        <span class="ident">inner</span>.<span class="ident">send_all_caps</span>();
+        <span class="ident">touch</span>
+    }
+
+    <span class="doccomment">/// Access the touch device of this seat, if any.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_touch</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TouchHandle</span><span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">arc</span>.<span class="ident">inner</span>.<span class="ident">borrow_mut</span>().<span class="ident">touch</span>.<span class="ident">clone</span>()
+    }
+
+    <span class="doccomment">/// Remove the touch capability from this seat</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Clients will be appropriately notified.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">remove_touch</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">inner</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">arc</span>.<span class="ident">inner</span>.<span class="ident">borrow_mut</span>();
+        <span class="kw">if</span> <span class="ident">inner</span>.<span class="ident">touch</span>.<span class="ident">is_some</span>() {
+            <span class="ident">inner</span>.<span class="ident">touch</span> <span class="op">=</span> <span class="prelude-val">None</span>;
+            <span class="ident">inner</span>.<span class="ident">send_all_caps</span>();
+        }
+    }
+
     <span class="doccomment">/// Checks whether a given [`WlSeat`](wl_seat::WlSeat) is associated with this [`Seat`]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">owns</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">seat</span>: <span class="kw-2">&amp;</span><span class="ident">wl_seat::WlSeat</span>) -&gt; <span class="ident">bool</span> {
         <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">arc</span>.<span class="ident">inner</span>.<span class="ident">borrow_mut</span>();
@@ -725,8 +850,13 @@
                     <span class="comment">// same as pointer, should error but cannot</span>
                 }
             }
-            <span class="ident">wl_seat::Request::GetTouch</span> { .. } =&gt; {
-                <span class="comment">// TODO</span>
+            <span class="ident">wl_seat::Request::GetTouch</span> { <span class="ident">id</span> } =&gt; {
+                <span class="kw">let</span> <span class="ident">touch</span> <span class="op">=</span> <span class="ident"><span class="self">self</span>::touch::implement_touch</span>(<span class="ident">id</span>, <span class="ident">inner</span>.<span class="ident">touch</span>.<span class="ident">as_ref</span>());
+                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">touch_handle</span>) <span class="op">=</span> <span class="ident">inner</span>.<span class="ident">touch</span> {
+                    <span class="ident">touch_handle</span>.<span class="ident">new_touch</span>(<span class="ident">touch</span>);
+                } <span class="kw">else</span> {
+                    <span class="comment">// same as pointer, should error but cannot</span>
+                }
             }
             <span class="ident">wl_seat::Request::Release</span> =&gt; {
                 <span class="comment">// Our destructors already handle it</span>
