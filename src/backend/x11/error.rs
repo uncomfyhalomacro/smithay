@@ -6,8 +6,6 @@ use x11rb::rust_connection::{ConnectError, ConnectionError, ReplyError, ReplyOrI
 
 use crate::backend::{allocator::gbm::GbmConvertError, drm::CreateDrmNodeError};
 
-use super::PresentError;
-
 /// An error emitted by the X11 backend during setup.
 #[derive(Debug, thiserror::Error)]
 pub enum X11Error {
@@ -45,10 +43,6 @@ pub enum X11Error {
     /// Failed to allocate buffers needed to present to the window.
     #[error("Failed to allocate buffers needed to present to the window")]
     Allocation(#[from] AllocateBuffersError),
-
-    /// Error while presenting to a window.
-    #[error(transparent)]
-    Present(#[from] PresentError),
 }
 
 impl From<ReplyError> for X11Error {

@@ -28,7 +28,7 @@ use x11rb::{
             UnmapNotifyEvent, WindowClass,
         },
     },
-    rust_connection::RustConnection,
+    xcb_ffi::XCBConnection,
     wrapper::ConnectionExt as _,
 };
 
@@ -55,7 +55,7 @@ impl Default for CursorState {
 
 #[derive(Debug)]
 pub(crate) struct WindowInner {
-    pub connection: Weak<RustConnection>,
+    pub connection: Weak<XCBConnection>,
     pub id: x11::Window,
     root: x11::Window,
     pub atoms: Atoms,
@@ -75,7 +75,7 @@ pub(crate) struct WindowInner {
 impl WindowInner {
     #[allow(clippy::too_many_arguments)]
     pub fn new(
-        connection: Weak<RustConnection>,
+        connection: Weak<XCBConnection>,
         screen: &Screen,
         size: Size<u16, Logical>,
         title: &str,
