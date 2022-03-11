@@ -1049,6 +1049,16 @@
 <span id="1044">1044</span>
 <span id="1045">1045</span>
 <span id="1046">1046</span>
+<span id="1047">1047</span>
+<span id="1048">1048</span>
+<span id="1049">1049</span>
+<span id="1050">1050</span>
+<span id="1051">1051</span>
+<span id="1052">1052</span>
+<span id="1053">1053</span>
+<span id="1054">1054</span>
+<span id="1055">1055</span>
+<span id="1056">1056</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">drm::control::atomic::AtomicModeReq</span>;
 <span class="kw">use</span> <span class="ident">drm::control::Device</span> <span class="kw">as</span> <span class="ident">ControlDevice</span>;
 <span class="kw">use</span> <span class="ident">drm::control</span>::{
@@ -1913,6 +1923,11 @@
                 <span class="self">self</span>.<span class="ident">plane_prop_handle</span>(<span class="ident">primary</span>, <span class="string">&quot;CRTC_H&quot;</span>)<span class="question-mark">?</span>,
                 <span class="ident">property::Value::UnsignedRange</span>(<span class="ident">mode</span>.<span class="ident">size</span>().<span class="number">1</span> <span class="kw">as</span> <span class="ident">u64</span>),
             );
+            <span class="ident">req</span>.<span class="ident">add_property</span>(
+                <span class="ident">primary</span>,
+                <span class="self">self</span>.<span class="ident">plane_prop_handle</span>(<span class="ident">primary</span>, <span class="string">&quot;rotation&quot;</span>)<span class="question-mark">?</span>,
+                <span class="ident">property::Value::Bitmask</span>(<span class="number">1u64</span>),
+            );
         }
 
         <span class="comment">// and finally the others</span>
@@ -1958,6 +1973,11 @@
                 <span class="ident">plane_info</span>.<span class="ident">handle</span>,
                 <span class="self">self</span>.<span class="ident">plane_prop_handle</span>(<span class="ident">plane_info</span>.<span class="ident">handle</span>, <span class="string">&quot;CRTC_H&quot;</span>)<span class="question-mark">?</span>,
                 <span class="ident">property::Value::UnsignedRange</span>(<span class="ident">plane_info</span>.<span class="ident">h</span> <span class="kw">as</span> <span class="ident">u64</span>),
+            );
+            <span class="ident">req</span>.<span class="ident">add_property</span>(
+                <span class="ident">plane_info</span>.<span class="ident">handle</span>,
+                <span class="self">self</span>.<span class="ident">plane_prop_handle</span>(<span class="ident">plane_info</span>.<span class="ident">handle</span>, <span class="string">&quot;rotation&quot;</span>)<span class="question-mark">?</span>,
+                <span class="ident">property::Value::Bitmask</span>(<span class="number">1u64</span>),
             );
         }
 
