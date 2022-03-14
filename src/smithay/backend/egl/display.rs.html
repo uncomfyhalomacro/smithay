@@ -912,6 +912,88 @@
 <span id="907">907</span>
 <span id="908">908</span>
 <span id="909">909</span>
+<span id="910">910</span>
+<span id="911">911</span>
+<span id="912">912</span>
+<span id="913">913</span>
+<span id="914">914</span>
+<span id="915">915</span>
+<span id="916">916</span>
+<span id="917">917</span>
+<span id="918">918</span>
+<span id="919">919</span>
+<span id="920">920</span>
+<span id="921">921</span>
+<span id="922">922</span>
+<span id="923">923</span>
+<span id="924">924</span>
+<span id="925">925</span>
+<span id="926">926</span>
+<span id="927">927</span>
+<span id="928">928</span>
+<span id="929">929</span>
+<span id="930">930</span>
+<span id="931">931</span>
+<span id="932">932</span>
+<span id="933">933</span>
+<span id="934">934</span>
+<span id="935">935</span>
+<span id="936">936</span>
+<span id="937">937</span>
+<span id="938">938</span>
+<span id="939">939</span>
+<span id="940">940</span>
+<span id="941">941</span>
+<span id="942">942</span>
+<span id="943">943</span>
+<span id="944">944</span>
+<span id="945">945</span>
+<span id="946">946</span>
+<span id="947">947</span>
+<span id="948">948</span>
+<span id="949">949</span>
+<span id="950">950</span>
+<span id="951">951</span>
+<span id="952">952</span>
+<span id="953">953</span>
+<span id="954">954</span>
+<span id="955">955</span>
+<span id="956">956</span>
+<span id="957">957</span>
+<span id="958">958</span>
+<span id="959">959</span>
+<span id="960">960</span>
+<span id="961">961</span>
+<span id="962">962</span>
+<span id="963">963</span>
+<span id="964">964</span>
+<span id="965">965</span>
+<span id="966">966</span>
+<span id="967">967</span>
+<span id="968">968</span>
+<span id="969">969</span>
+<span id="970">970</span>
+<span id="971">971</span>
+<span id="972">972</span>
+<span id="973">973</span>
+<span id="974">974</span>
+<span id="975">975</span>
+<span id="976">976</span>
+<span id="977">977</span>
+<span id="978">978</span>
+<span id="979">979</span>
+<span id="980">980</span>
+<span id="981">981</span>
+<span id="982">982</span>
+<span id="983">983</span>
+<span id="984">984</span>
+<span id="985">985</span>
+<span id="986">986</span>
+<span id="987">987</span>
+<span id="988">988</span>
+<span id="989">989</span>
+<span id="990">990</span>
+<span id="991">991</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Type safe native types for safe egl initialisation</span>
 
 <span class="kw">use</span> <span class="ident">std::collections::HashSet</span>;
@@ -929,16 +1011,21 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;use_system_lib&quot;</span>)]</span>
 <span class="kw">use</span> <span class="ident">wayland_sys::server::wl_display</span>;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::backend::allocator</span>::{<span class="ident">dmabuf::Dmabuf</span>, <span class="ident">Buffer</span>, <span class="ident">Format</span> <span class="kw">as</span> <span class="ident">DrmFormat</span>, <span class="ident">Fourcc</span>, <span class="ident">Modifier</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::backend::egl</span>::{
-    <span class="ident">context</span>::{<span class="ident">GlAttributes</span>, <span class="ident">PixelFormatRequirements</span>},
-    <span class="ident">ffi</span>,
-    <span class="ident">ffi::egl::types::EGLImage</span>,
-    <span class="ident">native::EGLNativeDisplay</span>,
-    <span class="ident">wrap_egl_call</span>, <span class="ident">EGLError</span>, <span class="ident">Error</span>,
-};
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;wayland_frontend&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;use_system_lib&quot;</span>))]</span>
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::backend::egl</span>::{<span class="ident">BufferAccessError</span>, <span class="ident">EGLBuffer</span>, <span class="ident">Format</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::{
+    <span class="ident">backend</span>::{
+        <span class="ident">allocator</span>::{<span class="ident">dmabuf::Dmabuf</span>, <span class="ident">Buffer</span>, <span class="ident">Format</span> <span class="kw">as</span> <span class="ident">DrmFormat</span>, <span class="ident">Fourcc</span>, <span class="ident">Modifier</span>},
+        <span class="ident">egl</span>::{
+            <span class="ident">context</span>::{<span class="ident">GlAttributes</span>, <span class="ident">PixelFormatRequirements</span>},
+            <span class="ident">ffi</span>,
+            <span class="ident">ffi::egl::types::EGLImage</span>,
+            <span class="ident">native::EGLNativeDisplay</span>,
+            <span class="ident">wrap_egl_call</span>, <span class="ident">EGLError</span>, <span class="ident">Error</span>,
+        },
+    },
+    <span class="ident">utils</span>::{<span class="ident">Buffer</span> <span class="kw">as</span> <span class="ident">BufferCoords</span>, <span class="ident">Size</span>},
+};
 
 <span class="kw">use</span> <span class="ident">slog</span>::{<span class="ident">debug</span>, <span class="ident">error</span>, <span class="ident">info</span>, <span class="ident">o</span>, <span class="ident">trace</span>, <span class="ident">warn</span>};
 
@@ -1316,6 +1403,83 @@
     <span class="doccomment">/// Returns the supported extensions of this display</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_extensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">extensions</span>.<span class="ident">clone</span>()
+    }
+
+    <span class="doccomment">/// Exports an [`EGLImage`] as a [`Dmabuf`]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create_dmabuf_from_image</span>(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        <span class="ident">image</span>: <span class="ident">EGLImage</span>,
+        <span class="ident">size</span>: <span class="ident">Size</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">BufferCoords</span><span class="op">&gt;</span>,
+        <span class="ident">y_inverted</span>: <span class="ident">bool</span>,
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Dmabuf</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::backend::allocator::dmabuf::DmabufFlags</span>;
+        <span class="kw">use</span> <span class="ident">std::convert::TryFrom</span>;
+
+        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">extensions</span>.<span class="ident">iter</span>().<span class="ident">any</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span> <span class="op">==</span> <span class="string">&quot;EGL_KHR_image_base&quot;</span>)
+            <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="self">self</span>
+                .<span class="ident">extensions</span>
+                .<span class="ident">iter</span>()
+                .<span class="ident">any</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span> <span class="op">==</span> <span class="string">&quot;EGL_MESA_image_dma_buf_export&quot;</span>)
+        {
+            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::EglExtensionNotSupported</span>(<span class="kw-2">&amp;</span>[
+                <span class="string">&quot;EGL_KHR_image_base&quot;</span>,
+                <span class="string">&quot;EGL_MESA_image_dma_buf_export&quot;</span>,
+            ]));
+        }
+
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">format</span>: <span class="ident">nix::libc::c_int</span> <span class="op">=</span> <span class="number">0</span>;
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">num_planes</span>: <span class="ident">nix::libc::c_int</span> <span class="op">=</span> <span class="number">0</span>;
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">modifier</span>: <span class="ident">ffi::egl::types::EGLuint64KHR</span> <span class="op">=</span> <span class="number">0</span>;
+        <span class="kw">if</span> <span class="kw">unsafe</span> {
+            <span class="ident">ffi::egl::ExportDMABUFImageQueryMESA</span>(
+                <span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>.<span class="ident">display</span>,
+                <span class="ident">image</span>,
+                <span class="kw-2">&amp;mut</span> <span class="ident">format</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="kw">_</span>,
+                <span class="kw-2">&amp;mut</span> <span class="ident">num_planes</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="kw">_</span>,
+                <span class="kw-2">&amp;mut</span> <span class="ident">modifier</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="kw">_</span>,
+            ) <span class="op">==</span> <span class="ident">ffi::egl::FALSE</span>
+        } {
+            <span class="ident">EGLError::from_last_call</span>().<span class="ident">map_err</span>(<span class="ident">Error::DmabufExportFailed</span>)<span class="question-mark">?</span>;
+        }
+
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fds</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">nix::libc::c_int</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="ident">num_planes</span> <span class="kw">as</span> <span class="ident">usize</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">strides</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ffi::egl::types::EGLint</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="ident">num_planes</span> <span class="kw">as</span> <span class="ident">usize</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">offsets</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ffi::egl::types::EGLint</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="ident">num_planes</span> <span class="kw">as</span> <span class="ident">usize</span>);
+        <span class="kw">unsafe</span> {
+            <span class="kw">if</span> <span class="ident">ffi::egl::ExportDMABUFImageMESA</span>(
+                <span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>.<span class="ident">display</span>,
+                <span class="ident">image</span>,
+                <span class="ident">fds</span>.<span class="ident">as_mut_ptr</span>(),
+                <span class="ident">strides</span>.<span class="ident">as_mut_ptr</span>(),
+                <span class="ident">offsets</span>.<span class="ident">as_mut_ptr</span>(),
+            ) <span class="op">==</span> <span class="ident">ffi::egl::FALSE</span>
+            {
+                <span class="ident">EGLError::from_last_call</span>().<span class="ident">map_err</span>(<span class="ident">Error::DmabufExportFailed</span>)<span class="question-mark">?</span>;
+            }
+            <span class="ident">fds</span>.<span class="ident">set_len</span>(<span class="ident">num_planes</span> <span class="kw">as</span> <span class="ident">usize</span>);
+            <span class="ident">strides</span>.<span class="ident">set_len</span>(<span class="ident">num_planes</span> <span class="kw">as</span> <span class="ident">usize</span>);
+            <span class="ident">offsets</span>.<span class="ident">set_len</span>(<span class="ident">num_planes</span> <span class="kw">as</span> <span class="ident">usize</span>);
+        }
+
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dma</span> <span class="op">=</span> <span class="ident">Dmabuf::builder</span>(
+            <span class="ident">size</span>,
+            <span class="ident">Fourcc::try_from</span>(<span class="ident">format</span> <span class="kw">as</span> <span class="ident">u32</span>).<span class="ident">expect</span>(<span class="string">&quot;Unknown format&quot;</span>),
+            <span class="kw">if</span> <span class="ident">y_inverted</span> {
+                <span class="ident">DmabufFlags::Y_INVERT</span>
+            } <span class="kw">else</span> {
+                <span class="ident">DmabufFlags::empty</span>()
+            },
+        );
+        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">num_planes</span> {
+            <span class="ident">dma</span>.<span class="ident">add_plane</span>(
+                <span class="ident">fds</span>[<span class="ident">i</span> <span class="kw">as</span> <span class="ident">usize</span>],
+                <span class="ident">i</span> <span class="kw">as</span> <span class="ident">u32</span>,
+                <span class="ident">offsets</span>[<span class="ident">i</span> <span class="kw">as</span> <span class="ident">usize</span>] <span class="kw">as</span> <span class="ident">u32</span>,
+                <span class="ident">strides</span>[<span class="ident">i</span> <span class="kw">as</span> <span class="ident">usize</span>] <span class="kw">as</span> <span class="ident">u32</span>,
+                <span class="ident">Modifier::from</span>(<span class="ident">modifier</span>),
+            );
+        }
+        <span class="ident">dma</span>.<span class="ident">build</span>().<span class="ident">ok_or</span>(<span class="ident">Error::DmabufExportFailed</span>(<span class="ident">EGLError::BadAlloc</span>))
     }
 
     <span class="doccomment">/// Imports a [`Dmabuf`] as an [`EGLImage`]</span>
@@ -1822,5 +1986,5 @@
     <span class="kw">pub</span> <span class="ident">srgb</span>: <span class="ident">bool</span>,
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (5f4e06771 2022-03-10)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (e95b10ba4 2022-03-13)" ></div>
 </body></html>

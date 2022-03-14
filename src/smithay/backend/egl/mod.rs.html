@@ -332,7 +332,7 @@
 
 <span class="doccomment">/// Error that can happen on optional EGL features</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">EglExtensionNotSupportedError</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>]);
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">EglExtensionNotSupportedError</span>(<span class="kw">pub</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>]);
 
 <span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">EglExtensionNotSupportedError</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">formatter</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">::std::result::Result</span><span class="op">&lt;</span>(), <span class="ident">fmt::Error</span><span class="op">&gt;</span> {
@@ -542,5 +542,5 @@
     }
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (5f4e06771 2022-03-10)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (e95b10ba4 2022-03-13)" ></div>
 </body></html>

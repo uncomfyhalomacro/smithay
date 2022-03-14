@@ -214,12 +214,87 @@
 <span id="209">209</span>
 <span id="210">210</span>
 <span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
+<span id="229">229</span>
+<span id="230">230</span>
+<span id="231">231</span>
+<span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
+<span id="238">238</span>
+<span id="239">239</span>
+<span id="240">240</span>
+<span id="241">241</span>
+<span id="242">242</span>
+<span id="243">243</span>
+<span id="244">244</span>
+<span id="245">245</span>
+<span id="246">246</span>
+<span id="247">247</span>
+<span id="248">248</span>
+<span id="249">249</span>
+<span id="250">250</span>
+<span id="251">251</span>
+<span id="252">252</span>
+<span id="253">253</span>
+<span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
+<span id="259">259</span>
+<span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
+<span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
+<span id="280">280</span>
+<span id="281">281</span>
+<span id="282">282</span>
+<span id="283">283</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">ffi::CStr</span>, <span class="ident">mem::MaybeUninit</span>, <span class="ident">os::raw::c_void</span>, <span class="ident">path::PathBuf</span>, <span class="ident">ptr</span>};
 
 <span class="kw">use</span> <span class="kw">super</span>::{
     <span class="ident">ffi</span>::{<span class="self">self</span>, <span class="ident">egl::types::EGLDeviceEXT</span>},
     <span class="ident">wrap_egl_call</span>, <span class="ident">EGLDisplay</span>, <span class="ident">EGLError</span>, <span class="ident">Error</span>,
 };
+
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;backend_drm&quot;</span>)]</span>
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::backend::drm</span>::{<span class="ident">DrmNode</span>, <span class="ident">NodeType</span>};
 
 <span class="doccomment">/// safe EGLDevice wrapper</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
@@ -370,9 +445,10 @@
                     <span class="ident">ffi::egl::DRM_DEVICE_FILE_EXT</span> <span class="kw">as</span> <span class="ident">ffi::egl::types::EGLint</span>,
                 )
             })
-            .<span class="ident">expect</span>(<span class="string">&quot;TODO: Add error variant&quot;</span>);
-
-            <span class="comment">// FIXME: Ensure EGL_FALSE is not returned.</span>
+            .<span class="ident">map_err</span>(<span class="ident">Error::QueryDeviceProperty</span>)<span class="question-mark">?</span>;
+            <span class="kw">if</span> <span class="ident">raw_path</span>.<span class="ident">is_null</span>() {
+                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::EmptyDeviceProperty</span>);
+            }
 
             <span class="comment">// This is safe because of the following:</span>
             <span class="comment">// 1) The string returned by `eglQueryDeviceStringEXT` is string which will exist as long</span>
@@ -385,6 +461,74 @@
                 .<span class="ident">expect</span>(<span class="string">&quot;Non-UTF8 device path name&quot;</span>);
 
             <span class="prelude-val">Ok</span>(<span class="ident">PathBuf::from</span>(<span class="ident">device_path</span>))
+        }
+    }
+
+    <span class="doccomment">/// Returns the path to the render node of this EGLDevice.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// This function will return an error if the following extensions are not available:</span>
+    <span class="doccomment">/// - [`EGL_EXT_device_drm_render_node`](https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_device_drm_render_node.txt)</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">render_device_path</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">PathBuf</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>
+            .<span class="ident">extensions</span>()
+            .<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="string">&quot;EGL_EXT_device_drm_render_node&quot;</span>.<span class="ident">to_owned</span>())
+        {
+            <span class="prelude-val">Err</span>(<span class="ident">Error::EglExtensionNotSupported</span>(<span class="kw-2">&amp;</span>[
+                <span class="string">&quot;EGL_EXT_device_drm_render_node&quot;</span>,
+            ]))
+        } <span class="kw">else</span> {
+            <span class="kw">let</span> <span class="ident">raw_path</span> <span class="op">=</span> <span class="ident">wrap_egl_call</span>(<span class="op">|</span><span class="op">|</span> <span class="kw">unsafe</span> {
+                <span class="ident">ffi::egl::QueryDeviceStringEXT</span>(
+                    <span class="self">self</span>.<span class="ident">inner</span>,
+                    <span class="ident">ffi::egl::DRM_RENDER_NODE_FILE_EXT</span> <span class="kw">as</span> <span class="ident">ffi::egl::types::EGLint</span>,
+                )
+            })
+            .<span class="ident">map_err</span>(<span class="ident">Error::QueryDeviceProperty</span>)<span class="question-mark">?</span>;
+            <span class="kw">if</span> <span class="ident">raw_path</span>.<span class="ident">is_null</span>() {
+                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::EmptyDeviceProperty</span>);
+            }
+
+            <span class="comment">// This is safe because of the following:</span>
+            <span class="comment">// 1) The string returned by `eglQueryDeviceStringEXT` is string which will exist as long</span>
+            <span class="comment">//    as the EGLDisplay is valid. Since the pointer is only used in this function, the</span>
+            <span class="comment">//    lifetime of the pointer will fulfil Rust&#39;s CStr requirements on lifetime.</span>
+            <span class="comment">// 2) The string returned by EGL is null terminated.</span>
+            <span class="kw">let</span> <span class="ident">device_path</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">CStr::from_ptr</span>(<span class="ident">raw_path</span>) }
+                .<span class="ident">to_str</span>()
+                <span class="comment">// EGL ensures the string is valid UTF-8</span>
+                .<span class="ident">expect</span>(<span class="string">&quot;Non-UTF8 device path name&quot;</span>);
+
+            <span class="prelude-val">Ok</span>(<span class="ident">PathBuf::from</span>(<span class="ident">device_path</span>))
+        }
+    }
+
+    <span class="doccomment">/// Returns the drm node beloging to this device.</span>
+    <span class="doccomment">/// Tries to optain a render_node first through `EGL_EXT_device_drm_render_node`</span>
+    <span class="doccomment">/// (see also [`EGLDevice::render_device_path`]) and then falls back to</span>
+    <span class="doccomment">/// get a render_node from `EGL_EXT_device_drm` (see also [`EGLDevice::drm_device_path`]).</span>
+    <span class="doccomment">/// If both fail to produce a render node, whichever device returned by</span>
+    <span class="doccomment">/// `EGL_EXT_device_drm` is returned.</span>
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;backend_drm&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">try_get_render_node</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">DrmNode</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="comment">// first lets try to get a render_node directly</span>
+        <span class="kw">match</span> <span class="self">self</span>
+            .<span class="ident">render_device_path</span>()
+            .<span class="ident">ok</span>()
+            .<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">path</span><span class="op">|</span> <span class="ident">DrmNode::from_path</span>(<span class="ident">path</span>).<span class="ident">ok</span>())
+        {
+            <span class="prelude-val">Some</span>(<span class="ident">node</span>) =&gt; <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">node</span>)),
+            <span class="comment">// else we take a drm_path</span>
+            <span class="prelude-val">None</span> =&gt; {
+                <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">drm_device_path</span>()<span class="question-mark">?</span>;
+                <span class="kw">let</span> <span class="ident">node</span> <span class="op">=</span> <span class="ident">DrmNode::from_path</span>(<span class="ident">path</span>).<span class="ident">ok</span>();
+                <span class="comment">// and try to convert it to a render_node</span>
+                <span class="prelude-val">Ok</span>(<span class="ident">node</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">node</span><span class="op">|</span> {
+                    <span class="ident">node</span>.<span class="ident">node_with_type</span>(<span class="ident">NodeType::Render</span>)
+                        .<span class="ident">and_then</span>(<span class="ident">Result::ok</span>)
+                        <span class="comment">// and otherwise go with whatever we got initially</span>
+                        .<span class="ident">unwrap_or</span>(<span class="ident">node</span>)
+                }))
+            }
         }
     }
 
@@ -426,5 +570,5 @@
         .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>())
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (5f4e06771 2022-03-10)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (e95b10ba4 2022-03-13)" ></div>
 </body></html>

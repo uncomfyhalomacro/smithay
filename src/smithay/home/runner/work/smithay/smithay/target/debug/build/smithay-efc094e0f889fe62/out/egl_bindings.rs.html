@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/work/smithay/smithay/target/debug/build/smithay-e46b55c795e77076/out/egl_bindings.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>egl_bindings.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../../../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../../../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../../../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../../../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../../../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../../../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../../../../../../../../storage.js"></script><script src="../../../../../../../../../../../../crates.js"></script><script defer src="../../../../../../../../../../../../main.js"></script><script defer src="../../../../../../../../../../../../source-script.js"></script><script defer src="../../../../../../../../../../../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/work/smithay/smithay/target/debug/build/smithay-efc094e0f889fe62/out/egl_bindings.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>egl_bindings.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../../../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../../../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../../../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../../../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../../../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../../../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../../../../../../../../storage.js"></script><script src="../../../../../../../../../../../../crates.js"></script><script defer src="../../../../../../../../../../../../main.js"></script><script defer src="../../../../../../../../../../../../source-script.js"></script><script defer src="../../../../../../../../../../../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../../../../../../../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../../../../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../../../../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../../../../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../../../../../../../../smithay/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../../../../../../../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
@@ -2138,6 +2138,62 @@
 <span id="2133">2133</span>
 <span id="2134">2134</span>
 <span id="2135">2135</span>
+<span id="2136">2136</span>
+<span id="2137">2137</span>
+<span id="2138">2138</span>
+<span id="2139">2139</span>
+<span id="2140">2140</span>
+<span id="2141">2141</span>
+<span id="2142">2142</span>
+<span id="2143">2143</span>
+<span id="2144">2144</span>
+<span id="2145">2145</span>
+<span id="2146">2146</span>
+<span id="2147">2147</span>
+<span id="2148">2148</span>
+<span id="2149">2149</span>
+<span id="2150">2150</span>
+<span id="2151">2151</span>
+<span id="2152">2152</span>
+<span id="2153">2153</span>
+<span id="2154">2154</span>
+<span id="2155">2155</span>
+<span id="2156">2156</span>
+<span id="2157">2157</span>
+<span id="2158">2158</span>
+<span id="2159">2159</span>
+<span id="2160">2160</span>
+<span id="2161">2161</span>
+<span id="2162">2162</span>
+<span id="2163">2163</span>
+<span id="2164">2164</span>
+<span id="2165">2165</span>
+<span id="2166">2166</span>
+<span id="2167">2167</span>
+<span id="2168">2168</span>
+<span id="2169">2169</span>
+<span id="2170">2170</span>
+<span id="2171">2171</span>
+<span id="2172">2172</span>
+<span id="2173">2173</span>
+<span id="2174">2174</span>
+<span id="2175">2175</span>
+<span id="2176">2176</span>
+<span id="2177">2177</span>
+<span id="2178">2178</span>
+<span id="2179">2179</span>
+<span id="2180">2180</span>
+<span id="2181">2181</span>
+<span id="2182">2182</span>
+<span id="2183">2183</span>
+<span id="2184">2184</span>
+<span id="2185">2185</span>
+<span id="2186">2186</span>
+<span id="2187">2187</span>
+<span id="2188">2188</span>
+<span id="2189">2189</span>
+<span id="2190">2190</span>
+<span id="2191">2191</span>
 </pre><pre class="rust"><code>
         <span class="kw">mod</span> <span class="ident">__gl_imports</span> {
             <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">std::mem</span>;
@@ -2540,6 +2596,10 @@
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>, <span class="ident">unused_variables</span>, <span class="ident">dead_code</span>)]</span> <span class="attribute">#[<span class="ident">inline</span>]</span>
             <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">DestroySync</span>(<span class="ident">dpy</span>: <span class="ident">types::EGLDisplay</span>, <span class="ident">sync</span>: <span class="ident">types::EGLSync</span>) -&gt; <span class="ident">types::EGLBoolean</span> { <span class="ident">__gl_imports::mem::transmute</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span>(<span class="ident">types::EGLDisplay</span>, <span class="ident">types::EGLSync</span>) -&gt; <span class="ident">types::EGLBoolean</span><span class="op">&gt;</span>(<span class="ident">storage::DestroySync</span>.<span class="ident">f</span>)(<span class="ident">dpy</span>, <span class="ident">sync</span>) }
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>, <span class="ident">unused_variables</span>, <span class="ident">dead_code</span>)]</span> <span class="attribute">#[<span class="ident">inline</span>]</span>
+            <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">ExportDMABUFImageMESA</span>(<span class="ident">dpy</span>: <span class="ident">types::EGLDisplay</span>, <span class="ident">image</span>: <span class="ident">types::EGLImageKHR</span>, <span class="ident">fds</span>: <span class="kw-2">*mut</span> <span class="ident">__gl_imports::raw::c_int</span>, <span class="ident">strides</span>: <span class="kw-2">*mut</span> <span class="ident">types::EGLint</span>, <span class="ident">offsets</span>: <span class="kw-2">*mut</span> <span class="ident">types::EGLint</span>) -&gt; <span class="ident">types::EGLBoolean</span> { <span class="ident">__gl_imports::mem::transmute</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span>(<span class="ident">types::EGLDisplay</span>, <span class="ident">types::EGLImageKHR</span>, <span class="kw-2">*mut</span> <span class="ident">__gl_imports::raw::c_int</span>, <span class="kw-2">*mut</span> <span class="ident">types::EGLint</span>, <span class="kw-2">*mut</span> <span class="ident">types::EGLint</span>) -&gt; <span class="ident">types::EGLBoolean</span><span class="op">&gt;</span>(<span class="ident">storage::ExportDMABUFImageMESA</span>.<span class="ident">f</span>)(<span class="ident">dpy</span>, <span class="ident">image</span>, <span class="ident">fds</span>, <span class="ident">strides</span>, <span class="ident">offsets</span>) }
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>, <span class="ident">unused_variables</span>, <span class="ident">dead_code</span>)]</span> <span class="attribute">#[<span class="ident">inline</span>]</span>
+            <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">ExportDMABUFImageQueryMESA</span>(<span class="ident">dpy</span>: <span class="ident">types::EGLDisplay</span>, <span class="ident">image</span>: <span class="ident">types::EGLImageKHR</span>, <span class="ident">fourcc</span>: <span class="kw-2">*mut</span> <span class="ident">__gl_imports::raw::c_int</span>, <span class="ident">num_planes</span>: <span class="kw-2">*mut</span> <span class="ident">__gl_imports::raw::c_int</span>, <span class="ident">modifiers</span>: <span class="kw-2">*mut</span> <span class="ident">types::EGLuint64KHR</span>) -&gt; <span class="ident">types::EGLBoolean</span> { <span class="ident">__gl_imports::mem::transmute</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span>(<span class="ident">types::EGLDisplay</span>, <span class="ident">types::EGLImageKHR</span>, <span class="kw-2">*mut</span> <span class="ident">__gl_imports::raw::c_int</span>, <span class="kw-2">*mut</span> <span class="ident">__gl_imports::raw::c_int</span>, <span class="kw-2">*mut</span> <span class="ident">types::EGLuint64KHR</span>) -&gt; <span class="ident">types::EGLBoolean</span><span class="op">&gt;</span>(<span class="ident">storage::ExportDMABUFImageQueryMESA</span>.<span class="ident">f</span>)(<span class="ident">dpy</span>, <span class="ident">image</span>, <span class="ident">fourcc</span>, <span class="ident">num_planes</span>, <span class="ident">modifiers</span>) }
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>, <span class="ident">unused_variables</span>, <span class="ident">dead_code</span>)]</span> <span class="attribute">#[<span class="ident">inline</span>]</span>
             <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">GetConfigAttrib</span>(<span class="ident">dpy</span>: <span class="ident">types::EGLDisplay</span>, <span class="ident">config</span>: <span class="ident">types::EGLConfig</span>, <span class="ident">attribute</span>: <span class="ident">types::EGLint</span>, <span class="ident">value</span>: <span class="kw-2">*mut</span> <span class="ident">types::EGLint</span>) -&gt; <span class="ident">types::EGLBoolean</span> { <span class="ident">__gl_imports::mem::transmute</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span>(<span class="ident">types::EGLDisplay</span>, <span class="ident">types::EGLConfig</span>, <span class="ident">types::EGLint</span>, <span class="kw-2">*mut</span> <span class="ident">types::EGLint</span>) -&gt; <span class="ident">types::EGLBoolean</span><span class="op">&gt;</span>(<span class="ident">storage::GetConfigAttrib</span>.<span class="ident">f</span>)(<span class="ident">dpy</span>, <span class="ident">config</span>, <span class="ident">attribute</span>, <span class="ident">value</span>) }
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>, <span class="ident">unused_variables</span>, <span class="ident">dead_code</span>)]</span> <span class="attribute">#[<span class="ident">inline</span>]</span>
             <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">GetConfigs</span>(<span class="ident">dpy</span>: <span class="ident">types::EGLDisplay</span>, <span class="ident">configs</span>: <span class="kw-2">*mut</span> <span class="ident">types::EGLConfig</span>, <span class="ident">config_size</span>: <span class="ident">types::EGLint</span>, <span class="ident">num_config</span>: <span class="kw-2">*mut</span> <span class="ident">types::EGLint</span>) -&gt; <span class="ident">types::EGLBoolean</span> { <span class="ident">__gl_imports::mem::transmute</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span>(<span class="ident">types::EGLDisplay</span>, <span class="kw-2">*mut</span> <span class="ident">types::EGLConfig</span>, <span class="ident">types::EGLint</span>, <span class="kw-2">*mut</span> <span class="ident">types::EGLint</span>) -&gt; <span class="ident">types::EGLBoolean</span><span class="op">&gt;</span>(<span class="ident">storage::GetConfigs</span>.<span class="ident">f</span>)(<span class="ident">dpy</span>, <span class="ident">configs</span>, <span class="ident">config_size</span>, <span class="ident">num_config</span>) }
@@ -2735,6 +2795,14 @@
                 <span class="ident">is_loaded</span>: <span class="bool-val">false</span>
             };
 <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">DestroySync</span>: <span class="ident">FnPtr</span> <span class="op">=</span> <span class="ident">FnPtr</span> {
+                <span class="ident">f</span>: <span class="ident"><span class="kw">super</span>::missing_fn_panic</span> <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">raw::c_void</span>,
+                <span class="ident">is_loaded</span>: <span class="bool-val">false</span>
+            };
+<span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">ExportDMABUFImageMESA</span>: <span class="ident">FnPtr</span> <span class="op">=</span> <span class="ident">FnPtr</span> {
+                <span class="ident">f</span>: <span class="ident"><span class="kw">super</span>::missing_fn_panic</span> <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">raw::c_void</span>,
+                <span class="ident">is_loaded</span>: <span class="bool-val">false</span>
+            };
+<span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">ExportDMABUFImageQueryMESA</span>: <span class="ident">FnPtr</span> <span class="op">=</span> <span class="ident">FnPtr</span> {
                 <span class="ident">f</span>: <span class="ident"><span class="kw">super</span>::missing_fn_panic</span> <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">raw::c_void</span>,
                 <span class="ident">is_loaded</span>: <span class="bool-val">false</span>
             };
@@ -3408,6 +3476,48 @@
                 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">load_with</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="ident">loadfn</span>: <span class="ident">F</span>) <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>) -&gt; <span class="kw-2">*const</span> <span class="ident">raw::c_void</span> {
                     <span class="kw">unsafe</span> {
                         <span class="ident">storage::DestroySync</span> <span class="op">=</span> <span class="ident">FnPtr::new</span>(<span class="ident">metaloadfn</span>(<span class="kw-2">&amp;mut</span> <span class="ident">loadfn</span>, <span class="string">&quot;eglDestroySync&quot;</span>, <span class="kw-2">&amp;</span>[<span class="string">&quot;eglDestroySyncKHR&quot;</span>]))
+                    }
+                }
+            }
+        
+
+            <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
+            <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">ExportDMABUFImageMESA</span> {
+                <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">storage</span>, <span class="ident">metaloadfn</span>};
+                <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::__gl_imports::raw</span>;
+                <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::FnPtr</span>;
+
+                <span class="attribute">#[<span class="ident">inline</span>]</span>
+                <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
+                <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_loaded</span>() -&gt; <span class="ident">bool</span> {
+                    <span class="kw">unsafe</span> { <span class="ident">storage::ExportDMABUFImageMESA</span>.<span class="ident">is_loaded</span> }
+                }
+
+                <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
+                <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">load_with</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="ident">loadfn</span>: <span class="ident">F</span>) <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>) -&gt; <span class="kw-2">*const</span> <span class="ident">raw::c_void</span> {
+                    <span class="kw">unsafe</span> {
+                        <span class="ident">storage::ExportDMABUFImageMESA</span> <span class="op">=</span> <span class="ident">FnPtr::new</span>(<span class="ident">metaloadfn</span>(<span class="kw-2">&amp;mut</span> <span class="ident">loadfn</span>, <span class="string">&quot;eglExportDMABUFImageMESA&quot;</span>, <span class="kw-2">&amp;</span>[]))
+                    }
+                }
+            }
+        
+
+            <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
+            <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">ExportDMABUFImageQueryMESA</span> {
+                <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">storage</span>, <span class="ident">metaloadfn</span>};
+                <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::__gl_imports::raw</span>;
+                <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::FnPtr</span>;
+
+                <span class="attribute">#[<span class="ident">inline</span>]</span>
+                <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
+                <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_loaded</span>() -&gt; <span class="ident">bool</span> {
+                    <span class="kw">unsafe</span> { <span class="ident">storage::ExportDMABUFImageQueryMESA</span>.<span class="ident">is_loaded</span> }
+                }
+
+                <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
+                <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">load_with</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="ident">loadfn</span>: <span class="ident">F</span>) <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>) -&gt; <span class="kw-2">*const</span> <span class="ident">raw::c_void</span> {
+                    <span class="kw">unsafe</span> {
+                        <span class="ident">storage::ExportDMABUFImageQueryMESA</span> <span class="op">=</span> <span class="ident">FnPtr::new</span>(<span class="ident">metaloadfn</span>(<span class="kw-2">&amp;mut</span> <span class="ident">loadfn</span>, <span class="string">&quot;eglExportDMABUFImageQueryMESA&quot;</span>, <span class="kw-2">&amp;</span>[]))
                     }
                 }
             }
@@ -4230,6 +4340,8 @@
 <span class="ident">DestroyStreamKHR::load_with</span>(<span class="kw-2">&amp;mut</span> <span class="kw-2">*</span><span class="ident">loadfn</span>);
 <span class="ident">DestroySurface::load_with</span>(<span class="kw-2">&amp;mut</span> <span class="kw-2">*</span><span class="ident">loadfn</span>);
 <span class="ident">DestroySync::load_with</span>(<span class="kw-2">&amp;mut</span> <span class="kw-2">*</span><span class="ident">loadfn</span>);
+<span class="ident">ExportDMABUFImageMESA::load_with</span>(<span class="kw-2">&amp;mut</span> <span class="kw-2">*</span><span class="ident">loadfn</span>);
+<span class="ident">ExportDMABUFImageQueryMESA::load_with</span>(<span class="kw-2">&amp;mut</span> <span class="kw-2">*</span><span class="ident">loadfn</span>);
 <span class="ident">GetConfigAttrib::load_with</span>(<span class="kw-2">&amp;mut</span> <span class="kw-2">*</span><span class="ident">loadfn</span>);
 <span class="ident">GetConfigs::load_with</span>(<span class="kw-2">&amp;mut</span> <span class="kw-2">*</span><span class="ident">loadfn</span>);
 <span class="ident">GetCurrentContext::load_with</span>(<span class="kw-2">&amp;mut</span> <span class="kw-2">*</span><span class="ident">loadfn</span>);
@@ -4274,5 +4386,5 @@
         }
     
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../../../../../../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (5f4e06771 2022-03-10)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../../../../../../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (e95b10ba4 2022-03-13)" ></div>
 </body></html>

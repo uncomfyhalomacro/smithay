@@ -256,6 +256,11 @@
 <span id="251">251</span>
 <span id="252">252</span>
 <span id="253">253</span>
+<span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Module for [dmabuf](https://01.org/linuxgraphics/gfx-docs/drm/driver-api/dma-buf.html) buffers.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! `Dmabuf`s act alike to smart pointers and can be freely cloned and passed around.</span>
@@ -491,6 +496,11 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">upgrade</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Dmabuf</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">upgrade</span>().<span class="ident">map</span>(<span class="ident">Dmabuf</span>)
     }
+
+    <span class="doccomment">/// Returns true if there are not any strong references remaining</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_gone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
+        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">strong_count</span>() <span class="op">==</span> <span class="number">0</span>
+    }
 }
 
 <span class="doccomment">/// Buffer that can be exported as Dmabufs</span>
@@ -510,5 +520,5 @@
     }
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (5f4e06771 2022-03-10)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (e95b10ba4 2022-03-13)" ></div>
 </body></html>

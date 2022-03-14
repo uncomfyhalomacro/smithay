@@ -141,7 +141,7 @@ void main() {
 
     vec2 transform_translation = position.xy;
     vec2 transform_scale = position.zw;
-    v_tex_coords = (vec3((tex_coords * scale(transform_scale)) + transform_translation, 1.0)).xy;
+    v_tex_coords = (vec3((v_tex_coords * scale(transform_scale)) + transform_translation, 1.0)).xy;
     gl_Position = vec4(matrix * vec3((vert * scale(transform_scale)) + transform_translation, 1.0), 1.0);
 }
 &quot;#</span>;
@@ -220,5 +220,5 @@ void main() {
 }
 &quot;#</span>;
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (5f4e06771 2022-03-10)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (e95b10ba4 2022-03-13)" ></div>
 </body></html>

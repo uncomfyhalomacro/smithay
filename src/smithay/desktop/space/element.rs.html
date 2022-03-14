@@ -253,8 +253,26 @@
 <span id="248">248</span>
 <span id="249">249</span>
 <span id="250">250</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::{
-    <span class="ident">backend::renderer</span>::{<span class="ident">Frame</span>, <span class="ident">ImportAll</span>, <span class="ident">Renderer</span>, <span class="ident">Texture</span>},
+<span id="251">251</span>
+<span id="252">252</span>
+<span id="253">253</span>
+<span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
+<span id="259">259</span>
+<span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
+<span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::desktop::space::popup::RenderPopup</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::{
+    <span class="ident">backend::renderer</span>::{<span class="ident">ImportAll</span>, <span class="ident">Renderer</span>, <span class="ident">Texture</span>},
     <span class="ident">desktop</span>::{<span class="ident">space</span>::<span class="kw-2">*</span>, <span class="ident">utils</span>::<span class="kw-2">*</span>},
     <span class="ident">utils</span>::{<span class="ident">Logical</span>, <span class="ident">Point</span>, <span class="ident">Rectangle</span>},
     <span class="ident">wayland::output::Output</span>,
@@ -285,27 +303,17 @@
     <span class="ident">PopupsOverlay</span> <span class="op">=</span> <span class="number">70</span>,
 }
 
-<span class="doccomment">/// Elements rendered by [`Space::render_output`] in addition to windows, layers and popups.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">DynamicRenderElements</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="op">=</span>
-    <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">RenderElement</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="op">&lt;</span><span class="ident">R</span> <span class="kw">as</span> <span class="ident">Renderer</span><span class="op">&gt;</span><span class="ident">::Frame</span>, <span class="op">&lt;</span><span class="ident">R</span> <span class="kw">as</span> <span class="ident">Renderer</span><span class="op">&gt;</span><span class="ident">::Error</span>, <span class="op">&lt;</span><span class="ident">R</span> <span class="kw">as</span> <span class="ident">Renderer</span><span class="op">&gt;</span><span class="ident">::TextureId</span><span class="op">&gt;</span><span class="op">&gt;</span>;
-
-<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">type</span> <span class="ident">SpaceElem</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="op">=</span>
-    <span class="kw">dyn</span> <span class="ident">SpaceElement</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="op">&lt;</span><span class="ident">R</span> <span class="kw">as</span> <span class="ident">Renderer</span><span class="op">&gt;</span><span class="ident">::Frame</span>, <span class="op">&lt;</span><span class="ident">R</span> <span class="kw">as</span> <span class="ident">Renderer</span><span class="op">&gt;</span><span class="ident">::Error</span>, <span class="op">&lt;</span><span class="ident">R</span> <span class="kw">as</span> <span class="ident">Renderer</span><span class="op">&gt;</span><span class="ident">::TextureId</span><span class="op">&gt;</span>;
-
 <span class="doccomment">/// Trait for custom elements to be rendered during [`Space::render_output`].</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">RenderElement</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">F</span>, <span class="ident">E</span>, <span class="ident">T</span><span class="op">&gt;</span>
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">RenderElement</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
 <span class="kw">where</span>
-    <span class="ident">R</span>: <span class="ident">Renderer</span><span class="op">&lt;</span><span class="ident">Error</span> <span class="op">=</span> <span class="ident">E</span>, <span class="ident">TextureId</span> <span class="op">=</span> <span class="ident">T</span>, <span class="ident">Frame</span> <span class="op">=</span> <span class="ident">F</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ImportAll</span>,
-    <span class="ident">F</span>: <span class="ident">Frame</span><span class="op">&lt;</span><span class="ident">Error</span> <span class="op">=</span> <span class="ident">E</span>, <span class="ident">TextureId</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
-    <span class="ident">E</span>: <span class="ident">std::error::Error</span>,
-    <span class="ident">T</span>: <span class="ident">Texture</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+    <span class="ident">R</span>: <span class="ident">Renderer</span> <span class="op">+</span> <span class="ident">ImportAll</span>,
     <span class="self">Self</span>: <span class="ident">Any</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
 {
     <span class="doccomment">/// Returns an id unique to this element for the type of Self.</span>
     <span class="kw">fn</span> <span class="ident">id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span>;
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="kw">fn</span> <span class="ident">type_of</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TypeId</span> {
-        <span class="ident">std::any::Any::type_id</span>(<span class="self">self</span>)
+        <span class="ident">Any::type_id</span>(<span class="self">self</span>)
     }
     <span class="doccomment">/// Returns the bounding box of this element including its position in the space.</span>
     <span class="kw">fn</span> <span class="ident">geometry</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Rectangle</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span>;
@@ -334,12 +342,12 @@
     <span class="kw">fn</span> <span class="ident">draw</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">renderer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">R</span>,
-        <span class="ident">frame</span>: <span class="kw-2">&amp;mut</span> <span class="ident">F</span>,
+        <span class="ident">frame</span>: <span class="kw-2">&amp;mut</span> <span class="op">&lt;</span><span class="ident">R</span> <span class="kw">as</span> <span class="ident">Renderer</span><span class="op">&gt;</span><span class="ident">::Frame</span>,
         <span class="ident">scale</span>: <span class="ident">f64</span>,
         <span class="ident">location</span>: <span class="ident">Point</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span>,
         <span class="ident">damage</span>: <span class="kw-2">&amp;</span>[<span class="ident">Rectangle</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span>],
         <span class="ident">log</span>: <span class="kw-2">&amp;</span><span class="ident">slog::Logger</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">R::Error</span><span class="op">&gt;</span>;
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="op">&lt;</span><span class="ident">R</span> <span class="kw">as</span> <span class="ident">Renderer</span><span class="op">&gt;</span><span class="ident">::Error</span><span class="op">&gt;</span>;
 
     <span class="doccomment">/// Returns z_index of RenderElement, reverf too [`RenderZindex`] for default values</span>
     <span class="kw">fn</span> <span class="ident">z_index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u8</span> {
@@ -347,68 +355,96 @@
     }
 }
 
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">trait</span> <span class="ident">SpaceElement</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">F</span>, <span class="ident">E</span>, <span class="ident">T</span><span class="op">&gt;</span>
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">enum</span> <span class="ident">SpaceElement</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">R</span>, <span class="ident">E</span><span class="op">&gt;</span>
 <span class="kw">where</span>
-    <span class="ident">R</span>: <span class="ident">Renderer</span><span class="op">&lt;</span><span class="ident">Error</span> <span class="op">=</span> <span class="ident">E</span>, <span class="ident">TextureId</span> <span class="op">=</span> <span class="ident">T</span>, <span class="ident">Frame</span> <span class="op">=</span> <span class="ident">F</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ImportAll</span>,
-    <span class="ident">F</span>: <span class="ident">Frame</span><span class="op">&lt;</span><span class="ident">Error</span> <span class="op">=</span> <span class="ident">E</span>, <span class="ident">TextureId</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
-    <span class="ident">E</span>: <span class="ident">std::error::Error</span>,
-    <span class="ident">T</span>: <span class="ident">Texture</span>,
+    <span class="ident">R</span>: <span class="ident">Renderer</span> <span class="op">+</span> <span class="ident">ImportAll</span>,
+    <span class="ident">E</span>: <span class="ident">RenderElement</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>,
 {
-    <span class="kw">fn</span> <span class="ident">id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span>;
-    <span class="kw">fn</span> <span class="ident">type_of</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TypeId</span>;
-    <span class="kw">fn</span> <span class="ident">location</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">space_id</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Point</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">geometry</span>(<span class="ident">space_id</span>).<span class="ident">loc</span>
+    <span class="ident">Layer</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">LayerSurface</span>),
+    <span class="ident">Window</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Window</span>),
+    <span class="ident">Popup</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">RenderPopup</span>),
+    <span class="ident">Custom</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">E</span>, <span class="ident">std::marker::PhantomData</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>),
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">R</span>, <span class="ident">E</span><span class="op">&gt;</span> <span class="ident">SpaceElement</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">R</span>, <span class="ident">E</span><span class="op">&gt;</span>
+<span class="kw">where</span>
+    <span class="ident">R</span>: <span class="ident">Renderer</span> <span class="op">+</span> <span class="ident">ImportAll</span>,
+    <span class="ident">E</span>: <span class="ident">RenderElement</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>,
+    <span class="op">&lt;</span><span class="ident">R</span> <span class="kw">as</span> <span class="ident">Renderer</span><span class="op">&gt;</span><span class="ident">::TextureId</span>: <span class="lifetime">&#39;static</span>,
+{
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
+        <span class="kw">match</span> <span class="self">self</span> {
+            <span class="ident">SpaceElement::Layer</span>(<span class="ident">layer</span>) =&gt; <span class="ident">layer</span>.<span class="ident">elem_id</span>(),
+            <span class="ident">SpaceElement::Window</span>(<span class="ident">window</span>) =&gt; <span class="ident">window</span>.<span class="ident">elem_id</span>(),
+            <span class="ident">SpaceElement::Popup</span>(<span class="ident">popup</span>) =&gt; <span class="ident">popup</span>.<span class="ident">elem_id</span>(),
+            <span class="ident">SpaceElement::Custom</span>(<span class="ident">custom</span>, <span class="kw">_</span>) =&gt; <span class="ident">custom</span>.<span class="ident">id</span>(),
+        }
     }
-    <span class="kw">fn</span> <span class="ident">geometry</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">space_id</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Rectangle</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span>;
-    <span class="kw">fn</span> <span class="ident">accumulated_damage</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">for_values</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="kw-2">&amp;</span><span class="ident">Space</span>, <span class="kw-2">&amp;</span><span class="ident">Output</span>)<span class="op">&gt;</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Rectangle</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">type_of</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TypeId</span> {
+        <span class="kw">match</span> <span class="self">self</span> {
+            <span class="ident">SpaceElement::Layer</span>(<span class="ident">layer</span>) =&gt; <span class="ident">layer</span>.<span class="ident">elem_type_of</span>(),
+            <span class="ident">SpaceElement::Window</span>(<span class="ident">window</span>) =&gt; <span class="ident">window</span>.<span class="ident">elem_type_of</span>(),
+            <span class="ident">SpaceElement::Popup</span>(<span class="ident">popup</span>) =&gt; <span class="ident">popup</span>.<span class="ident">elem_type_of</span>(),
+            <span class="ident">SpaceElement::Custom</span>(<span class="ident">custom</span>, <span class="kw">_</span>) =&gt; <span class="ident">custom</span>.<span class="ident">type_of</span>(),
+        }
+    }
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">location</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">space_id</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Point</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span> {
+        <span class="kw">match</span> <span class="self">self</span> {
+            <span class="ident">SpaceElement::Layer</span>(<span class="ident">layer</span>) =&gt; <span class="ident">layer</span>.<span class="ident">elem_geometry</span>(<span class="ident">space_id</span>).<span class="ident">loc</span>,
+            <span class="ident">SpaceElement::Window</span>(<span class="ident">window</span>) =&gt; <span class="ident">window</span>.<span class="ident">elem_location</span>(<span class="ident">space_id</span>),
+            <span class="ident">SpaceElement::Popup</span>(<span class="ident">popup</span>) =&gt; <span class="ident">popup</span>.<span class="ident">elem_geometry</span>(<span class="ident">space_id</span>).<span class="ident">loc</span>,
+            <span class="ident">SpaceElement::Custom</span>(<span class="ident">custom</span>, <span class="kw">_</span>) =&gt; <span class="ident">custom</span>.<span class="ident">geometry</span>().<span class="ident">loc</span>,
+        }
+    }
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">geometry</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">space_id</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Rectangle</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span> {
+        <span class="kw">match</span> <span class="self">self</span> {
+            <span class="ident">SpaceElement::Layer</span>(<span class="ident">layer</span>) =&gt; <span class="ident">layer</span>.<span class="ident">elem_geometry</span>(<span class="ident">space_id</span>),
+            <span class="ident">SpaceElement::Window</span>(<span class="ident">window</span>) =&gt; <span class="ident">window</span>.<span class="ident">elem_geometry</span>(<span class="ident">space_id</span>),
+            <span class="ident">SpaceElement::Popup</span>(<span class="ident">popup</span>) =&gt; <span class="ident">popup</span>.<span class="ident">elem_geometry</span>(<span class="ident">space_id</span>),
+            <span class="ident">SpaceElement::Custom</span>(<span class="ident">custom</span>, <span class="kw">_</span>) =&gt; <span class="ident">custom</span>.<span class="ident">geometry</span>(),
+        }
+    }
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">accumulated_damage</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">for_values</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="kw-2">&amp;</span><span class="ident">Space</span>, <span class="kw-2">&amp;</span><span class="ident">Output</span>)<span class="op">&gt;</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Rectangle</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="kw">match</span> <span class="self">self</span> {
+            <span class="ident">SpaceElement::Layer</span>(<span class="ident">layer</span>) =&gt; <span class="ident">layer</span>.<span class="ident">elem_accumulated_damage</span>(<span class="ident">for_values</span>),
+            <span class="ident">SpaceElement::Window</span>(<span class="ident">window</span>) =&gt; <span class="ident">window</span>.<span class="ident">elem_accumulated_damage</span>(<span class="ident">for_values</span>),
+            <span class="ident">SpaceElement::Popup</span>(<span class="ident">popup</span>) =&gt; <span class="ident">popup</span>.<span class="ident">elem_accumulated_damage</span>(<span class="ident">for_values</span>),
+            <span class="ident">SpaceElement::Custom</span>(<span class="ident">custom</span>, <span class="kw">_</span>) =&gt; {
+                <span class="ident">custom</span>.<span class="ident">accumulated_damage</span>(<span class="ident">for_values</span>.<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">s</span>, <span class="ident">o</span>)<span class="op">|</span> <span class="ident">SpaceOutputTuple</span>(<span class="ident">s</span>, <span class="ident">o</span>)))
+            }
+        }
+    }
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::too_many_arguments</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">draw</span>(
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">draw</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">space_id</span>: <span class="ident">usize</span>,
         <span class="ident">renderer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">R</span>,
-        <span class="ident">frame</span>: <span class="kw-2">&amp;mut</span> <span class="ident">F</span>,
-        <span class="ident">scale</span>: <span class="ident">f64</span>,
-        <span class="ident">location</span>: <span class="ident">Point</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span>,
-        <span class="ident">damage</span>: <span class="kw-2">&amp;</span>[<span class="ident">Rectangle</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span>],
-        <span class="ident">log</span>: <span class="kw-2">&amp;</span><span class="ident">slog::Logger</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">R::Error</span><span class="op">&gt;</span>;
-    <span class="kw">fn</span> <span class="ident">z_index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u8</span>;
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">F</span>, <span class="ident">E</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">SpaceElement</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">F</span>, <span class="ident">E</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">RenderElement</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">F</span>, <span class="ident">E</span>, <span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">R</span>: <span class="ident">Renderer</span><span class="op">&lt;</span><span class="ident">Error</span> <span class="op">=</span> <span class="ident">E</span>, <span class="ident">TextureId</span> <span class="op">=</span> <span class="ident">T</span>, <span class="ident">Frame</span> <span class="op">=</span> <span class="ident">F</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ImportAll</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-    <span class="ident">F</span>: <span class="ident">Frame</span><span class="op">&lt;</span><span class="ident">Error</span> <span class="op">=</span> <span class="ident">E</span>, <span class="ident">TextureId</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-    <span class="ident">E</span>: <span class="ident">std::error::Error</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-    <span class="ident">T</span>: <span class="ident">Texture</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-{
-    <span class="kw">fn</span> <span class="ident">id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
-        (<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span> <span class="kw">as</span> <span class="kw-2">&amp;</span><span class="kw">dyn</span> <span class="ident">RenderElement</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">F</span>, <span class="ident">E</span>, <span class="ident">T</span><span class="op">&gt;</span>).<span class="ident">id</span>()
-    }
-    <span class="kw">fn</span> <span class="ident">type_of</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TypeId</span> {
-        (<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span> <span class="kw">as</span> <span class="kw-2">&amp;</span><span class="kw">dyn</span> <span class="ident">RenderElement</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">F</span>, <span class="ident">E</span>, <span class="ident">T</span><span class="op">&gt;</span>).<span class="ident">type_of</span>()
-    }
-    <span class="kw">fn</span> <span class="ident">geometry</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_space_id</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Rectangle</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span> {
-        (<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span> <span class="kw">as</span> <span class="kw-2">&amp;</span><span class="kw">dyn</span> <span class="ident">RenderElement</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">F</span>, <span class="ident">E</span>, <span class="ident">T</span><span class="op">&gt;</span>).<span class="ident">geometry</span>()
-    }
-    <span class="kw">fn</span> <span class="ident">accumulated_damage</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">for_values</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="kw-2">&amp;</span><span class="ident">Space</span>, <span class="kw-2">&amp;</span><span class="ident">Output</span>)<span class="op">&gt;</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Rectangle</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        (<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span> <span class="kw">as</span> <span class="kw-2">&amp;</span><span class="kw">dyn</span> <span class="ident">RenderElement</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">F</span>, <span class="ident">E</span>, <span class="ident">T</span><span class="op">&gt;</span>).<span class="ident">accumulated_damage</span>(<span class="ident">for_values</span>.<span class="ident">map</span>(<span class="ident">SpaceOutputTuple::from</span>))
-    }
-    <span class="kw">fn</span> <span class="ident">draw</span>(
-        <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">_space_id</span>: <span class="ident">usize</span>,
-        <span class="ident">renderer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">R</span>,
-        <span class="ident">frame</span>: <span class="kw-2">&amp;mut</span> <span class="ident">F</span>,
+        <span class="ident">frame</span>: <span class="kw-2">&amp;mut</span> <span class="op">&lt;</span><span class="ident">R</span> <span class="kw">as</span> <span class="ident">Renderer</span><span class="op">&gt;</span><span class="ident">::Frame</span>,
         <span class="ident">scale</span>: <span class="ident">f64</span>,
         <span class="ident">location</span>: <span class="ident">Point</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span>,
         <span class="ident">damage</span>: <span class="kw-2">&amp;</span>[<span class="ident">Rectangle</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span>],
         <span class="ident">log</span>: <span class="kw-2">&amp;</span><span class="ident">slog::Logger</span>,
     ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">R::Error</span><span class="op">&gt;</span> {
-        (<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span> <span class="kw">as</span> <span class="kw-2">&amp;</span><span class="kw">dyn</span> <span class="ident">RenderElement</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">F</span>, <span class="ident">E</span>, <span class="ident">T</span><span class="op">&gt;</span>).<span class="ident">draw</span>(<span class="ident">renderer</span>, <span class="ident">frame</span>, <span class="ident">scale</span>, <span class="ident">location</span>, <span class="ident">damage</span>, <span class="ident">log</span>)
+        <span class="kw">match</span> <span class="self">self</span> {
+            <span class="ident">SpaceElement::Layer</span>(<span class="ident">layer</span>) =&gt; {
+                <span class="ident">layer</span>.<span class="ident">elem_draw</span>(<span class="ident">space_id</span>, <span class="ident">renderer</span>, <span class="ident">frame</span>, <span class="ident">scale</span>, <span class="ident">location</span>, <span class="ident">damage</span>, <span class="ident">log</span>)
+            }
+            <span class="ident">SpaceElement::Window</span>(<span class="ident">window</span>) =&gt; {
+                <span class="ident">window</span>.<span class="ident">elem_draw</span>(<span class="ident">space_id</span>, <span class="ident">renderer</span>, <span class="ident">frame</span>, <span class="ident">scale</span>, <span class="ident">location</span>, <span class="ident">damage</span>, <span class="ident">log</span>)
+            }
+            <span class="ident">SpaceElement::Popup</span>(<span class="ident">popup</span>) =&gt; {
+                <span class="ident">popup</span>.<span class="ident">elem_draw</span>(<span class="ident">space_id</span>, <span class="ident">renderer</span>, <span class="ident">frame</span>, <span class="ident">scale</span>, <span class="ident">location</span>, <span class="ident">damage</span>, <span class="ident">log</span>)
+            }
+            <span class="ident">SpaceElement::Custom</span>(<span class="ident">custom</span>, <span class="kw">_</span>) =&gt; <span class="ident">custom</span>.<span class="ident">draw</span>(<span class="ident">renderer</span>, <span class="ident">frame</span>, <span class="ident">scale</span>, <span class="ident">location</span>, <span class="ident">damage</span>, <span class="ident">log</span>),
+        }
     }
-
-    <span class="kw">fn</span> <span class="ident">z_index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u8</span> {
-        <span class="ident">RenderElement::z_index</span>(<span class="self">self</span>.<span class="ident">as_ref</span>())
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">z_index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u8</span> {
+        <span class="kw">match</span> <span class="self">self</span> {
+            <span class="ident">SpaceElement::Layer</span>(<span class="ident">layer</span>) =&gt; <span class="ident">layer</span>.<span class="ident">elem_z_index</span>(),
+            <span class="ident">SpaceElement::Window</span>(<span class="ident">window</span>) =&gt; <span class="ident">window</span>.<span class="ident">elem_z_index</span>(),
+            <span class="ident">SpaceElement::Popup</span>(<span class="ident">popup</span>) =&gt; <span class="ident">popup</span>.<span class="ident">elem_z_index</span>(),
+            <span class="ident">SpaceElement::Custom</span>(<span class="ident">custom</span>, <span class="kw">_</span>) =&gt; <span class="ident">custom</span>.<span class="ident">z_index</span>(),
+        }
     }
 }
 
@@ -428,12 +464,10 @@
     <span class="kw">pub</span> <span class="ident">position</span>: <span class="ident">Point</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">F</span>, <span class="ident">E</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">RenderElement</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">F</span>, <span class="ident">E</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SurfaceTree</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">RenderElement</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SurfaceTree</span>
 <span class="kw">where</span>
-    <span class="ident">R</span>: <span class="ident">Renderer</span><span class="op">&lt;</span><span class="ident">Error</span> <span class="op">=</span> <span class="ident">E</span>, <span class="ident">TextureId</span> <span class="op">=</span> <span class="ident">T</span>, <span class="ident">Frame</span> <span class="op">=</span> <span class="ident">F</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">ImportAll</span>,
-    <span class="ident">F</span>: <span class="ident">Frame</span><span class="op">&lt;</span><span class="ident">Error</span> <span class="op">=</span> <span class="ident">E</span>, <span class="ident">TextureId</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
-    <span class="ident">E</span>: <span class="ident">std::error::Error</span>,
-    <span class="ident">T</span>: <span class="ident">Texture</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+    <span class="ident">R</span>: <span class="ident">Renderer</span> <span class="op">+</span> <span class="ident">ImportAll</span>,
+    <span class="op">&lt;</span><span class="ident">R</span> <span class="kw">as</span> <span class="ident">Renderer</span><span class="op">&gt;</span><span class="ident">::TextureId</span>: <span class="ident">Texture</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
 {
     <span class="kw">fn</span> <span class="ident">id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
         <span class="self">self</span>.<span class="ident">surface</span>.<span class="ident">as_ref</span>().<span class="ident">id</span>() <span class="kw">as</span> <span class="ident">usize</span>
@@ -455,12 +489,12 @@
     <span class="kw">fn</span> <span class="ident">draw</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">renderer</span>: <span class="kw-2">&amp;mut</span> <span class="ident">R</span>,
-        <span class="ident">frame</span>: <span class="kw-2">&amp;mut</span> <span class="ident">F</span>,
+        <span class="ident">frame</span>: <span class="kw-2">&amp;mut</span> <span class="op">&lt;</span><span class="ident">R</span> <span class="kw">as</span> <span class="ident">Renderer</span><span class="op">&gt;</span><span class="ident">::Frame</span>,
         <span class="ident">scale</span>: <span class="ident">f64</span>,
         <span class="ident">location</span>: <span class="ident">Point</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span>,
         <span class="ident">damage</span>: <span class="kw-2">&amp;</span>[<span class="ident">Rectangle</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">Logical</span><span class="op">&gt;</span>],
         <span class="ident">log</span>: <span class="kw-2">&amp;</span><span class="ident">slog::Logger</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">R::Error</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="op">&lt;</span><span class="ident">R</span> <span class="kw">as</span> <span class="ident">Renderer</span><span class="op">&gt;</span><span class="ident">::Error</span><span class="op">&gt;</span> {
         <span class="ident"><span class="kw">crate</span>::backend::renderer::utils::draw_surface_tree</span>(
             <span class="ident">renderer</span>,
             <span class="ident">frame</span>,
@@ -504,5 +538,5 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Hash</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SpaceOutputHash</span>(<span class="ident">usize</span>, <span class="ident">usize</span>);
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (5f4e06771 2022-03-10)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="smithay" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (e95b10ba4 2022-03-13)" ></div>
 </body></html>
