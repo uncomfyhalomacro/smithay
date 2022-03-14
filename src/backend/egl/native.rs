@@ -150,7 +150,25 @@ impl<A: AsRawFd + Send + 'static> EGLNativeDisplay for GbmDevice<A> {
 #[cfg(feature = "backend_x11")]
 impl EGLNativeDisplay for X11Backend {
     fn supported_platforms(&self) -> Vec<EGLPlatform<'_>> {
-        self.connection.supported_platforms()
+        vec![
+            // prefer Xlib, because the nvidia driver does not support EGL_EXT_platform_xcb as of 510.
+            // Otherwise glvnd could select llvmpipe (via mesa, which does support EGL_EXT_platform_xcb),
+            // which is likely not what the user wants.
+            // see: https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_platform_x11.txt
+            egl_platform!(PLATFORM_X11_EXT, self.display, &["EGL_EXT_platform_x11"]),
+            // see: https://www.khronos.org/registry/EGL/extensions/EXT/EGL_MESA_platform_x11.txt
+            egl_platform!(PLATFORM_X11_EXT, self.display, &["EGL_MESA_platform_x11"]),
+            
+            // We cannot use XCB - even on supported platform - because one of the few differences
+            // between xlib and xcb is the size of the window_id.
+            // which means the pointer in the `EGLNativeSurface` implementation will not work
+            // for XCB-based EGLDisplays ....
+
+            // see: https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_platform_xcb.txt
+            // egl_platform!(PLATFORM_XCB_EXT, self.connection.get_raw_xcb_connection(), &["EGL_EXT_platform_xcb"]),
+            // see: https://www.khronos.org/registry/EGL/extensions/EXT/EGL_MESA_platform_xcb.txt
+            // egl_platform!(PLATFORM_XCB_EXT, self.connection.get_raw_xcb_connection(), &["EGL_MESA_platform_xcb"]),
+        ]
     }
 }
 
@@ -303,10 +321,12 @@ unsafe impl EGLNativeSurface for X11Window {
         config_id: ffi::egl::types::EGLConfig,
     ) -> Result<*const c_void, super::EGLError> {
         wrap_egl_call(|| unsafe {
+            // on 64-bit systems this is a u64, which is important for the upcoming call,
+            let mut id = self.id() as std::os::raw::c_ulong;
             ffi::egl::CreatePlatformWindowSurfaceEXT(
                 display.handle,
                 config_id,
-                self.id() as *mut _,
+                (&mut id) as *mut std::os::raw::c_ulong as *mut _,
                 SURFACE_ATTRIBUTES.as_ptr(),
             )
         })

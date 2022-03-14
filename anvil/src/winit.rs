@@ -143,7 +143,7 @@ pub fn run_winit(log: Logger) {
     );
     output.change_current_state(
         Some(mode),
-        Some(wl_output::Transform::Flipped180),
+        None,
         None,
         Some((0, 0).into()),
     );

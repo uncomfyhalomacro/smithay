@@ -14,7 +14,7 @@ use smithay::backend::renderer::{gles2::Gles2Texture, ImportMem};
 use smithay::{backend::renderer::ImportDma, wayland::dmabuf::init_dmabuf_global};
 use smithay::{
     backend::{
-        egl::{EGLContext, EGLDisplay, EGLSurface, context::GlAttributes},
+        egl::{EGLContext, EGLDisplay, EGLSurface, context::GlAttributes, surface::adjust_damage as egl_adjust_damage},
         renderer::{gles2::Gles2Renderer, Bind, ImportEgl},
         x11::{WindowBuilder, X11Backend, X11Event},
     },
@@ -69,7 +69,7 @@ pub fn run_x11(log: Logger) {
         version: (3, 0),
         profile: None,
         debug: cfg!(debug_assertions),
-        vsync: false,
+        vsync: true,
     }, Default::default(), log.clone()).expect("Failed to create EGLContext");
 
     let window = WindowBuilder::new()
@@ -267,10 +267,15 @@ pub fn run_x11(log: Logger) {
                 Ok(damage) => {
                     trace!(log, "Finished rendering");
                     let scale = space.output_scale(&output).unwrap_or(1.0);
-                    let mut damage = damage.map(|damage| damage.into_iter().map(|rect| {
-                        rect.to_f64().to_physical(scale).to_i32_round()
-                    }).collect::<Vec<_>>());
-                    backend_data.surface.swap_buffers(damage.as_mut().map(|x| &mut **x));
+                    let size = output.current_mode().unwrap().size;
+                    let mut damage = damage
+                        .filter(|_| age != 0)
+                        .map(|damage|
+                            egl_adjust_damage(damage.into_iter().map(|rect| {
+                                rect.to_f64().to_physical(scale).to_i32_round()
+                            }), size)
+                        );
+                    backend_data.surface.swap_buffers(damage.as_deref_mut());
                     state.backend_data.render = false;
                 }
                 Err(err) => {

@@ -150,11 +150,15 @@ pub enum X11Event {
 /// Represents an active connection to the X to manage events on the Window provided by the backend.
 #[derive(Debug)]
 pub struct X11Backend {
-    log: Logger,
+    pub(crate) display: *mut xlib_sys::xlib::Display,
     pub(crate) connection: Arc<XCBConnection>,
     source: X11Source<XCBConnection>,
     inner: Arc<Mutex<X11Inner>>,
+    log: Logger,
 }
+
+unsafe impl Send for X11Backend {}
+unsafe impl Sync for X11Backend {}
 
 impl X11Backend {
     /// Initializes the X11 backend by connecting to the X server.
@@ -166,7 +170,17 @@ impl X11Backend {
 
         info!(logger, "Connecting to the X server");
 
-        let (connection, screen_number) = XCBConnection::connect(None)?;
+        let (connection, display, screen_number) = unsafe {
+            xlib_sys::xlib::XInitThreads();
+            let display = xlib_sys::xlib::XOpenDisplay(std::ptr::null());
+            if display.is_null() {
+                return Err(X11Error::ConnectionFailed(x11rb::errors::ConnectError::UnknownError));
+            }
+            xlib_sys::xlib_xcb::XSetEventQueueOwner(display, xlib_sys::xlib_xcb::XEventQueueOwner::XCBOwnsEventQueue);
+            let screen = xlib_sys::xlib::XDefaultScreen(display);
+            let xcb_raw = xlib_sys::xlib_xcb::XGetXCBConnection(display);
+            (XCBConnection::from_raw_xcb_connection(xcb_raw, true)?, display, screen as usize)
+        };
         let connection = Arc::new(connection);
         info!(logger, "Connected to screen {}", screen_number);
 
@@ -248,6 +262,7 @@ impl X11Backend {
         Ok(X11Backend {
             log: logger,
             connection,
+            display,
             source,
             inner: Arc::new(Mutex::new(inner)),
         })
